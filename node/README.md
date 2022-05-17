@@ -12,4 +12,6 @@
 
 ## test
 
-测试相关代码
+- 用户修改 `test/application.test.js` 内的apiKey
+- `npm install`
+- `npm run test`

@@ -6,19 +6,21 @@
 
 import { ApplicationApi } from '../src/application';
 
+export const ApiKey = 'TDlysl39yzl65V0ZmVf6AcSJTL3VwGYp';
+
 describe('application test', () => {
-    const api = new ApplicationApi('TDlysl39yzl65V0ZmVf6AcSJTL3VwGYp');
+    const api = new ApplicationApi(ApiKey);
     let appId = '';
 
-    test('userAppList', async () => {
-        const appList = await api.userAppList();
+    test('appList', async () => {
+        const appList = await api.appList();
         expect(appList.apps).toBeTruthy();
         console.log(appList);
         appId = appList.apps[0].app_id;
     });
 
-    test('userEntryList', async () => {
-        const entryList = await api.userEntryList(appId);
+    test('entryList', async () => {
+        const entryList = await api.entryList(appId);
         expect(entryList.forms).toBeTruthy();
         console.log(entryList);
     });

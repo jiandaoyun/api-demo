@@ -13,7 +13,7 @@ export class Api {
      * @param { String } apiKey - apiKey
      */
     constructor(apiKey) {
-        this.host = 'https://api.jiandaoyun.com';
+        this.host = 'https://api.jiandaoyun.com/api';
         this.apiKey = apiKey;
     }
 

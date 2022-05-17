@@ -9,10 +9,10 @@ export class ApplicationApi extends Api {
     /**
      * 用户应用查询接口
      */
-    async userAppList() {
+    async appList() {
         return await this.doRequest({
             method: 'POST',
-            path: '/api/v1/app/retrieve_all',
+            path: '/v1/app/retrieve_all',
             payload: {
                 skip: 0,
                 limit: 10
@@ -23,10 +23,10 @@ export class ApplicationApi extends Api {
     /**
      * 用户表单查询接口
      */
-    async userEntryList(appId) {
+    async entryList(appId) {
         return await this.doRequest({
             method: 'POST',
-            path: `/api/v1/app/${appId}/entry_retrieve`,
+            path: `/v1/app/${appId}/entry_retrieve`,
             payload: {
                 skip: 0,
                 limit: 10

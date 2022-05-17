@@ -3,3 +3,8 @@
  * @author Thomas.Zhuang
  * @date 2022/05/17
  */
+import { Api } from './api';
+
+export class WorkflowApi extends Api {
+
+}
