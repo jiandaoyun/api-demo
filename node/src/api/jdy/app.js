@@ -3,19 +3,20 @@
  * @author Thomas.Zhuang
  * @date 2022/05/17
  */
-import { Api } from './api';
 
-export class ApplicationApi extends Api {
+import { Api } from '../../base/api';
+
+export class AppApi extends Api {
     /**
      * 用户应用查询接口
      */
-    async appList() {
+    async appList(skip, limit) {
         return await this.doRequest({
             method: 'POST',
             path: '/v1/app/retrieve_all',
             payload: {
-                skip: 0,
-                limit: 10
+                skip,
+                limit
             }
         });
     }
@@ -23,13 +24,13 @@ export class ApplicationApi extends Api {
     /**
      * 用户表单查询接口
      */
-    async entryList(appId) {
+    async entryList(appId, skip, limit) {
         return await this.doRequest({
             method: 'POST',
             path: `/v1/app/${appId}/entry_retrieve`,
             payload: {
-                skip: 0,
-                limit: 10
+                skip,
+                limit
             }
         });
     }

@@ -15,16 +15,23 @@
 package base
 
 import (
+	"sync"
 	"testing"
 	"time"
 )
 
 func TestTryBeforeRun(t *testing.T) {
 	t.Run("max speed", func(t *testing.T) {
+		var wg sync.WaitGroup
 		for i := 0; i < 15; i++ {
-			TryBeforeRun()
-			t.Log(time.Now())
+			wg.Add(1)
+			go func() {
+				defer wg.Done()
+				TryBeforeRun()
+				t.Log(time.Now())
+			}()
 		}
+		wg.Wait()
 	})
 
 	t.Run("slow speed", func(t *testing.T) {

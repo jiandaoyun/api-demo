@@ -21,12 +21,10 @@ var buckets = make(chan struct{}, 5)
 func init() {
 	go func() {
 		for {
-			<-time.After(1 * time.Second)
-			for i := 0; i < 5; i++ {
-				select {
-				case buckets <- struct{}{}:
-				default:
-				}
+			<-time.After(200 * time.Millisecond)
+			select {
+			case buckets <- struct{}{}:
+			default:
 			}
 		}
 	}()

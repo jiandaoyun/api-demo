@@ -3,9 +3,14 @@
  * @author Thomas.Zhuang
  * @date 2022/05/17
  */
+
 import _ from 'lodash';
 import axios from 'axios';
 import qs from 'querystring';
+import { tryBeforeRun } from './limiter';
+
+export const ApiKey = 'TDlysl39yzl65V0ZmVf6AcSJTL3VwGYp';
+export const Host = 'https://api.jiandaoyun.com/api';
 
 export class Api {
     /**
@@ -14,7 +19,7 @@ export class Api {
      * @param { String } host - host
      */
     constructor(apiKey, host) {
-        this.host = apiKey;
+        this.host = host;
         this.apiKey = apiKey;
     }
 
@@ -39,16 +44,18 @@ export class Api {
         };
         let response;
         try {
+            await tryBeforeRun();
             response = await axios(axiosRequestConfig);
             return response.data;
         } catch (e) {
             response = e.response;
-            const { status, data } = response;
-            if (status && status > 200) {
-                throw new Error(`请求错误！Error Code: ${data.code}, Error Msg: ${data.msg}`);
-            } else {
-                throw e;
+            if (response) {
+                const { status, data } = response;
+                if (status && status > 200) {
+                    throw new Error(`请求错误！Error Code: ${data.code}, Error Msg: ${data.msg}`);
+                }
             }
+            throw e;
         }
     }
 }
