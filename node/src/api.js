@@ -11,9 +11,10 @@ export class Api {
     /**
      * 构造方法
      * @param { String } apiKey - apiKey
+     * @param { String } host - host
      */
-    constructor(apiKey) {
-        this.host = 'https://api.jiandaoyun.com/api';
+    constructor(apiKey, host) {
+        this.host = apiKey;
         this.apiKey = apiKey;
     }
 

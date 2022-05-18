@@ -7,9 +7,10 @@
 import { ApplicationApi } from '../src/application';
 
 export const ApiKey = 'TDlysl39yzl65V0ZmVf6AcSJTL3VwGYp';
+export const Host = 'https://api.jiandaoyun.com/api';
 
 describe('application test', () => {
-    const api = new ApplicationApi(ApiKey);
+    const api = new ApplicationApi(ApiKey, Host);
     let appId = '';
 
     test('appList', async () => {
