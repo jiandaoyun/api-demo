@@ -4,13 +4,11 @@
 
 ## src
 
-- application.go: 表单相关接口调用示例
-- form_data.go: 表单,数据接口调用示例
-- file.go: 文件接口调用示例
-- workflow.go: 流程接口调用示例
-- contacts.go: 通讯录接口调用示例
+- api/arch: 组织架构相关API
+- api/jdy: 简道云表单,数据等API
+- base: 基类
 
 ## test
 
-- 用户修改 `test/application_test.go` 内的apiKey
-- `go test -v`
+- 用户修改 `base/api.go` 内的apiKey和host进行测试
+- `go test ./... -v`

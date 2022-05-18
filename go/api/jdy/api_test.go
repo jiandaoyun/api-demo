@@ -4,15 +4,13 @@
  * @date 2022/5/17
  */
 
-package _go
+package jdy
 
 import (
+	"api-demo/base"
 	"encoding/json"
 	"testing"
 )
-
-const ApiKey = "TDlysl39yzl65V0ZmVf6AcSJTL3VwGYp"
-const Host = "https://api.jiandaoyun.com/api"
 
 // JsonIndentString json换行缩进字符串
 func JsonIndentString(v interface{}) string {
@@ -21,11 +19,11 @@ func JsonIndentString(v interface{}) string {
 }
 
 func TestApplicationApi(t *testing.T) {
-	api := new(ApplicationApi)
-	api.Api = &Api{ApiKey: ApiKey, Host: Host}
+	api := new(AppApi)
+	api.Api = &base.Api{ApiKey: base.ApiKey, Host: base.Host}
 
 	t.Run("AppList", func(t *testing.T) {
-		list, err := api.AppList()
+		list, err := api.AppList(0, 10)
 		if err != nil {
 			t.Error(err)
 		} else {

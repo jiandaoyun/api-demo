@@ -4,7 +4,7 @@
  * @date 2022/5/17
  */
 
-package _go
+package base
 
 import (
 	"bytes"
@@ -17,6 +17,9 @@ import (
 	"strings"
 	"time"
 )
+
+const ApiKey = "TDlysl39yzl65V0ZmVf6AcSJTL3VwGYp"
+const Host = "https://api.jiandaoyun.com/api"
 
 // Api 基类
 type Api struct {

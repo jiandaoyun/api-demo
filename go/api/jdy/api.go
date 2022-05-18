@@ -4,20 +4,21 @@
  * @date 2022/5/17
  */
 
-package _go
+package jdy
 
 import (
+	"api-demo/base"
 	"encoding/json"
 )
 
-type ApplicationApi struct {
-	*Api
+type AppApi struct {
+	*base.Api
 }
 
-func (api *ApplicationApi) AppList() (responseBody map[string]interface{}, err error) {
+func (api *AppApi) AppList(skip, limit uint8) (responseBody map[string]interface{}, err error) {
 	payload, err := json.Marshal(map[string]interface{}{
-		"skip":  0,
-		"limit": 10,
+		"skip":  skip,
+		"limit": limit,
 	})
 	if err != nil {
 		return
