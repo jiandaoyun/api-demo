@@ -16,7 +16,7 @@ package base
 
 import "time"
 
-var bucket = make(chan struct{}, 5)
+var buckets = make(chan struct{}, 5)
 
 func init() {
 	go func() {
@@ -24,7 +24,7 @@ func init() {
 			<-time.After(1 * time.Second)
 			for i := 0; i < 5; i++ {
 				select {
-				case bucket <- struct{}{}:
+				case buckets <- struct{}{}:
 				default:
 				}
 			}
@@ -34,5 +34,5 @@ func init() {
 
 // TryBeforeRun 限流
 func TryBeforeRun() {
-	<-bucket
+	<-buckets
 }

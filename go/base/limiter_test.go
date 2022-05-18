@@ -21,14 +21,14 @@ import (
 
 func TestTryBeforeRun(t *testing.T) {
 	t.Run("max speed", func(t *testing.T) {
-		for i := 0; i < 50; i++ {
+		for i := 0; i < 15; i++ {
 			TryBeforeRun()
 			t.Log(time.Now())
 		}
 	})
 
 	t.Run("slow speed", func(t *testing.T) {
-		for i := 0; i < 10; i++ {
+		for i := 0; i < 3; i++ {
 			time.Sleep(1 * time.Second)
 			TryBeforeRun()
 			t.Log(time.Now())
