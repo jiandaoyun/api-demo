@@ -14,25 +14,24 @@
 
 package base
 
-import "time"
+import (
+	"testing"
+	"time"
+)
 
-var bucket = make(chan struct{}, 5)
-
-func init() {
-	go func() {
-		for {
-			<-time.After(1 * time.Second)
-			for i := 0; i < 5; i++ {
-				select {
-				case bucket <- struct{}{}:
-				default:
-				}
-			}
+func TestTryBeforeRun(t *testing.T) {
+	t.Run("max speed", func(t *testing.T) {
+		for i := 0; i < 50; i++ {
+			TryBeforeRun()
+			t.Log(time.Now())
 		}
-	}()
-}
+	})
 
-// TryBeforeRun 限流
-func TryBeforeRun() {
-	<-bucket
+	t.Run("slow speed", func(t *testing.T) {
+		for i := 0; i < 10; i++ {
+			time.Sleep(1 * time.Second)
+			TryBeforeRun()
+			t.Log(time.Now())
+		}
+	})
 }
