@@ -7,9 +7,11 @@
 import { deptTest } from './api/arch/dept.test';
 import { memberTest } from './api/arch/member.test';
 import { appTest } from './api/jdy/app.test';
+import { limiterTest } from './base/limiter.test';
 
 describe('main test', () => {
     test('load', () => {
+        console.log(limiterTest);
         console.log(deptTest);
         console.log(memberTest);
         console.log(appTest);
