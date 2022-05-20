@@ -4,20 +4,22 @@
  * @date 2022/05/18
  */
 
-import { sleep, tryBeforeRun } from '../../src/base/limiter';
+import { defaultLimiter, sleep } from '../../src/base/limiter';
 
 describe('limiter test', () => {
     test('slow speed', async () => {
         for (let i = 0; i < 3; i++) {
             await sleep(1000);
-            await tryBeforeRun();
+            defaultLimiter.tryBeforeRun().then(() => {
+                console.log(new Date());
+            });
         }
     });
 
     test('max speed', async () => {
         let count = 0;
         for (let i = 0; i < 50; i++) {
-            tryBeforeRun().then(() => {
+            defaultLimiter.tryBeforeRun().then(() => {
                 console.log(new Date());
                 count++;
             });

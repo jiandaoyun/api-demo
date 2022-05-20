@@ -7,6 +7,8 @@
 import { AppApi } from '../../../src/api/jdy/app';
 import { ApiKey, Host } from '../../../src/base/api';
 
+export const appTest = 'appTest';
+
 describe('app api test', () => {
     const api = new AppApi(ApiKey, Host);
     let appId = '';

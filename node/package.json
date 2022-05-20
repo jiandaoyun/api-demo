@@ -4,7 +4,7 @@
   "description": "The Demo of FineX's API",
   "main": "index.js",
   "scripts": {
-    "test": "jest test/"
+    "test": "jest test/main.test.js"
   },
   "author": "",
   "license": "ISC",

@@ -7,6 +7,8 @@
 import { ApiKey, Host } from '../../../src/base/api';
 import { DeptApi } from '../../../src/api/arch/dept';
 
+export const deptTest = 'deptTest';
+
 describe('dept api test', () => {
     const api = new DeptApi(ApiKey, Host);
     let deptNo;

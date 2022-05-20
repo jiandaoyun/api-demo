@@ -7,7 +7,7 @@
 import _ from 'lodash';
 import axios from 'axios';
 import qs from 'querystring';
-import { tryBeforeRun } from './limiter';
+import { defaultLimiter } from './limiter';
 
 export const ApiKey = 'TDlysl39yzl65V0ZmVf6AcSJTL3VwGYp';
 export const Host = 'https://api.jiandaoyun.com/api';
@@ -44,7 +44,7 @@ export class Api {
         };
         let response;
         try {
-            await tryBeforeRun();
+            await defaultLimiter.tryBeforeRun();
             response = await axios(axiosRequestConfig);
             return response.data;
         } catch (e) {

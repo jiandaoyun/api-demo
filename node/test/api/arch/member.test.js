@@ -7,6 +7,8 @@
 import { ApiKey, Host } from '../../../src/base/api';
 import { MemberApi } from '../../../src/api/arch/member';
 
+export const memberTest = 'memberTest';
+
 const RootDeptNo = 1;
 
 describe('member api test', () => {
