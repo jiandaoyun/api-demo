@@ -28,15 +28,23 @@ func TestTryBeforeRun(t *testing.T) {
 			go func() {
 				defer wg.Done()
 				DefaultLimiter.TryBeforeRun()
+				t.Log(time.Now())
 			}()
 		}
 		wg.Wait()
 	})
 
 	t.Run("slow speed", func(t *testing.T) {
+		var wg sync.WaitGroup
 		for i := 0; i < 3; i++ {
 			time.Sleep(1 * time.Second)
-			DefaultLimiter.TryBeforeRun()
+			wg.Add(1)
+			go func() {
+				defer wg.Done()
+				DefaultLimiter.TryBeforeRun()
+				t.Log(time.Now())
+			}()
 		}
+		wg.Wait()
 	})
 }
