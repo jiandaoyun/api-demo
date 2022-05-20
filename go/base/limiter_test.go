@@ -27,8 +27,7 @@ func TestTryBeforeRun(t *testing.T) {
 			wg.Add(1)
 			go func() {
 				defer wg.Done()
-				TryBeforeRun()
-				t.Log(time.Now())
+				DefaultLimiter.TryBeforeRun()
 			}()
 		}
 		wg.Wait()
@@ -37,8 +36,7 @@ func TestTryBeforeRun(t *testing.T) {
 	t.Run("slow speed", func(t *testing.T) {
 		for i := 0; i < 3; i++ {
 			time.Sleep(1 * time.Second)
-			TryBeforeRun()
-			t.Log(time.Now())
+			DefaultLimiter.TryBeforeRun()
 		}
 	})
 }

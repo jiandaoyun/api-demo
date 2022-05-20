@@ -51,7 +51,7 @@ func (api *Api) DoRequest(method string, path string, query map[string]string, p
 		request.URL.RawQuery = values.Encode()
 	}
 
-	TryBeforeRun()
+	DefaultLimiter.TryBeforeRun()
 	// response
 	response, err := http.DefaultClient.Do(request)
 	if err != nil {
