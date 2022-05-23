@@ -4,16 +4,16 @@
  * @date 2022/05/17
  */
 
-import { Api } from '../../base/api';
+import { ApiClient } from '../../base/api_client';
 
-export class AppApi extends Api {
+export class AppApi extends ApiClient {
     /**
      * 用户应用查询接口
      */
     async appList(skip, limit) {
         return await this.doRequest({
             method: 'POST',
-            path: '/v1/app/retrieve_all',
+            path: 'app/retrieve_all',
             payload: {
                 skip,
                 limit
@@ -27,7 +27,7 @@ export class AppApi extends Api {
     async entryList(appId, skip, limit) {
         return await this.doRequest({
             method: 'POST',
-            path: `/v1/app/${appId}/entry_retrieve`,
+            path: `app/${appId}/entry_retrieve`,
             payload: {
                 skip,
                 limit

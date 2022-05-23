@@ -4,8 +4,8 @@
  * @date 2022/05/17
  */
 
-import { Api } from '../../base/api';
+import { ApiClient } from '../../base/api_client';
 
-export class WorkflowApi extends Api {
+export class WorkflowApi extends ApiClient {
 
 }

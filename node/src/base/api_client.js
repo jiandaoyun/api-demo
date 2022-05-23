@@ -12,15 +12,17 @@ import { defaultLimiter } from './limiter';
 export const ApiKey = 'TDlysl39yzl65V0ZmVf6AcSJTL3VwGYp';
 export const Host = 'https://api.jiandaoyun.com/api';
 
-export class Api {
+export class ApiClient {
     /**
      * 构造方法
      * @param { String } apiKey - apiKey
      * @param { String } host - host
+     * @param { String } version - version
      */
-    constructor(apiKey, host) {
+    constructor(apiKey, host, version) {
         this.host = host;
         this.apiKey = apiKey;
+        this.version = version ?? 'v1';
     }
 
     /**
@@ -33,12 +35,13 @@ export class Api {
      */
     async doRequest(options) {
         const httpMethod = _.toUpper(options.method);
+        const query = options.query ? `?${qs.stringify(options.query)}` : '';
         const axiosRequestConfig = {
             method: httpMethod,
             headers: {
                 'Authorization': `Bearer ${this.apiKey}`, 'Content-type': 'application/json;charset=utf-8'
             },
-            url: options.query ? `${this.host}${options.path}?${qs.stringify(options.query)}` : `${this.host}${options.path}`,
+            url: `${this.host}/${this.version}/${options.path}${query}`,
             data: options.payload,
             timeout: 5000
         };

@@ -4,16 +4,16 @@
  * @date 2022/05/18
  */
 
-import { Api } from '../../base/api';
+import { ApiClient } from '../../base/api_client';
 
-export class DeptApi extends Api {
+export class DeptApi extends ApiClient {
     /**
      * （递归）获取部门列表
      */
     async deptList(deptNo) {
         return await this.doRequest({
             method: 'POST',
-            path: `/v2/department/${deptNo}/department_list`,
+            path: `department/${deptNo}/department_list`,
             payload: {
                 has_child: true
             }
@@ -26,7 +26,7 @@ export class DeptApi extends Api {
     async deptCreate(name, parent_no, dept_no) {
         return await this.doRequest({
             method: 'POST',
-            path: `/v2/department/create`,
+            path: `department/create`,
             payload: {
                 name,
                 parent_no,
@@ -38,10 +38,10 @@ export class DeptApi extends Api {
     /**
      * 更新部门
      */
-    async deptUpdate(deptNo,name) {
+    async deptUpdate(deptNo, name) {
         return await this.doRequest({
             method: 'POST',
-            path: `/v2/department/${deptNo}/update`,
+            path: `department/${deptNo}/update`,
             payload: {
                 name
             }
@@ -54,7 +54,7 @@ export class DeptApi extends Api {
     async deptDelete(deptNo) {
         return await this.doRequest({
             method: 'POST',
-            path: `/v2/department/${deptNo}/delete`
+            path: `department/${deptNo}/delete`
         });
     }
 
@@ -64,7 +64,7 @@ export class DeptApi extends Api {
     async deptByIntegrateId(integrateId) {
         return await this.doRequest({
             method: 'POST',
-            path: `/v2/department/get_deptno_by_integrateid`,
+            path: `department/get_deptno_by_integrateid`,
             payload: {
                 integrate_id: integrateId
             }

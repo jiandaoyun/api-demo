@@ -4,7 +4,7 @@
  * @date 2022/05/18
  */
 
-import { ApiKey, Host } from '../../../src/base/api';
+import { ApiKey, Host } from '../../../src/base/api_client';
 import { MemberApi } from '../../../src/api/arch/member';
 
 export const memberTest = 'memberTest';
@@ -12,7 +12,7 @@ export const memberTest = 'memberTest';
 const RootDeptNo = 1;
 
 describe('member api test', () => {
-    const api = new MemberApi(ApiKey, Host);
+    const api = new MemberApi(ApiKey, Host, 'v2');
 
     test('deptMemberList', async () => {
         const deptMemberList = await api.deptMemberList(RootDeptNo, true);

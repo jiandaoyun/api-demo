@@ -4,9 +4,9 @@
  * @date 2022/05/18
  */
 
-import { Api } from '../../base/api';
+import { ApiClient } from '../../base/api_client';
 
-export class MemberApi extends Api {
+export class MemberApi extends ApiClient {
 
     /**
      * 获取部门成员（递归）
@@ -14,7 +14,7 @@ export class MemberApi extends Api {
     async deptMemberList(deptNo, has_child) {
         return await this.doRequest({
             method: 'POST',
-            path: `/v2/department/${deptNo}/member_list`,
+            path: `department/${deptNo}/member_list`,
             payload: {
                 has_child
             }
@@ -27,7 +27,7 @@ export class MemberApi extends Api {
     async userInfo(username) {
         return await this.doRequest({
             method: 'POST',
-            path: `/v2/user/${username}/user_retrieve`
+            path: `user/${username}/user_retrieve`
         });
     }
 
@@ -37,7 +37,7 @@ export class MemberApi extends Api {
     async userCreate(name, departments, username) {
         return await this.doRequest({
             method: 'POST',
-            path: `/v2/user/create`,
+            path: `user/create`,
             payload: {
                 name,
                 departments,
@@ -52,7 +52,7 @@ export class MemberApi extends Api {
     async userUpdate(username, name, departments) {
         return await this.doRequest({
             method: 'POST',
-            path: `/v2/user/${username}/update`,
+            path: `user/${username}/update`,
             payload: {
                 name,
                 departments
@@ -66,7 +66,7 @@ export class MemberApi extends Api {
     async userDelete(username) {
         return await this.doRequest({
             method: 'POST',
-            path: `/v2/user/${username}/delete`
+            path: `user/${username}/delete`
         });
     }
 
@@ -76,7 +76,7 @@ export class MemberApi extends Api {
     async userBatchDelete(usernames) {
         return await this.doRequest({
             method: 'POST',
-            path: `/v2/user/batch_delete`,
+            path: `user/batch_delete`,
             payload: {
                 usernames
             }
