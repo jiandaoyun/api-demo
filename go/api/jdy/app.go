@@ -11,11 +11,11 @@ import (
 	"encoding/json"
 )
 
-type AppApi struct {
+type AppApiClient struct {
 	*base.ApiClient
 }
 
-func (api *AppApi) AppList(skip, limit uint8) (responseBody map[string]interface{}, err error) {
+func (api *AppApiClient) AppList(skip, limit uint8) (responseBody map[string]interface{}, err error) {
 	payload, err := json.Marshal(map[string]interface{}{
 		"skip":  skip,
 		"limit": limit,

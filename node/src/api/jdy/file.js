@@ -6,6 +6,6 @@
 
 import { ApiClient } from '../../base/api_client';
 
-export class FileApi extends ApiClient {
+export class FileApiClient extends ApiClient {
 
 }

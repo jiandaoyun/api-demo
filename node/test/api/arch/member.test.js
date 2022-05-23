@@ -5,14 +5,14 @@
  */
 
 import { ApiKey, Host } from '../../../src/base/api_client';
-import { MemberApi } from '../../../src/api/arch/member';
+import { MemberApiClient } from '../../../src/api/arch/member';
 
 export const memberTest = 'memberTest';
 
 const RootDeptNo = 1;
 
 describe('member api test', () => {
-    const api = new MemberApi(ApiKey, Host, 'v2');
+    const api = new MemberApiClient(ApiKey, Host, 'v2');
 
     test('deptMemberList', async () => {
         const deptMemberList = await api.deptMemberList(RootDeptNo, true);

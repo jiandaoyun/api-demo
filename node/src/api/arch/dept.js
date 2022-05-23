@@ -6,7 +6,7 @@
 
 import { ApiClient } from '../../base/api_client';
 
-export class DeptApi extends ApiClient {
+export class DeptApiClient extends ApiClient {
     /**
      * （递归）获取部门列表
      */

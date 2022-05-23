@@ -6,6 +6,6 @@
 
 import { ApiClient } from '../../base/api_client';
 
-export class WorkflowApi extends ApiClient {
+export class WorkflowApiClient extends ApiClient {
 
 }

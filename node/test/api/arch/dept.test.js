@@ -5,12 +5,12 @@
  */
 
 import { ApiKey, Host } from '../../../src/base/api_client';
-import { DeptApi } from '../../../src/api/arch/dept';
+import { DeptApiClient } from '../../../src/api/arch/dept';
 
 export const deptTest = 'deptTest';
 
 describe('dept api test', () => {
-    const api = new DeptApi(ApiKey, Host, 'v2');
+    const api = new DeptApiClient(ApiKey, Host, 'v2');
     let deptNo;
 
     test('deptCreate', async () => {

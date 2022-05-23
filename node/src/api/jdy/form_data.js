@@ -6,6 +6,6 @@
 
 import { ApiClient } from '../../base/api_client';
 
-export class FormDataApi extends ApiClient {
+export class FormDataApiClient extends ApiClient {
 
 }

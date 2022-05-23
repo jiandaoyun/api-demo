@@ -6,7 +6,7 @@
 
 import { ApiClient } from '../../base/api_client';
 
-export class AppApi extends ApiClient {
+export class AppApiClient extends ApiClient {
     /**
      * 用户应用查询接口
      */

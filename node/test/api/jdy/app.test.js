@@ -4,13 +4,13 @@
  * @date 2022/05/17
  */
 
-import { AppApi } from '../../../src/api/jdy/app';
+import { AppApiClient } from '../../../src/api/jdy/app';
 import { ApiKey, Host } from '../../../src/base/api_client';
 
 export const appTest = 'appTest';
 
 describe('app api test', () => {
-    const api = new AppApi(ApiKey, Host, 'v1');
+    const api = new AppApiClient(ApiKey, Host, 'v1');
     let appId = '';
 
     test('appList', async () => {
