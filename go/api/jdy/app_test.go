@@ -20,7 +20,7 @@ func JsonIndentString(v interface{}) string {
 
 func TestApplicationApi(t *testing.T) {
 	api := new(AppApi)
-	api.Api = &base.Api{ApiKey: base.ApiKey, Host: base.Host}
+	api.ApiClient = &base.ApiClient{ApiKey: base.ApiKey, Host: base.Host, Version: "v1"}
 
 	t.Run("AppList", func(t *testing.T) {
 		list, err := api.AppList(0, 10)

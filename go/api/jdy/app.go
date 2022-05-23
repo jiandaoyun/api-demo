@@ -12,7 +12,7 @@ import (
 )
 
 type AppApi struct {
-	*base.Api
+	*base.ApiClient
 }
 
 func (api *AppApi) AppList(skip, limit uint8) (responseBody map[string]interface{}, err error) {
@@ -24,7 +24,7 @@ func (api *AppApi) AppList(skip, limit uint8) (responseBody map[string]interface
 		return
 	}
 
-	response, err := api.DoRequest("POST", "/v1/app/retrieve_all", nil, payload)
+	response, err := api.DoRequest("POST", "/app/retrieve_all", nil, payload)
 	if err != nil {
 		return
 	}

@@ -20,22 +20,28 @@ import (
 
 const ApiKey = "TDlysl39yzl65V0ZmVf6AcSJTL3VwGYp"
 const Host = "https://api.jiandaoyun.com/api"
+const DefaultVersion = "v1"
 
-// Api 基类
-type Api struct {
-	Host   string
-	ApiKey string
+// ApiClient 基类
+type ApiClient struct {
+	Host    string
+	ApiKey  string
+	Version string
 }
 
 // DoRequest 发送http请求
-func (api *Api) DoRequest(method string, path string, query map[string]string, payload []byte) (responseBody []byte, err error) {
+func (api *ApiClient) DoRequest(method string, path string, query map[string]string, payload []byte) (responseBody []byte, err error) {
+	if api.Version == "" {
+		api.Version = DefaultVersion
+	}
+
 	// request
 	timeout, cancelFunc := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancelFunc()
 	request, err := http.NewRequestWithContext(
 		timeout,
 		strings.ToUpper(method),
-		api.Host+path,
+		fmt.Sprintf("%s/%s/%s", api.Host, api.Version, path),
 		bytes.NewBuffer(payload))
 	if err != nil {
 		log.Println(err.Error())
