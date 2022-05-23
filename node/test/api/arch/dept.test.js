@@ -10,7 +10,7 @@ import { DeptApiClient } from '../../../src/api/arch/dept';
 export const deptTest = 'deptTest';
 
 describe('dept api test', () => {
-    const api = new DeptApiClient(ApiKey, Host, 'v2');
+    const api = new DeptApiClient(ApiKey, Host);
     let deptNo;
 
     test('deptCreate', async () => {

@@ -22,7 +22,7 @@ export class ApiClient {
     constructor(apiKey, host, version) {
         this.host = host;
         this.apiKey = apiKey;
-        this.version = version ?? 'v1';
+        this.version = version;
     }
 
     /**

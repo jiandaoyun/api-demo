@@ -21,9 +21,8 @@ func JsonIndentString(v interface{}) string {
 func TestApplicationApi(t *testing.T) {
 	api := new(AppApiClient)
 	api.ApiClient = &base.ApiClient{
-		ApiKey:  base.ApiKey,
-		Host:    base.Host,
-		Version: base.DefaultVersion,
+		ApiKey: base.ApiKey,
+		Host:   base.Host,
 	}
 
 	t.Run("AppList", func(t *testing.T) {

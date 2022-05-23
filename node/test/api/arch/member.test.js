@@ -12,7 +12,7 @@ export const memberTest = 'memberTest';
 const RootDeptNo = 1;
 
 describe('member api test', () => {
-    const api = new MemberApiClient(ApiKey, Host, 'v2');
+    const api = new MemberApiClient(ApiKey, Host);
 
     test('deptMemberList', async () => {
         const deptMemberList = await api.deptMemberList(RootDeptNo, true);

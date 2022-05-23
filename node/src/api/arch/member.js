@@ -7,6 +7,18 @@
 import { ApiClient } from '../../base/api_client';
 
 export class MemberApiClient extends ApiClient {
+    validVersions = ['v2'];
+    defaultVersion = 'v2';
+
+    /**
+     * check version
+     */
+    async doRequest(options) {
+        if (!this.validVersions.includes(this.version)) {
+            this.version = this.defaultVersion;
+        }
+        return super.doRequest(options);
+    }
 
     /**
      * 获取部门成员（递归）

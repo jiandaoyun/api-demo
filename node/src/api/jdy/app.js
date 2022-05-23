@@ -7,6 +7,19 @@
 import { ApiClient } from '../../base/api_client';
 
 export class AppApiClient extends ApiClient {
+    validVersions = ['v1'];
+    defaultVersion = 'v1';
+
+    /**
+     * check version
+     */
+    async doRequest(options) {
+        if (!this.validVersions.includes(this.version)) {
+            this.version = this.defaultVersion;
+        }
+        return super.doRequest(options);
+    }
+
     /**
      * 用户应用查询接口
      */

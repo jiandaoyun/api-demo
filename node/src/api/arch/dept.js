@@ -7,6 +7,19 @@
 import { ApiClient } from '../../base/api_client';
 
 export class DeptApiClient extends ApiClient {
+    validVersions = ['v2'];
+    defaultVersion = 'v2';
+
+    /**
+     * check version
+     */
+    async doRequest(options) {
+        if (!this.validVersions.includes(this.version)) {
+            this.version = this.defaultVersion;
+        }
+        return super.doRequest(options);
+    }
+
     /**
      * （递归）获取部门列表
      */

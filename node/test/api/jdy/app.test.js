@@ -10,7 +10,7 @@ import { ApiKey, Host } from '../../../src/base/api_client';
 export const appTest = 'appTest';
 
 describe('app api test', () => {
-    const api = new AppApiClient(ApiKey, Host, 'v1');
+    const api = new AppApiClient(ApiKey, Host);
     let appId = '';
 
     test('appList', async () => {
