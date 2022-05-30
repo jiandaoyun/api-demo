@@ -28,42 +28,6 @@ import java.util.Map;
 
 public class HttpUtil {
 
-    /**
-     * 发送GET请求
-     *
-     * @param param - 请求参数
-     * @throws Exception
-     */
-    public static Object sendGetRequest(HttpRequestParam param) throws Exception {
-        if (param == null || StringUtils.isBlank(param.getUrl()) || StringUtils.isBlank(param.getApiKey())) {
-            throw new RuntimeException("缺失参数！");
-        }
-        HttpClient client = getSSLHttpClient();
-        Header[] headers = getHttpHeaders(param.getApiKey());
-        // 构建url
-        URIBuilder uriBuilder = new URIBuilder(param.getUrl());
-        if (param.getData() != null) {
-            // 添加请求参数
-            for (Map.Entry<String, Object> entry : param.getData().entrySet()) {
-                uriBuilder.addParameter(entry.getKey(), (String) entry.getValue());
-            }
-        }
-        HttpRequestBase request = new HttpGet(uriBuilder.build());
-
-        // 设置请求头
-        request.setHeaders(headers);
-        // 发送请求并获取返回结果
-        HttpResponse response = client.execute(request);
-        int statusCode = response.getStatusLine().getStatusCode();
-        ObjectMapper mapper = new ObjectMapper();
-        Map<String, Object> result = (Map<String, Object>) mapper.readValue(response.getEntity().getContent(), Object.class);
-        if (statusCode >= 400) {
-            throw new RuntimeException("请求错误，Error Code: " + result.get("code") + ", Error Msg: " + result.get("msg"));
-        } else {
-            // 处理返回结果
-            return result;
-        }
-    }
 
     /**
      * 发送POST请求

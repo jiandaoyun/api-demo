@@ -2,20 +2,23 @@ package api.arch;
 
 import model.dept.DeptCreateParam;
 
+/**
+ * 部门 接口 Demo 测试
+ */
 public class DeptDemoTest {
 
     public static void main(String[] args) throws Exception {
         DeptDemo deptDemo = new DeptDemo();
         // 创建部门
-//        testDeptCreate(deptDemo);
-//        System.out.println("-------------------------------------");
+        testDeptCreate(deptDemo);
+        // 根据deptNo查询部门信息
         testDeptList(deptDemo);
-//        System.out.println("-------------------------------------");
-//        testDeptUpdate(deptDemo);
-//        System.out.println("-------------------------------------");
-//        testDeptDelete(deptDemo);
-//        System.out.println("-------------------------------------");
-//        deptByIntegrateId(deptDemo);
+        // 更新部门
+        testDeptUpdate(deptDemo);
+        // 删除部门
+        testDeptDelete(deptDemo);
+        // 根据集成模式通讯录的部门ID获取部门编号
+        deptByIntegrateId(deptDemo);
     }
 
     private static void deptByIntegrateId(DeptDemo deptDemo) throws Exception {
