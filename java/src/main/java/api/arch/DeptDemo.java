@@ -23,7 +23,7 @@ public class DeptDemo {
      * @param deptNo 部门编号
      * @throws Exception
      */
-    public void deptList(Integer deptNo) throws Exception {
+    public Map<String, Object> deptList(Integer deptNo) throws Exception {
         if (deptNo == null) {
             throw new RuntimeException("param lack!");
         }
@@ -35,8 +35,7 @@ public class DeptDemo {
         Map<String, Object> data = new HashMap<>();
         data.put("has_child", true);
         param.setData(data);
-        Object result = HttpUtil.sendPostRequest(param);
-        System.out.println("deptList result:\n" + result.toString());
+        return HttpUtil.sendPostRequest(param);
     }
 
     /**
@@ -45,7 +44,7 @@ public class DeptDemo {
      * @param param 部门名称
      * @throws Exception
      */
-    public void deptCreate(DeptCreateParam param) throws Exception {
+    public Map<String, Object> deptCreate(DeptCreateParam param) throws Exception {
         if (param == null || StringUtils.isBlank(param.getName())) {
             throw new RuntimeException("param lack!");
         }
@@ -59,8 +58,7 @@ public class DeptDemo {
         data.put("dept_no", param.getDeptNo());
         data.put("parent_no", param.getParentNo());
         httpRequestParam.setData(data);
-        Object result = HttpUtil.sendPostRequest(httpRequestParam);
-        System.out.println("deptCreate result:\n" + result.toString());
+        return HttpUtil.sendPostRequest(httpRequestParam);
     }
 
 
@@ -71,7 +69,7 @@ public class DeptDemo {
      * @param name
      * @throws Exception
      */
-    public void deptUpdate(Integer deptNo, String name) throws Exception {
+    public Map<String, Object> deptUpdate(Integer deptNo, String name) throws Exception {
         if (deptNo == null || StringUtils.isBlank(name)) {
             throw new RuntimeException("param lack!");
         }
@@ -83,8 +81,7 @@ public class DeptDemo {
         Map<String, Object> data = new HashMap<>();
         data.put("name", name);
         httpRequestParam.setData(data);
-        Object result = HttpUtil.sendPostRequest(httpRequestParam);
-        System.out.println("deptUpdate result:\n" + result.toString());
+        return HttpUtil.sendPostRequest(httpRequestParam);
     }
 
     /**
@@ -93,7 +90,7 @@ public class DeptDemo {
      * @param deptNo
      * @throws Exception
      */
-    public void deptDelete(Integer deptNo) throws Exception {
+    public Map<String, Object> deptDelete(Integer deptNo) throws Exception {
         if (deptNo == null) {
             throw new RuntimeException("param lack!");
         }
@@ -101,14 +98,13 @@ public class DeptDemo {
         HttpRequestParam httpRequestParam = new HttpRequestParam();
         httpRequestParam.setApiKey(HttpConstant.API_KEY);
         httpRequestParam.setUrl(url);
-        Object result = HttpUtil.sendPostRequest(httpRequestParam);
-        System.out.println("deptDelete result:\n" + result.toString());
+        return HttpUtil.sendPostRequest(httpRequestParam);
     }
 
     /**
      * 根据集成模式通讯录的部门ID获取部门编号
      */
-    public void deptByIntegrateId(String integrateId) throws Exception {
+    public Map<String, Object> deptByIntegrateId(String integrateId) throws Exception {
         if (StringUtils.isBlank(integrateId)) {
             throw new RuntimeException("param lack!");
         }
@@ -120,7 +116,6 @@ public class DeptDemo {
         Map<String, Object> data = new HashMap<>();
         data.put("integrate_id", integrateId);
         httpRequestParam.setData(data);
-        Object result = HttpUtil.sendPostRequest(httpRequestParam);
-        System.out.println("deptByIntegrateId result:\n" + result.toString());
+        return HttpUtil.sendPostRequest(httpRequestParam);
     }
 }

@@ -35,7 +35,7 @@ public class HttpUtil {
      * @param param - 请求参数
      * @throws Exception
      */
-    public static Object sendPostRequest(HttpRequestParam param) throws Exception {
+    public static Map<String, Object> sendPostRequest(HttpRequestParam param) throws Exception {
         if (param == null || StringUtils.isBlank(param.getUrl()) || StringUtils.isBlank(param.getApiKey())) {
             throw new RuntimeException("缺失参数！");
         }

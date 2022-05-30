@@ -23,7 +23,7 @@ public class AppDemo {
      * @param limit
      * @throws Exception
      */
-    public void appList(Integer skip, Integer limit) throws Exception {
+    public Map<String, Object> appList(Integer skip, Integer limit) throws Exception {
         if (skip == null || limit == null) {
             throw new RuntimeException("param lack!");
         }
@@ -36,8 +36,9 @@ public class AppDemo {
         data.put("skip", skip);
         data.put("limit", limit);
         param.setData(data);
-        Object result = HttpUtil.sendPostRequest(param);
+        Map<String, Object> result = HttpUtil.sendPostRequest(param);
         System.out.println("appList result:\n" + result.toString());
+        return result;
     }
 
     /**
@@ -48,7 +49,7 @@ public class AppDemo {
      * @param limit
      * @throws Exception
      */
-    public void entryList(String appId, Integer skip, Integer limit) throws Exception {
+    public Map<String, Object> entryList(String appId, Integer skip, Integer limit) throws Exception {
         if (StringUtils.isBlank(appId) || skip == null || limit == null) {
             throw new RuntimeException("param lack!");
         }
@@ -61,8 +62,9 @@ public class AppDemo {
         data.put("skip", skip);
         data.put("limit", limit);
         param.setData(data);
-        Object result = HttpUtil.sendPostRequest(param);
+        Map<String, Object> result = HttpUtil.sendPostRequest(param);
         System.out.println("entryList result:\n" + result.toString());
+        return result;
     }
 
 

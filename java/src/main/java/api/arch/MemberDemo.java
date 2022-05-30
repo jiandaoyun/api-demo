@@ -24,7 +24,7 @@ public class MemberDemo {
      * @param hasChild 是否查子部门
      * @throws Exception
      */
-      void deptMemberList(Integer deptNo, Boolean hasChild) throws Exception {
+    public Map<String, Object> deptMemberList(Integer deptNo, Boolean hasChild) throws Exception {
         if (deptNo == null || hasChild == null) {
             throw new RuntimeException("param lack!");
         }
@@ -36,8 +36,7 @@ public class MemberDemo {
         Map<String, Object> data = new HashMap<>();
         data.put("has_child", hasChild);
         param.setData(data);
-        Object result = HttpUtil.sendPostRequest(param);
-        System.out.println("deptMemberList result:\n" + result.toString());
+        return HttpUtil.sendPostRequest(param);
     }
 
     /**
@@ -46,7 +45,7 @@ public class MemberDemo {
      * @param param
      * @throws Exception
      */
-    public void userCreate(UserCreateParam param) throws Exception {
+    public Map<String, Object> userCreate(UserCreateParam param) throws Exception {
         if (param == null || StringUtils.isBlank(param.getName()) || StringUtils.isBlank(param.getUserName())) {
             throw new RuntimeException("param lack!");
         }
@@ -60,8 +59,7 @@ public class MemberDemo {
         data.put("username", param.getUserName());
         data.put("departments", param.getDepartmentList());
         requestParam.setData(data);
-        Object result = HttpUtil.sendPostRequest(requestParam);
-        System.out.println("userCreate result:\n" + result.toString());
+        return HttpUtil.sendPostRequest(requestParam);
     }
 
     /**
@@ -70,7 +68,7 @@ public class MemberDemo {
      * @param userName 成员名称
      * @throws Exception
      */
-    public void userInfo(String userName) throws Exception {
+    public Map<String, Object> userInfo(String userName) throws Exception {
         if (StringUtils.isBlank(userName)) {
             throw new RuntimeException("param lack!");
         }
@@ -78,8 +76,7 @@ public class MemberDemo {
         HttpRequestParam param = new HttpRequestParam();
         param.setApiKey(HttpConstant.API_KEY);
         param.setUrl(url);
-        Object result = HttpUtil.sendPostRequest(param);
-        System.out.println("userInfo result:\n" + result.toString());
+        return HttpUtil.sendPostRequest(param);
     }
 
     /**
@@ -88,7 +85,7 @@ public class MemberDemo {
      * @param param
      * @throws Exception
      */
-    public void userUpdate(UserUpdateParam param) throws Exception {
+    public Map<String, Object> userUpdate(UserUpdateParam param) throws Exception {
         if (param == null || StringUtils.isBlank(param.getName()) || StringUtils.isBlank(param.getUserName())) {
             throw new RuntimeException("param lack!");
         }
@@ -101,8 +98,7 @@ public class MemberDemo {
         data.put("name", param.getName());
         data.put("departments", param.getDepartmentList());
         requestParam.setData(data);
-        Object result = HttpUtil.sendPostRequest(requestParam);
-        System.out.println("userUpdate result:\n" + result.toString());
+        return HttpUtil.sendPostRequest(requestParam);
     }
 
     /**
@@ -111,7 +107,7 @@ public class MemberDemo {
      * @param userName
      * @throws Exception
      */
-    public void userDelete(String userName) throws Exception {
+    public Map<String, Object> userDelete(String userName) throws Exception {
         if (StringUtils.isBlank(userName)) {
             throw new RuntimeException("param lack!");
         }
@@ -119,8 +115,7 @@ public class MemberDemo {
         HttpRequestParam param = new HttpRequestParam();
         param.setApiKey(HttpConstant.API_KEY);
         param.setUrl(url);
-        Object result = HttpUtil.sendPostRequest(param);
-        System.out.println("userDelete result:\n" + result.toString());
+        return HttpUtil.sendPostRequest(param);
     }
 
 
@@ -130,7 +125,7 @@ public class MemberDemo {
      * @param userNameList
      * @throws Exception
      */
-    public void userBatchDelete(List<String> userNameList) throws Exception {
+    public Map<String, Object> userBatchDelete(List<String> userNameList) throws Exception {
         if (userNameList == null || userNameList.size() == 0) {
             throw new RuntimeException("param lack!");
         }
@@ -142,8 +137,7 @@ public class MemberDemo {
         Map<String, Object> data = new HashMap<>();
         data.put("usernames", userNameList);
         requestParam.setData(data);
-        Object result = HttpUtil.sendPostRequest(requestParam);
-        System.out.println("userBatchDelete result:\n" + result.toString());
+        return HttpUtil.sendPostRequest(requestParam);
     }
 
 }

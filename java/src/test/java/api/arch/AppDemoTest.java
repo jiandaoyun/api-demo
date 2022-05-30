@@ -2,6 +2,8 @@ package api.arch;
 
 import api.jdy.AppDemo;
 
+import java.util.Map;
+
 /**
  * 应用 Demo 测试
  */
@@ -17,10 +19,12 @@ public class AppDemoTest {
     }
 
     private static void appList(AppDemo appDemo) throws Exception {
-        appDemo.appList(0,10);
+        Map<String, Object> result = appDemo.appList(0, 10);
+        System.out.println("appList result \n" + result);
     }
 
     private static void entryList(AppDemo appDemo) throws Exception {
-        appDemo.entryList("6077edcf5820c900083c9b26",0,10);
+        Map<String, Object> result =  appDemo.entryList("6077edcf5820c900083c9b26", 0, 10);
+        System.out.println("entryList result \n" + result);
     }
 }

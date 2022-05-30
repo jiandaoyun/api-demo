@@ -2,6 +2,8 @@ package api.arch;
 
 import model.dept.DeptCreateParam;
 
+import java.util.Map;
+
 /**
  * 部门 接口 Demo 测试
  */
@@ -22,25 +24,30 @@ public class DeptDemoTest {
     }
 
     private static void deptByIntegrateId(DeptDemo deptDemo) throws Exception {
-        deptDemo.deptByIntegrateId("1005");
+        Map<String, Object> result = deptDemo.deptByIntegrateId("1005");
+        System.out.println("deptByIntegrateId result \n" + result);
     }
 
     private static void testDeptDelete(DeptDemo deptDemo) throws Exception {
-        deptDemo.deptDelete(96);
+        Map<String, Object> result = deptDemo.deptDelete(96);
+        System.out.println("testDeptDelete result \n" + result);
     }
 
     private static void testDeptUpdate(DeptDemo deptDemo) throws Exception {
-        deptDemo.deptUpdate(97, "name97");
+        Map<String, Object> result = deptDemo.deptUpdate(97, "name97");
+        System.out.println("testDeptUpdate result \n" + result);
     }
 
     private static void testDeptList(DeptDemo deptDemo) throws Exception {
-        deptDemo.deptList(1);
+        Map<String, Object> result = deptDemo.deptList(1);
+        System.out.println("testDeptList result \n" + result);
     }
 
     private static void testDeptCreate(DeptDemo deptDemo) throws Exception {
         DeptCreateParam param = new DeptCreateParam("Hello-Jdy test5");
         param.setDeptNo(96);
         param.setParentNo(97);
-        deptDemo.deptCreate(param);
+        Map<String, Object> result = deptDemo.deptCreate(param);
+        System.out.println("testDeptCreate result \n" + result);
     }
 }
