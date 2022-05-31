@@ -26,6 +26,6 @@ public class HttpConstant {
     public static final String APP_BASE_URL = HOST_V1 + "/app/";
 
 
-    public static final String API_KEY = "TDlysl39yzl65V0ZmVf6AcSJTL3VwGYp";
+    public static final String API_KEY = "API_KEY";
 
 }
