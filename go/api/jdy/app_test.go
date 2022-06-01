@@ -26,11 +26,11 @@ func TestApplicationApi(t *testing.T) {
 	}
 
 	t.Run("AppList", func(t *testing.T) {
-		list, err := api.AppList(0, 10)
+		appList, err := api.AppList(0, 10)
 		if err != nil {
 			t.Error(err)
 		} else {
-			t.Log(JsonIndentString(list))
+			t.Log(JsonIndentString(appList))
 		}
 	})
 }

@@ -14,14 +14,14 @@ describe('dept api test', () => {
     let deptNo;
 
     test('deptCreate', async () => {
-        const dept = await api.deptCreate('研发部门');
+        const dept = await api.deptCreate('Demo研发部门');
         expect(dept.department).toBeTruthy();
         deptNo = dept.department.dept_no;
         console.log(dept);
     });
 
     test('deptUpdate', async () => {
-        const dept = await api.deptUpdate(deptNo, '测试部门');
+        const dept = await api.deptUpdate(deptNo, 'Demo测试部门');
         expect(dept.department).toBeTruthy();
         console.log(dept);
     });
