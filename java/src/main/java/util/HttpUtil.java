@@ -26,7 +26,6 @@ import java.util.Map;
 
 public class HttpUtil {
 
-
     /**
      * 发送POST请求
      *
@@ -49,6 +48,8 @@ public class HttpUtil {
         }
         // 设置请求头
         request.setHeaders(headers);
+        // 限流阻塞
+        LimitUtil.tryBeforeRun();
         // 发送请求并获取返回结果
         HttpResponse response = client.execute(request);
         // 返回状态码
