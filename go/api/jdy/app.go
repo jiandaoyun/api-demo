@@ -8,6 +8,7 @@ package jdy
 
 import (
 	"api-demo/base"
+	"api-demo/model"
 	"encoding/json"
 )
 
@@ -35,7 +36,7 @@ func (api *AppApiClient) DoRequest(method string, path string, query map[string]
 }
 
 // AppList 应用列表
-func (api *AppApiClient) AppList(skip, limit uint8) (responseBody map[string]interface{}, err error) {
+func (api *AppApiClient) AppList(skip, limit uint8) (responseBody model.AppList, err error) {
 	payload, err := json.Marshal(map[string]interface{}{
 		"skip":  skip,
 		"limit": limit,
