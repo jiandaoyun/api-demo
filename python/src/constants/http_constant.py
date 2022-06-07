@@ -1,5 +1,7 @@
 class HttpConstant:
     HOST = "https://api.jiandaoyun.com/api"
+    HOST = "http://localhost:3001/api"
+
     HOST_V2 = HOST + "/v2"
     HOST_V1 = HOST + "/v1"
 
@@ -11,4 +13,4 @@ class HttpConstant:
     APP_BASE_URL = HOST_V1 + "/app/"
 
     #   把 API_KEY 修改成自己的API_KEY
-    API_KEY = "API_KEY"
+    API_KEY = "pQZ24l3mrlfum1H9ghrefQvGvvEGtIM8"

@@ -1,6 +1,6 @@
 import requests
 import json
-from src.util.limit_util import Limiter
+from .limit_util import Limiter
 import threading
 
 limiter = Limiter(1000, 5)
@@ -35,7 +35,6 @@ def send_post(request_param):
     try:
         # 限流
         lock.acquire()
-        print('seq=',limiter.seq)
         limiter.tryBeforeRun()
         # 这里传入的data,是body里面的数据。params是拼接url时的参数
         res = requests.post(url=request_param.url, data=data, headers=headers)
