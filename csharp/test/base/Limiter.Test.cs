@@ -11,9 +11,9 @@ public class LimiterTest
     [Fact]
     public void TestTryBeforeRunMaxSpeed()
     {
+        Thread.Sleep(1000);
         long start = new DateTimeOffset(DateTime.UtcNow).ToUnixTimeMilliseconds();
         List<ManualResetEvent> manualEvents = new List<ManualResetEvent>();
-        Thread[] threads = new Thread[100];
         for (int i = 0; i < 15; i++)
         {
             ManualResetEvent mre = new ManualResetEvent(false);
@@ -21,7 +21,10 @@ public class LimiterTest
             ThreadPool.QueueUserWorkItem(Global.TryBeforeRun, mre);
         }
         WaitHandle.WaitAll(manualEvents.ToArray());
-        Console.WriteLine(new DateTimeOffset(DateTime.UtcNow).ToUnixTimeMilliseconds() - start);
+        long cost = new DateTimeOffset(DateTime.UtcNow).ToUnixTimeMilliseconds() - start;
+        Console.WriteLine(cost);
+        Assert.True(cost > 2000);
+        Assert.True(cost < 2050);
     }
 
     // [Fact]
