@@ -9,9 +9,11 @@ import { ApiKey, Host } from '../../../src/base/api_client';
 
 export const appTest = 'appTest';
 
+export let appId = '';
+export let entryId = '';
+
 describe('app api test', () => {
     const api = new AppApiClient(ApiKey, Host);
-    let appId = '';
 
     test('appList', async () => {
         const appList = await api.appList(0, 10);
@@ -24,5 +26,6 @@ describe('app api test', () => {
         const entryList = await api.entryList(appId, 0, 10);
         expect(entryList.forms).toBeTruthy();
         console.log(entryList);
+        entryId = entryList.forms[0].entry_id;
     });
 });

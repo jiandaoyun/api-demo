@@ -11,19 +11,23 @@ export const memberTest = 'memberTest';
 
 const RootDeptNo = 1;
 
+let username;
+
 describe('member api test', () => {
     const api = new MemberApiClient(ApiKey, Host);
 
     test('deptMemberList', async () => {
-        const deptMemberList = await api.deptMemberList(RootDeptNo, true);
+        const deptMemberList = await api.deptMemberList(RootDeptNo, {
+            hasChild: true
+        });
         expect(deptMemberList.users).toBeTruthy();
         console.log(deptMemberList);
     });
 
-    let username;
-
     test('userCreate', async () => {
-        const user = await api.userCreate('小云', undefined, 'jiandaoyun');
+        const user = await api.userCreate('小云', {
+            username: 'jiandaoyun'
+        });
         expect(user.user).toBeTruthy();
         expect(user.user.name).toEqual('小云');
         expect(user.user.username).toEqual('jiandaoyun');
@@ -40,7 +44,9 @@ describe('member api test', () => {
     });
 
     test('userUpdate', async () => {
-        const user = await api.userUpdate(username, '小简');
+        const user = await api.userUpdate(username, {
+            name: '小简'
+        });
         expect(user.user).toBeTruthy();
         expect(user.user.name).toEqual('小简');
         console.log(user);
@@ -53,6 +59,11 @@ describe('member api test', () => {
 
     test('userBatchDelete', async () => {
         const response = await api.userBatchDelete([username]);
+        expect(response.status).toEqual('success');
+    });
+
+    test('userImport', async () => {
+        const response = await api.userImport([]);
         expect(response.status).toEqual('success');
     });
 });
