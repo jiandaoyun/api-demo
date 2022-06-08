@@ -7,7 +7,7 @@
 import { ApiClient } from '../../base/api_client';
 
 export class MemberApiClient extends ApiClient {
-    validVersions = ['v2'];
+    validVersions = ['v2', 'v1'];
     defaultVersion = 'v2';
 
     /**
@@ -23,12 +23,12 @@ export class MemberApiClient extends ApiClient {
     /**
      * 获取部门成员（递归）
      */
-    async deptMemberList(deptNo, has_child) {
+    async deptMemberList(deptNo, options) {
         return await this.doRequest({
             method: 'POST',
             path: `department/${deptNo}/member_list`,
             payload: {
-                has_child
+                has_child: options.hasChild
             }
         });
     }
@@ -46,14 +46,13 @@ export class MemberApiClient extends ApiClient {
     /**
      * 创建成员
      */
-    async userCreate(name, departments, username) {
+    async userCreate(name, options) {
         return await this.doRequest({
             method: 'POST',
             path: `user/create`,
             payload: {
                 name,
-                departments,
-                username
+                ...options
             }
         });
     }
@@ -61,13 +60,12 @@ export class MemberApiClient extends ApiClient {
     /**
      * 更新成员
      */
-    async userUpdate(username, name, departments) {
+    async userUpdate(username, options) {
         return await this.doRequest({
             method: 'POST',
             path: `user/${username}/update`,
             payload: {
-                name,
-                departments
+                ...options
             }
         });
     }
@@ -91,6 +89,19 @@ export class MemberApiClient extends ApiClient {
             path: `user/batch_delete`,
             payload: {
                 usernames
+            }
+        });
+    }
+
+    /**
+    * 批量导入成员
+    */
+    async userImport(users) {
+        return await this.doRequest({
+            method: 'POST',
+            path: `/user/import`,
+            payload: {
+                users
             }
         });
     }

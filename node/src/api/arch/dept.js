@@ -7,7 +7,7 @@
 import { ApiClient } from '../../base/api_client';
 
 export class DeptApiClient extends ApiClient {
-    validVersions = ['v2'];
+    validVersions = ['v2', 'v1'];
     defaultVersion = 'v2';
 
     /**
@@ -23,12 +23,12 @@ export class DeptApiClient extends ApiClient {
     /**
      * （递归）获取部门列表
      */
-    async deptList(deptNo) {
+    async deptList(deptNo, options) {
         return await this.doRequest({
             method: 'POST',
             path: `department/${deptNo}/department_list`,
             payload: {
-                has_child: true
+                has_child: options.hasChild
             }
         });
     }
@@ -36,14 +36,14 @@ export class DeptApiClient extends ApiClient {
     /**
      * 创建部门
      */
-    async deptCreate(name, parent_no, dept_no) {
+    async deptCreate(name, options) {
         return await this.doRequest({
             method: 'POST',
             path: `department/create`,
             payload: {
                 name,
-                parent_no,
-                dept_no
+                parent_no: options.parentNo,
+                dept_no: options.deptNo
             }
         });
     }
@@ -80,6 +80,19 @@ export class DeptApiClient extends ApiClient {
             path: `department/get_deptno_by_integrateid`,
             payload: {
                 integrate_id: integrateId
+            }
+        });
+    }
+
+    /**
+     * 批量导入部门
+     */
+    async departmentImport(departments) {
+        return await this.doRequest({
+            method: 'POST',
+            path: `/department/import`,
+            payload: {
+                departments
             }
         });
     }

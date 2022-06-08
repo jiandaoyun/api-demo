@@ -28,6 +28,7 @@ export class ApiClient {
     /**
      * 发送http请求
      * @param { Object } options - 请求参数
+     * @param { String } options.version - 版本
      * @param { String } options.method - HTTP动词 (GET|POST)
      * @param { String } options.path - 请求path
      * @param { Object } options.query - url参数,可选
@@ -39,9 +40,10 @@ export class ApiClient {
         const axiosRequestConfig = {
             method: httpMethod,
             headers: {
-                'Authorization': `Bearer ${this.apiKey}`, 'Content-type': 'application/json;charset=utf-8'
+                'Authorization': `Bearer ${this.apiKey}`,
+                'Content-type': 'application/json;charset=utf-8'
             },
-            url: `${this.host}/${this.version}/${options.path}${query}`,
+            url: `${this.host}/${options.version ?? this.version}/${options.path}${query}`,
             data: options.payload,
             timeout: 5000
         };
@@ -54,7 +56,7 @@ export class ApiClient {
             response = e.response;
             if (response) {
                 const { status, data } = response;
-                if (status && status > 200) {
+                if (status && status > 200 && data.code && data.msg) {
                     throw new Error(`请求错误！Error Code: ${data.code}, Error Msg: ${data.msg}`);
                 }
             }

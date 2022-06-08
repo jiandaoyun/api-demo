@@ -9,12 +9,13 @@ import { DeptApiClient } from '../../../src/api/arch/dept';
 
 export const deptTest = 'deptTest';
 
+let deptNo;
+
 describe('dept api test', () => {
     const api = new DeptApiClient(ApiKey, Host);
-    let deptNo;
 
     test('deptCreate', async () => {
-        const dept = await api.deptCreate('Demo研发部门');
+        const dept = await api.deptCreate('Demo研发部门', {});
         expect(dept.department).toBeTruthy();
         deptNo = dept.department.dept_no;
         console.log(dept);
@@ -27,7 +28,9 @@ describe('dept api test', () => {
     });
 
     test('deptList', async () => {
-        const deptList = await api.deptList(deptNo);
+        const deptList = await api.deptList(deptNo, {
+            hasChild: true
+        });
         expect(deptList.departments).toBeTruthy();
         console.log(deptList);
     });
@@ -40,6 +43,15 @@ describe('dept api test', () => {
     test('deptByIntegrateId', async () => {
         try {
             await api.deptByIntegrateId('1005');
+        } catch (e) {
+            console.log(e);
+        }
+    });
+
+    test('departmentImport', async () => {
+        try {
+            const response = await api.departmentImport([]);
+            expect(response.status).toEqual('success');
         } catch (e) {
             console.log(e);
         }
