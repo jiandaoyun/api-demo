@@ -1,9 +1,11 @@
 package api.arch;
 
-import model.dept.UserCreateParam;
-import model.dept.UserUpdateParam;
+import model.user.UserCreateParam;
+import model.user.UserUpdateParam;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -24,6 +26,22 @@ public class MemberDemoTest {
         userDelete(memberDemo);
         // 批量删除用户
         userBatchDelete(memberDemo);
+        // 批量创建成员
+        userImport(memberDemo);
+    }
+
+    private static void userImport(MemberDemo memberDemo) throws Exception {
+        // 批量的话 三个参数必传
+        List<UserCreateParam> paramList = new ArrayList<>();
+        UserCreateParam createParam = new UserCreateParam("importName1","importUserName1");
+        createParam.setDepartments(Arrays.asList(97,98));
+        paramList.add(createParam);
+        createParam = new UserCreateParam("importName2","importUserName2");
+        createParam.setDepartments(Arrays.asList(101,102));
+        paramList.add(createParam);
+
+        Map<String, Object> result = memberDemo.userImport(paramList);
+        System.out.println("departmentImport result \n" + result);
     }
 
     private static void userBatchDelete(MemberDemo memberDemo) throws Exception {
@@ -45,8 +63,8 @@ public class MemberDemoTest {
 
 
     private static void userCreate(MemberDemo memberDemo) throws Exception {
-        UserCreateParam param = new UserCreateParam("name2", "userName2");
-        param.setDepartmentList(Arrays.asList(97, 98));
+        UserCreateParam param = new UserCreateParam("name21", "userName21");
+        param.setDepartments(Arrays.asList(97, 98));
         Map<String, Object> result = memberDemo.userCreate(param);
         System.out.println("userCreate result \n" + result);
     }

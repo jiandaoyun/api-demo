@@ -1,14 +1,11 @@
-package model.dept;
+package model.user;
 
 import java.util.List;
 
-public class UserCreateParam {
+public class UserUpdateParam {
 
     private String name;
 
-    /**
-     * 用户名 由数字字母和下划线组成
-     */
     private String userName;
 
     /**
@@ -16,10 +13,10 @@ public class UserCreateParam {
      */
     private List<Integer> departmentList;
 
-    public UserCreateParam() {
+    public UserUpdateParam() {
     }
 
-    public UserCreateParam(String name, String userName) {
+    public UserUpdateParam(String name, String userName) {
         this.name = name;
         this.userName = userName;
     }

@@ -21,6 +21,7 @@ import javax.net.ssl.SSLContext;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -55,9 +56,13 @@ public class HttpUtil {
         // 返回状态码
         int statusCode = response.getStatusLine().getStatusCode();
         ObjectMapper mapper = new ObjectMapper();
-        Map<String, Object> result = (Map<String, Object>) mapper.readValue(response.getEntity().getContent(), Object.class);
+        Map<String, Object> result = new HashMap<>();
+        // 有部分接口直接返回 没有数据
+        if (response.getEntity().getContentLength() > 0) {
+            result = (Map<String, Object>) mapper.readValue(response.getEntity().getContent(), Object.class);
+        }
         if (statusCode >= 400) {
-            throw new RuntimeException("请求错误，Error Code: " + result.get("code") + ", Error Msg: " + result.get("msg"));
+            throw new RuntimeException("请求错误，statusCode:"+statusCode+",Error Code: " + result.get("code") + ", Error Msg: " + result.get("msg"));
         } else {
             // 处理返回结果
             return result;

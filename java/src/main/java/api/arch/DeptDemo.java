@@ -7,6 +7,7 @@ import org.apache.commons.lang3.StringUtils;
 import util.HttpUtil;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import static constants.HttpConstant.DEPT_BASE_URL;
@@ -23,7 +24,7 @@ public class DeptDemo {
      * @param deptNo 部门编号
      * @throws Exception
      */
-    public Map<String, Object> deptList(Integer deptNo) throws Exception {
+    public Map<String, Object> deptList(Integer deptNo, Boolean hasChild) throws Exception {
         if (deptNo == null) {
             throw new RuntimeException("param lack!");
         }
@@ -33,7 +34,7 @@ public class DeptDemo {
         param.setUrl(url);
         // 请求参数
         Map<String, Object> data = new HashMap<>();
-        data.put("has_child", true);
+        data.put("has_child", hasChild);
         param.setData(data);
         return HttpUtil.sendPostRequest(param);
     }
@@ -55,8 +56,8 @@ public class DeptDemo {
         // 请求参数
         Map<String, Object> data = new HashMap<>();
         data.put("name", param.getName());
-        data.put("dept_no", param.getDeptNo());
-        data.put("parent_no", param.getParentNo());
+        data.put("dept_no", param.getDept_no());
+        data.put("parent_no", param.getParent_no());
         httpRequestParam.setData(data);
         return HttpUtil.sendPostRequest(httpRequestParam);
     }
@@ -103,6 +104,10 @@ public class DeptDemo {
 
     /**
      * 根据集成模式通讯录的部门ID获取部门编号
+     *
+     * @param integrateId
+     * @return
+     * @throws Exception
      */
     public Map<String, Object> deptByIntegrateId(String integrateId) throws Exception {
         if (StringUtils.isBlank(integrateId)) {
@@ -118,4 +123,27 @@ public class DeptDemo {
         httpRequestParam.setData(data);
         return HttpUtil.sendPostRequest(httpRequestParam);
     }
+
+    /**
+     * 批量创建部门
+     *
+     * @param paramList
+     * @return
+     * @throws Exception
+     */
+    public Map<String, Object> departmentImport(List<Object> paramList) throws Exception {
+        if (paramList == null || paramList.size() == 0) {
+            throw new RuntimeException("param lack!");
+        }
+        String url = DEPT_BASE_URL + "import";
+        HttpRequestParam httpRequestParam = new HttpRequestParam();
+        httpRequestParam.setApiKey(HttpConstant.API_KEY);
+        httpRequestParam.setUrl(url);
+        // 请求参数
+        Map<String, Object> data = new HashMap<>();
+        data.put("departments", paramList);
+        httpRequestParam.setData(data);
+        return HttpUtil.sendPostRequest(httpRequestParam);
+    }
+
 }

@@ -25,8 +25,6 @@ public class LimitUtil {
      */
     public static synchronized void tryBeforeRun() throws InterruptedException {
         Long now = System.currentTimeMillis();
-        // 打印seq 看看 在多线程模式下 seq的顺序 是否是 0、1、2、3、4、0、1、2.。。
-        System.out.println(Thread.currentThread().getName() + " seq :" + seq);
         // 当前时间 与 前limit个请求的时间 作比较
         Long interval = now - requestTimeList.get(seq);
         if (interval < 0) {
