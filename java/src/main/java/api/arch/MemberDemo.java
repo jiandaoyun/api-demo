@@ -1,8 +1,8 @@
 package api.arch;
 
 import constants.HttpConstant;
-import model.dept.UserCreateParam;
-import model.dept.UserUpdateParam;
+import model.user.UserCreateParam;
+import model.user.UserUpdateParam;
 import model.http.HttpRequestParam;
 import org.apache.commons.lang3.StringUtils;
 import util.HttpUtil;
@@ -46,7 +46,7 @@ public class MemberDemo {
      * @throws Exception
      */
     public Map<String, Object> userCreate(UserCreateParam param) throws Exception {
-        if (param == null || StringUtils.isBlank(param.getName()) || StringUtils.isBlank(param.getUserName())) {
+        if (param == null || StringUtils.isBlank(param.getName()) || StringUtils.isBlank(param.getUsername())) {
             throw new RuntimeException("param lack!");
         }
         String url = MEMBER_BASE_URL + "create";
@@ -56,8 +56,8 @@ public class MemberDemo {
         // 请求参数
         Map<String, Object> data = new HashMap<>();
         data.put("name", param.getName());
-        data.put("username", param.getUserName());
-        data.put("departments", param.getDepartmentList());
+        data.put("username", param.getUsername());
+        data.put("departments", param.getDepartments());
         requestParam.setData(data);
         return HttpUtil.sendPostRequest(requestParam);
     }
@@ -139,5 +139,28 @@ public class MemberDemo {
         requestParam.setData(data);
         return HttpUtil.sendPostRequest(requestParam);
     }
+
+    /**
+     * 批量导入成员
+     *
+     * @param userNameList
+     * @return
+     * @throws Exception
+     */
+    public Map<String, Object> userImport(List<UserCreateParam> userNameList) throws Exception {
+        if (userNameList == null || userNameList.size() == 0) {
+            throw new RuntimeException("param lack!");
+        }
+        String url = MEMBER_BASE_URL + "import";
+        HttpRequestParam requestParam = new HttpRequestParam();
+        requestParam.setApiKey(HttpConstant.API_KEY);
+        requestParam.setUrl(url);
+        // 请求参数
+        Map<String, Object> data = new HashMap<>();
+        data.put("users", userNameList);
+        requestParam.setData(data);
+        return HttpUtil.sendPostRequest(requestParam);
+    }
+
 
 }

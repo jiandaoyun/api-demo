@@ -1,9 +1,9 @@
 package model.dept;
 
 /**
- * 创建部门的参数
+ * 批量创建部门的参数
  */
-public class DeptCreateParam {
+public class DeptImportCreateParam {
 
     /**
      * 部门名称 必填
@@ -11,20 +11,15 @@ public class DeptCreateParam {
     private String name;
 
     /**
-     * 父级部门编号 选填
-     */
-    private Integer parent_no;
-
-    /**
      * 部门编号 选填
      */
     private Integer dept_no;
 
-    public DeptCreateParam(String name) {
+    public DeptImportCreateParam(String name) {
         this.name = name;
     }
 
-    public DeptCreateParam() {
+    public DeptImportCreateParam() {
     }
 
     public String getName() {
@@ -33,14 +28,6 @@ public class DeptCreateParam {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public Integer getParent_no() {
-        return parent_no;
-    }
-
-    public void setParent_no(Integer parent_no) {
-        this.parent_no = parent_no;
     }
 
     public Integer getDept_no() {
@@ -55,7 +42,6 @@ public class DeptCreateParam {
     public String toString() {
         return "DeptCreateParam{" +
                 "name='" + name + '\'' +
-                ", parent_no=" + parent_no +
                 ", dept_no=" + dept_no +
                 '}';
     }

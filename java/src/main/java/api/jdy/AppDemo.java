@@ -37,7 +37,6 @@ public class AppDemo {
         data.put("limit", limit);
         param.setData(data);
         Map<String, Object> result = HttpUtil.sendPostRequest(param);
-        System.out.println("appList result:\n" + result.toString());
         return result;
     }
 
@@ -63,7 +62,6 @@ public class AppDemo {
         data.put("limit", limit);
         param.setData(data);
         Map<String, Object> result = HttpUtil.sendPostRequest(param);
-        System.out.println("entryList result:\n" + result.toString());
         return result;
     }
 

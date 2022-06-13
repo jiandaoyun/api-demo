@@ -21,7 +21,7 @@ public class LimitUtilThread implements Runnable {
         for (int i = 0; i < 15; i++) {
             try {
                 temp = System.currentTimeMillis();
-                Map<String, Object> reultMap = deptDemo.deptList(1);
+                Map<String, Object> reultMap = deptDemo.deptList(1,true);
                 System.out.println(threadName + "第" + i + "次请求耗时 :" + (System.currentTimeMillis() - temp));
             } catch (Exception e) {
                 System.out.println(threadName + " error happens!" + e.getMessage());
