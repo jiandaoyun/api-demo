@@ -2,6 +2,8 @@ import requests
 import json
 from .limit_util import Limiter
 import threading
+from .encoder_util import MyEncoder
+
 
 limiter = Limiter(1000, 5)
 
@@ -29,7 +31,7 @@ def send_post(request_param):
     # 如果有 data 的话 把 data 序列化
     if request_param.data:
         if isinstance(request_param.data, dict):
-            data = json.dumps(request_param.data)
+            data = json.dumps(request_param.data, cls=MyEncoder)
         else:
             data = json.dumps(request_param.data.__dict__)
     try:

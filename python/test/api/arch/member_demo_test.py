@@ -40,6 +40,10 @@ def userBatchDelete():
     result = member_demo.userBatchDelete(['python_username_6', 'python_username_5'])
     print('userDelete result:', result)
 
+def userImport():
+    result = member_demo.userImport(['python_username_6', 'python_username_5'])
+    print('userImport result:', result)
+
 
 if __name__ == '__main__':
     userCreate()
@@ -48,3 +52,4 @@ if __name__ == '__main__':
     userUpdate()
     userDelete()
     userBatchDelete()
+    userImport()

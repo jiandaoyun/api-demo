@@ -12,10 +12,12 @@ from ...model.http.http_request_param import HttpRequestParam
 """
 
 
-def deptMemberList(dept_no, has_child):
-    url = HttpConstant.DEPT_BASE_URL + str(dept_no) + "/member_list"
-    request_param = HttpRequestParam(HttpConstant.API_KEY, url, {"has_child": has_child})
+def roleList(role_list_query_param):
+    url = HttpConstant.DEPT_BASE_URL + "list"
+    request_param = HttpRequestParam(HttpConstant.API_KEY, url, role_list_query_param)
     return http_util.send_post(request_param)
+
+
 
 
 """
