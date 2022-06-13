@@ -8,16 +8,25 @@ import org.apache.http.Header;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpRequestBase;
 import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
+import org.apache.http.entity.ContentType;
 import org.apache.http.entity.StringEntity;
+import org.apache.http.entity.mime.HttpMultipartMode;
+import org.apache.http.entity.mime.MultipartEntityBuilder;
+import org.apache.http.entity.mime.content.StringBody;
+import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicHeader;
 import org.apache.http.ssl.SSLContextBuilder;
 import org.apache.http.ssl.TrustStrategy;
+import org.apache.http.util.EntityUtils;
 
 import javax.net.ssl.SSLContext;
+import java.io.File;
+import java.io.IOException;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
 import java.util.ArrayList;
@@ -62,14 +71,14 @@ public class HttpUtil {
             result = (Map<String, Object>) mapper.readValue(response.getEntity().getContent(), Object.class);
         }
         if (statusCode >= 400) {
-            throw new RuntimeException("请求错误，statusCode:"+statusCode+",Error Code: " + result.get("code") + ", Error Msg: " + result.get("msg"));
+            throw new RuntimeException("请求错误，statusCode:" + statusCode + ",Error Code: " + result.get("code") + ", Error Msg: " + result.get("msg"));
         } else {
             // 处理返回结果
             return result;
         }
     }
 
-    public static HttpClient getSSLHttpClient() throws Exception {
+    private static HttpClient getSSLHttpClient() throws Exception {
         SSLContext sslContext = new SSLContextBuilder().loadTrustMaterial(null, new TrustStrategy() {
             //信任所有
             @Override
@@ -86,10 +95,70 @@ public class HttpUtil {
      *
      * @return
      */
-    public static Header[] getHttpHeaders(String apiKey) {
+    private static Header[] getHttpHeaders(String apiKey) {
         List<Header> headerList = new ArrayList<Header>();
         headerList.add(new BasicHeader("Authorization", "Bearer " + apiKey));
         headerList.add(new BasicHeader("Content-Type", "application/json;charset=utf-8"));
         return headerList.toArray(new Header[headerList.size()]);
+    }
+
+    public static void httpPostFile(String url, File file, String token) {
+        CloseableHttpClient httpClient = HttpClients.createDefault();
+        try {
+            HttpPost httpPost = new HttpPost(url);
+            MultipartEntityBuilder builder = MultipartEntityBuilder.create();
+            httpPost.addHeader("token", token);
+            builder.addBinaryBody("file", file, ContentType.MULTIPART_FORM_DATA, file.getName());
+            // 传递 token
+            builder.addTextBody("token", token);
+            StringBody tokenBody = new StringBody(token, ContentType.MULTIPART_FORM_DATA);
+            builder.addPart("token", tokenBody);
+            HttpEntity entity = builder.build();
+            httpPost.setEntity(entity);
+            CloseableHttpResponse response = httpClient.execute(httpPost);
+            String result = EntityUtils.toString(response.getEntity(), "UTF-8");
+            System.out.println("结果：\n" + result);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                httpClient.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+
+//        String result = "";
+//        CloseableHttpClient httpClient = HttpClients.createDefault();
+//        CloseableHttpResponse response = null;
+//        try {
+//            HttpPost httpPost = new HttpPost(url);
+//            //HttpMultipartMode.RFC6532参数的设定是为避免文件名为中文时乱码
+//            MultipartEntityBuilder builder = MultipartEntityBuilder.create().setMode(HttpMultipartMode.RFC6532);
+////            httpPost.addHeader("header1", "zip");//头部放文件上传的head可自定义
+//            httpPost.setHeader("token", token);
+//
+//            builder.addBinaryBody("file", file, ContentType.MULTIPART_FORM_DATA, file.getName());
+//            builder.addTextBody("token", token);
+//            HttpEntity entity = builder.build();
+//            httpPost.setEntity(entity);
+//            response = httpClient.execute(httpPost);// 执行提交
+//            HttpEntity responseEntity = response.getEntity();//接收调用外部接口返回的内容
+//            // 通过EntityUtils中的toString方法将结果转换为字符串
+//            result = EntityUtils.toString(responseEntity);
+//            System.out.println("result =" + result);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        } finally {//处理结束后关闭httpclient的链接
+//            try {
+//                if (httpClient != null) {
+//                    httpClient.close();
+//                }
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//        }
+
     }
 }

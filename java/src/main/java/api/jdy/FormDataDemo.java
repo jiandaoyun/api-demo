@@ -10,8 +10,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static constants.HttpConstant.APP_BASE_URL;
 import static constants.HttpConstant.FORM_DATA_BASE_URL;
-import static constants.HttpConstant.FORM_DATA_V1_URL;
 
 /**
  * 表单数据相关的请求Demo
@@ -107,7 +107,7 @@ public class FormDataDemo {
                 StringUtils.isBlank(deleteParam.getEntryId())) {
             throw new RuntimeException("param lack!");
         }
-        String url = FORM_DATA_V1_URL + deleteParam.getAppId() + "/entry/" + deleteParam.getEntryId() + "/data_delete";
+        String url = APP_BASE_URL + deleteParam.getAppId() + "/entry/" + deleteParam.getEntryId() + "/data_delete";
         HttpRequestParam param = new HttpRequestParam();
         param.setApiKey(HttpConstant.API_KEY);
         param.setUrl(url);
@@ -129,7 +129,7 @@ public class FormDataDemo {
         if (StringUtils.isBlank(createParam.getAppId()) || StringUtils.isBlank(createParam.getEntryId())) {
             throw new RuntimeException("param lack!");
         }
-        String url = FORM_DATA_V1_URL + createParam.getAppId() + "/entry/" + createParam.getEntryId() + "/data_batch_create";
+        String url = APP_BASE_URL + createParam.getAppId() + "/entry/" + createParam.getEntryId() + "/data_batch_create";
         HttpRequestParam param = new HttpRequestParam();
         param.setApiKey(HttpConstant.API_KEY);
         param.setUrl(url);
@@ -152,7 +152,7 @@ public class FormDataDemo {
         if (StringUtils.isBlank(queryParam.getAppId()) || StringUtils.isBlank(queryParam.getEntryId())) {
             throw new RuntimeException("param lack!");
         }
-        String url = FORM_DATA_V1_URL + queryParam.getAppId() + "/entry/" + queryParam.getEntryId() + "/data";
+        String url = APP_BASE_URL + queryParam.getAppId() + "/entry/" + queryParam.getEntryId() + "/data";
         HttpRequestParam param = new HttpRequestParam();
         param.setApiKey(HttpConstant.API_KEY);
         param.setUrl(url);
@@ -179,7 +179,7 @@ public class FormDataDemo {
         if (StringUtils.isBlank(appId) || StringUtils.isBlank(entryId)) {
             throw new RuntimeException("param lack!");
         }
-        String url = FORM_DATA_V1_URL + appId + "/entry/" + entryId + "/data_batch_delete";
+        String url = APP_BASE_URL + appId + "/entry/" + entryId + "/data_batch_delete";
         HttpRequestParam param = new HttpRequestParam();
         param.setApiKey(HttpConstant.API_KEY);
         param.setUrl(url);
@@ -201,7 +201,7 @@ public class FormDataDemo {
         if (StringUtils.isBlank(updateParam.getAppId()) || StringUtils.isBlank(updateParam.getEntryId())) {
             throw new RuntimeException("param lack!");
         }
-        String url = FORM_DATA_V1_URL + updateParam.getAppId() + "/entry/" + updateParam.getEntryId() + "/data_batch_update";
+        String url = APP_BASE_URL + updateParam.getAppId() + "/entry/" + updateParam.getEntryId() + "/data_batch_update";
         HttpRequestParam param = new HttpRequestParam();
         param.setApiKey(HttpConstant.API_KEY);
         param.setUrl(url);
@@ -213,23 +213,5 @@ public class FormDataDemo {
         Map<String, Object> result = HttpUtil.sendPostRequest(param);
         return result;
     }
-
-//
-//    /**
-//     * 修改多条数据接口
-//     */
-//    async batchDataUpdate(appId, entryId, dataIds, data, options) {
-//        return await this.doRequest({
-//                version: 'v1',
-//                method: 'POST',
-//                path: `/app/${appId}/entry/${entryId}/data_batch_update`,
-//                payload: {
-//            data_ids: dataIds,
-//                    data,
-//                    transaction_id: options.transactionId
-//        }
-//        });
-//    }
-
 
 }

@@ -4,24 +4,27 @@ import model.form.*;
 
 import java.util.*;
 
+import static constants.HttpConstant.APP_ID;
+import static constants.HttpConstant.ENTRY_ID;
+
 public class FormDataDemoTest {
 
     public static void main(String[] args) throws Exception {
         FormDataDemo formDataDemo = new FormDataDemo();
         // 查询单条数据接口
-//        singleDataQuery(formDataDemo);
-//        // 新建单条数据接口
-//        singleDataCreate(formDataDemo);
-//         // 更新单条数据接口
-//        singleDataUpdate(formDataDemo);
+        singleDataQuery(formDataDemo);
+        // 新建单条数据接口
+        singleDataCreate(formDataDemo);
+         // 更新单条数据接口
+        singleDataUpdate(formDataDemo);
         // 删除单条数据
-//        singleDataRemove(formDataDemo);
-//        // 新建多条数据接口
-//        batchDataCreate(formDataDemo);
-//        // 查询多条数据
-//        batchDataQuery(formDataDemo);
-//        // 删除多条数据接口
-//        batchDataRemove(formDataDemo);
+        singleDataRemove(formDataDemo);
+        // 新建多条数据接口
+        batchDataCreate(formDataDemo);
+        // 查询多条数据
+        batchDataQuery(formDataDemo);
+        // 删除多条数据接口
+        batchDataRemove(formDataDemo);
         //  修改多条数据接口
         batchDataUpdate(formDataDemo);
 
@@ -29,7 +32,7 @@ public class FormDataDemoTest {
 
     private static void batchDataUpdate(FormDataDemo formDataDemo) throws Exception {
         FormDataBatchUpdateParam param =
-                new FormDataBatchUpdateParam("62a2fc216575a5000628c41f", "62a2fc246575a5000628c444");
+                new FormDataBatchUpdateParam(APP_ID, ENTRY_ID);
         Map<String,Object> data = new HashMap<>();
         data.put("_widget_1654848548501", new HashMap<String, Object>() {
             {
@@ -50,8 +53,8 @@ public class FormDataDemoTest {
 
     private static void batchDataQuery(FormDataDemo formDataDemo) throws Exception {
         FormDataQueryParam param = new FormDataQueryParam();
-        param.setAppId("62a2fc216575a5000628c41f");
-        param.setEntryId("62a2fc246575a5000628c444");
+        param.setAppId(APP_ID);
+        param.setEntryId(ENTRY_ID);
         param.setDataId("62a2fc6f5e66850006738f73");
         param.setLimit(10);
         param.setFieldList(Arrays.asList("_widget_1654848548482", "_widget_1654848548501"));
@@ -123,7 +126,7 @@ public class FormDataDemoTest {
     }
 
     private static void singleDataRemove(FormDataDemo formDataDemo) throws Exception {
-        FormDataDeleteParam deleteParam = new FormDataDeleteParam("62a2fc216575a5000628c41f", "62a2fc246575a5000628c444", "62a303315cb2173054a96116");
+        FormDataDeleteParam deleteParam = new FormDataDeleteParam(APP_ID, ENTRY_ID, "62a303315cb2173054a96116");
         Map<String, Object> result = formDataDemo.singleDataRemove(deleteParam);
         System.out.println("singleDataRemove result \n" + result);
     }
@@ -204,7 +207,7 @@ public class FormDataDemoTest {
         });
 
         FormDataCreateParam createParam =
-                new FormDataCreateParam("62a2fc216575a5000628c41f", "62a2fc246575a5000628c444", data);
+                new FormDataCreateParam(APP_ID, ENTRY_ID, data);
         Map<String, Object> result = formDataDemo.singleDataCreate(createParam);
         System.out.println("singleDataCreate result \n" + result);
     }

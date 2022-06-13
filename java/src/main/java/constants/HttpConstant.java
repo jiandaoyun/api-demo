@@ -55,11 +55,12 @@ public class HttpConstant {
      */
     public static final String FORM_DATA_BASE_URL = HOST_V4 + "/app/";
 
-    /**
-     * 表单数据相关的v1接口前缀
-     */
-    public static final String FORM_DATA_V1_URL = HOST_V1 + "/app/";
-
     public static final String API_KEY = "pQZ24l3mrlfum2H9ghrefQvGvvEGtIM7";//  pQZ24l3mrlfum1H9ghrefQvGvvEGtIM8
+
+    public static final String APP_ID = "62a2fc216575a5000628c41f";
+
+    public static final String WORK_FLOW_ENTRY_ID = "62a696f514b27e0006836b60";
+
+    public static final String ENTRY_ID = "62a2fc246575a5000628c444";
 
 }
