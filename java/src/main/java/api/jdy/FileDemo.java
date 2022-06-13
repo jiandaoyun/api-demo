@@ -42,24 +42,7 @@ public class FileDemo {
         if (StringUtils.isBlank(url) || StringUtils.isBlank(token) || file == null) {
             throw new RuntimeException("param lack!");
         }
-        HttpUtil.httpPostFile(url, file, token);
-        return null;
+        return HttpUtil.httpPostFile(url, token, file);
     }
 
-//
-//    /**
-//     * 文件上传接口
-//     */
-//    async uploadFile(url, token, file) {
-//        let formData = new FormData();
-//        formData.append('token', token);
-//        formData.append('file', file);
-//        const axiosRequestConfig = {
-//                method: 'POST',
-//                url,
-//                data: formData
-//        };
-//        const response = await axios(axiosRequestConfig);
-//        return response.data;
-//    }
 }

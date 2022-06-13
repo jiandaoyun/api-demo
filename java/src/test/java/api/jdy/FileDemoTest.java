@@ -26,7 +26,7 @@ public class FileDemoTest {
         List<Map<String, Object>> uploadTokenList = (List<Map<String, Object>>) uploadTokenResult.get("token_and_url_list");
         String url = uploadTokenList.get(0).get("url").toString();
         String token = uploadTokenList.get(0).get("token").toString();
-        Map<String, Object> result = fileDemo.uploadFile(url, token, new File("filePath"));
+        Map<String, Object> result = fileDemo.uploadFile(url, token, new File("C:\\Users\\xzh19\\Pictures\\test1.PNG"));
         System.out.println("uploadFile result \n" + result);
     }
 }

@@ -101,20 +101,4 @@ public class RoleGroupDemo {
         return HttpUtil.sendPostRequest(param);
     }
 
-
-//
-//    /**
-//     * 删除角色组
-//     */
-//    async roleGroupDelete(roleGroupNo) {
-//        return await this.doRequest({
-//                method: 'POST',
-//                path: `/role_group/delete`,
-//                payload: {
-//            role_group_no: roleGroupNo,
-//        }
-//        });
-//    }
-
-
 }
