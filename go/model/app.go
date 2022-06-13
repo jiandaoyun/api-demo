@@ -16,3 +16,15 @@ type App struct {
 type AppList struct {
 	Apps []App `json:"apps"`
 }
+
+// Entry 表单
+type Entry struct {
+	Name    string `json:"name"`
+	AppId   string `json:"app_id"`
+	EntryId string `json:"entry_id"`
+}
+
+// EntryList 表单列表
+type EntryList struct {
+	Forms []Entry `json:"forms"`
+}

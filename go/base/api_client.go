@@ -9,6 +9,7 @@ package base
 import (
 	"bytes"
 	"context"
+	"encoding/json"
 	"fmt"
 	"io/ioutil"
 	"log"
@@ -34,25 +35,37 @@ type ApiClient struct {
 	Version string
 }
 
+// RequestOption 请求选项
+type RequestOption struct {
+	Version string
+	Method  string
+	Path    string
+	Query   map[string]string
+	Payload []byte
+}
+
 // DoRequest 发送http请求
-func (api *ApiClient) DoRequest(method string, path string, query map[string]string, payload []byte) (responseBody []byte, err error) {
+func (api *ApiClient) DoRequest(option *RequestOption) (responseBody []byte, err error) {
 	// request
 	timeout, cancelFunc := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancelFunc()
+	if option.Version == "" {
+		option.Version = api.Version
+	}
 	request, err := http.NewRequestWithContext(
 		timeout,
-		strings.ToUpper(method),
-		fmt.Sprintf("%s/%s/%s", api.Host, api.Version, path),
-		bytes.NewBuffer(payload))
+		strings.ToUpper(option.Method),
+		fmt.Sprintf("%s/%s/%s", api.Host, option.Version, option.Path),
+		bytes.NewBuffer(option.Payload))
 	if err != nil {
 		log.Println(err.Error())
 		return
 	}
 	request.Header.Set("Authorization", fmt.Sprintf("Bearer %s", api.ApiKey))
 	request.Header.Set("Content-type", "application/json;charset=utf-8")
-	if query != nil && len(query) > 0 {
+	if option.Query != nil && len(option.Query) > 0 {
 		values := new(url.Values)
-		for k, v := range query {
+		for k, v := range option.Query {
 			values.Add(k, v)
 		}
 		request.URL.RawQuery = values.Encode()
@@ -67,4 +80,10 @@ func (api *ApiClient) DoRequest(method string, path string, query map[string]str
 	defer response.Body.Close()
 
 	return ioutil.ReadAll(response.Body)
+}
+
+// JsonIndentString json换行缩进字符串
+func JsonIndentString(v interface{}) string {
+	indent, _ := json.MarshalIndent(v, "", "    ")
+	return string(indent)
 }

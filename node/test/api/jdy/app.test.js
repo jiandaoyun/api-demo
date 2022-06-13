@@ -16,14 +16,14 @@ describe('app api test', () => {
     const api = new AppApiClient(ApiKey, Host);
 
     test('appList', async () => {
-        const appList = await api.appList(0, 10);
+        const appList = await api.appList({});
         expect(appList.apps).toBeTruthy();
         console.log(appList);
         appId = appList.apps[0].app_id;
     });
 
     test('entryList', async () => {
-        const entryList = await api.entryList(appId, 0, 10);
+        const entryList = await api.entryList(appId, {});
         expect(entryList.forms).toBeTruthy();
         console.log(entryList);
         entryId = entryList.forms[0].entry_id;

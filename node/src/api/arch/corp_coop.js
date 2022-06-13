@@ -26,7 +26,7 @@ export class CorpCoopApiClient extends ApiClient {
     async corpCoopDepartList(options) {
         return await this.doRequest({
             method: 'POST',
-            path: `/corp_coop/guest/department_list`,
+            path: `corp_coop/guest/department_list`,
             payload: {
                 dept_no: options.deptNo
             }
@@ -39,7 +39,7 @@ export class CorpCoopApiClient extends ApiClient {
     async corpCoopMemberList(options) {
         return await this.doRequest({
             method: 'POST',
-            path: `/corp_coop/guest/member_list`,
+            path: `corp_coop/guest/member_list`,
             payload: {
                 dept_no: options.deptNo
             }
@@ -52,7 +52,7 @@ export class CorpCoopApiClient extends ApiClient {
     async corpCoopUserInfo(username) {
         return await this.doRequest({
             method: 'POST',
-            path: `/corp_coop/guest/user_retrieve`,
+            path: `corp_coop/guest/user_retrieve`,
             payload: {
                 username
             }

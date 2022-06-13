@@ -90,7 +90,7 @@ export class DeptApiClient extends ApiClient {
     async departmentImport(departments) {
         return await this.doRequest({
             method: 'POST',
-            path: `/department/import`,
+            path: `department/import`,
             payload: {
                 departments
             }

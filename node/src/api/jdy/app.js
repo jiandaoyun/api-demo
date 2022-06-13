@@ -23,13 +23,12 @@ export class AppApiClient extends ApiClient {
     /**
      * 用户应用查询接口
      */
-    async appList(skip, limit) {
+    async appList(options) {
         return await this.doRequest({
             method: 'POST',
             path: 'app/retrieve_all',
             payload: {
-                skip,
-                limit
+                ...options
             }
         });
     }
@@ -37,13 +36,12 @@ export class AppApiClient extends ApiClient {
     /**
      * 用户表单查询接口
      */
-    async entryList(appId, skip, limit) {
+    async entryList(appId, options) {
         return await this.doRequest({
             method: 'POST',
             path: `app/${appId}/entry_retrieve`,
             payload: {
-                skip,
-                limit
+                ...options
             }
         });
     }

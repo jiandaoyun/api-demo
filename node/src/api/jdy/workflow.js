@@ -26,7 +26,7 @@ export class WorkflowApiClient extends ApiClient {
     async approvalComments(appId, entryId, dataId, options) {
         return await this.doRequest({
             method: 'POST',
-            path: `/app/${appId}/entry/${entryId}/data/${dataId}/approval_comments`,
+            path: `app/${appId}/entry/${entryId}/data/${dataId}/approval_comments`,
             payload: {
                 skip: options.skip ?? 0
             }

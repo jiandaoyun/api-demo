@@ -30,7 +30,7 @@ export class FileApiClient extends ApiClient {
     async uploadToken(appId, entryId, transactionId) {
         return await this.doRequest({
             method: 'POST',
-            path: `/app/${appId}/entry/${entryId}/file/get_upload_token`,
+            path: `app/${appId}/entry/${entryId}/file/get_upload_token`,
             payload: {
                 transaction_id: transactionId
             }

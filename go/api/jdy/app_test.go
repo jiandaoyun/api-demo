@@ -8,15 +8,11 @@ package jdy
 
 import (
 	"api-demo/base"
-	"encoding/json"
 	"testing"
 )
 
-// JsonIndentString json换行缩进字符串
-func JsonIndentString(v interface{}) string {
-	indent, _ := json.MarshalIndent(v, "", "    ")
-	return string(indent)
-}
+var AppId = ""
+var EntryId = ""
 
 func TestApplicationApi(t *testing.T) {
 	api := new(AppApiClient)
@@ -26,11 +22,22 @@ func TestApplicationApi(t *testing.T) {
 	}
 
 	t.Run("AppList", func(t *testing.T) {
-		appList, err := api.AppList(0, 10)
+		appList, err := api.AppList(make(map[string]interface{}))
 		if err != nil {
 			t.Error(err)
 		} else {
-			t.Log(JsonIndentString(appList))
+			t.Log(base.JsonIndentString(appList))
+			AppId = appList.Apps[0].AppId
+		}
+	})
+
+	t.Run("EntryList", func(t *testing.T) {
+		entryList, err := api.EntryList(AppId, make(map[string]interface{}))
+		if err != nil {
+			t.Error(err)
+		} else {
+			t.Log(base.JsonIndentString(entryList))
+			EntryId = entryList.Forms[0].EntryId
 		}
 	})
 }

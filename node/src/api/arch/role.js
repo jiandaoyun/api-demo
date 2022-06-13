@@ -26,7 +26,7 @@ export class RoleApiClient extends ApiClient {
     async roleList(options) {
         return await this.doRequest({
             method: 'POST',
-            path: `/role/list`,
+            path: `role/list`,
             payload: {
                 ...options
             }
@@ -39,7 +39,7 @@ export class RoleApiClient extends ApiClient {
     async roleCreate(name, groupNo) {
         return await this.doRequest({
             method: 'POST',
-            path: `/role/create`,
+            path: `role/create`,
             payload: {
                 name,
                 group_no: groupNo
@@ -53,7 +53,7 @@ export class RoleApiClient extends ApiClient {
     async roleUpdate(roleNo, groupNo, options) {
         return await this.doRequest({
             method: 'POST',
-            path: `/role/update`,
+            path: `role/update`,
             payload: {
                 role_no: roleNo,
                 group_no: groupNo,
@@ -68,7 +68,7 @@ export class RoleApiClient extends ApiClient {
     async roleDelete(roleNo) {
         return await this.doRequest({
             method: 'POST',
-            path: `/role/delete`,
+            path: `role/delete`,
             payload: {
                 role_no: roleNo
             }
@@ -81,7 +81,7 @@ export class RoleApiClient extends ApiClient {
     async roleMemberList(roleNo, options) {
         return await this.doRequest({
             method: 'POST',
-            path: `/role/member_list`,
+            path: `role/member_list`,
             payload: {
                 role_no: roleNo,
                 ...options
@@ -95,7 +95,7 @@ export class RoleApiClient extends ApiClient {
     async roleAddMembers(roleNo, usernames) {
         return await this.doRequest({
             method: 'POST',
-            path: `/role/add_members`,
+            path: `role/add_members`,
             payload: {
                 role_no: roleNo,
                 usernames
@@ -109,7 +109,7 @@ export class RoleApiClient extends ApiClient {
     async roleRmoveMembers(roleNo, usernames) {
         return await this.doRequest({
             method: 'POST',
-            path: `/role/remove_members`,
+            path: `role/remove_members`,
             payload: {
                 role_no: roleNo,
                 usernames
