@@ -27,7 +27,7 @@ export class FormApiClient extends ApiClient {
     async formWidgets(appId, entryId) {
         return await this.doRequest({
             method: 'POST',
-            path: `/app/${appId}/entry/${entryId}/widgets`
+            path: `app/${appId}/entry/${entryId}/widgets`
         });
     }
 }

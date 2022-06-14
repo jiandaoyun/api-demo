@@ -4,13 +4,14 @@
 * @date 2022/06/07
 */
 
-import { FileApiClient, transactionId } from '../../../src/api/jdy/file';
+import { FileApiClient } from '../../../src/api/jdy/file';
 import { ApiKey, Host } from '../../../src/base/api_client';
 import { appId, entryId } from './app.test';
 import fs from 'fs/promises';
 import path from 'path';
 
 export const fileTest = 'fileTest';
+const transactionId = '87cd7d71-c6df-4281-9927-469094395677';
 
 let token;
 let url;

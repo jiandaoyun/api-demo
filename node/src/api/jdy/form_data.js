@@ -26,7 +26,7 @@ export class FormDataApiClient extends ApiClient {
     async singleDataCreate(appId, entryId, data, options) {
         return await this.doRequest({
             method: 'POST',
-            path: `/app/${appId}/entry/${entryId}/data_create`,
+            path: `app/${appId}/entry/${entryId}/data_create`,
             payload: {
                 data,
                 is_start_workflow: options.isStartWorkflow,
@@ -42,7 +42,7 @@ export class FormDataApiClient extends ApiClient {
     async singleDataQuery(appId, entryId, dataId) {
         return await this.doRequest({
             method: 'POST',
-            path: `/app/${appId}/entry/${entryId}/data_retrieve`,
+            path: `app/${appId}/entry/${entryId}/data_retrieve`,
             payload: {
                 data_id: dataId
             }
@@ -55,7 +55,7 @@ export class FormDataApiClient extends ApiClient {
     async singleDataUpdate(appId, entryId, data_id, data, options) {
         return await this.doRequest({
             method: 'POST',
-            path: `/app/${appId}/entry/${entryId}/data_update`,
+            path: `app/${appId}/entry/${entryId}/data_update`,
             payload: {
                 data_id,
                 data,
@@ -72,7 +72,7 @@ export class FormDataApiClient extends ApiClient {
         return await this.doRequest({
             version: 'v1',
             method: 'POST',
-            path: `/app/${appId}/entry/${entryId}/data_delete`,
+            path: `app/${appId}/entry/${entryId}/data_delete`,
             payload: {
                 data_id: dataId,
                 is_start_trigger: options.isStartTrigger,
@@ -87,7 +87,7 @@ export class FormDataApiClient extends ApiClient {
         return await this.doRequest({
             version: 'v1',
             method: 'POST',
-            path: `/app/${appId}/entry/${entryId}/data_batch_create`,
+            path: `app/${appId}/entry/${entryId}/data_batch_create`,
             payload: {
                 data_list: dataList,
                 is_start_workflow: options.isStartWorkflow,
@@ -103,7 +103,7 @@ export class FormDataApiClient extends ApiClient {
         return await this.doRequest({
             version: 'v1',
             method: 'POST',
-            path: `/app/${appId}/entry/${entryId}/data`,
+            path: `app/${appId}/entry/${entryId}/data`,
             payload: {
                 data_id: options.nextId,
                 fields: options.fields,
@@ -120,7 +120,7 @@ export class FormDataApiClient extends ApiClient {
         return await this.doRequest({
             version: 'v1',
             method: 'POST',
-            path: `/app/${appId}/entry/${entryId}/data_batch_update`,
+            path: `app/${appId}/entry/${entryId}/data_batch_update`,
             payload: {
                 data_ids: dataIds,
                 data,
@@ -136,7 +136,7 @@ export class FormDataApiClient extends ApiClient {
         return await this.doRequest({
             version: 'v1',
             method: 'POST',
-            path: `/app/${appId}/entry/${entryId}/data_batch_delete`,
+            path: `app/${appId}/entry/${entryId}/data_batch_delete`,
             payload: {
                 data_ids: dataIds
             }

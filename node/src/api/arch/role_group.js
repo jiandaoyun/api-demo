@@ -26,7 +26,7 @@ export class RoleGroupApiClient extends ApiClient {
     async roleGroupList(options) {
         return await this.doRequest({
             method: 'POST',
-            path: `/role_group/list`,
+            path: `role_group/list`,
             payload: {
                 ...options
             }
@@ -39,7 +39,7 @@ export class RoleGroupApiClient extends ApiClient {
     async roleGroupCreate(name) {
         return await this.doRequest({
             method: 'POST',
-            path: `/role_group/create`,
+            path: `role_group/create`,
             payload: {
                 name
             }
@@ -52,7 +52,7 @@ export class RoleGroupApiClient extends ApiClient {
     async roleGroupUpdate(roleGroupNo, name) {
         return await this.doRequest({
             method: 'POST',
-            path: `/role_group/update`,
+            path: `role_group/update`,
             payload: {
                 role_group_no: roleGroupNo,
                 name
@@ -66,7 +66,7 @@ export class RoleGroupApiClient extends ApiClient {
     async roleGroupDelete(roleGroupNo) {
         return await this.doRequest({
             method: 'POST',
-            path: `/role_group/delete`,
+            path: `role_group/delete`,
             payload: {
                 role_group_no: roleGroupNo,
             }

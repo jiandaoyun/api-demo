@@ -99,7 +99,7 @@ export class MemberApiClient extends ApiClient {
     async userImport(users) {
         return await this.doRequest({
             method: 'POST',
-            path: `/user/import`,
+            path: `user/import`,
             payload: {
                 users
             }
