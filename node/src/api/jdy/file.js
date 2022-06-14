@@ -8,8 +8,6 @@ import { ApiClient } from '../../base/api_client';
 import FormData from 'form-data';
 import axios from 'axios';
 
-export const transactionId = '87cd7d71-c6df-4281-9927-469094395677';
-
 export class FileApiClient extends ApiClient {
     validVersions = ['v1'];
     defaultVersion = 'v1';
