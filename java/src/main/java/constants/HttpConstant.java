@@ -39,7 +39,7 @@ public class HttpConstant {
     public static final String ROLE_BASE_URL = HOST_V2 + "/role/";
 
     /**
-     * 角色相关的接口前缀
+     * 角色组相关的接口前缀
      */
     public static final String ROLE_GROUP_BASE_URL = HOST_V2 + "/role_group/";
 

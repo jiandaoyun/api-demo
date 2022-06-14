@@ -4,7 +4,6 @@ from .limit_util import Limiter
 import threading
 from .encoder_util import MyEncoder
 
-
 limiter = Limiter(1000, 5)
 
 lock = threading.Lock()
@@ -50,4 +49,9 @@ def handle_result(res):
     if res.status_code >= 400:
         raise Exception('Opps，Something Wrong: ', res.text)
     else:
-        return res.json()
+        return "success" if len(res.text) == 0 else res.json()
+
+
+def send_post_with_file(url, data, file):
+    response = requests.post(url=url, files=file, data=data)
+    return handle_result(response)

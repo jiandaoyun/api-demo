@@ -1,6 +1,6 @@
 import src.api.arch.member_demo as member_demo
-from src.model.dept.user_create_param import UserCreateParam
-from src.model.dept.user_update_param import UserUpdateParam
+from src.model.user.user_create_param import UserCreateParam
+from src.model.user.user_update_param import UserUpdateParam
 
 
 # 测试 创建成员
