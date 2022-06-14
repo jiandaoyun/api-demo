@@ -56,7 +56,7 @@ func (api *AppApiClient) AppList(option map[string]interface{}) (responseBody *m
 	return
 }
 
-// EntryList 应用列表
+// EntryList 表单列表
 func (api *AppApiClient) EntryList(appId string, option map[string]interface{}) (responseBody *model.EntryList, err error) {
 	payload, err := json.Marshal(option)
 	if err != nil {

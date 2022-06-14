@@ -9,18 +9,29 @@ using Src.Base;
 
 namespace Test;
 
+[TestCaseOrderer("XUnit.Project.Orderers.AlphabeticalOrderer", "Test")]
 public class AppTest
 {
+    public static string appId = "";
+    public static string entryId = "";
+
     private static AppApiClient api = new AppApiClient(Global.Host, Global.ApiKey);
-    private string appId = "";
 
     [Fact]
     public async void TestAppList()
     {
-        var appList = await api.appList(0, 10);
+        var appList = await api.appList(new Dictionary<string, object>());
         Assert.True(appList != null);
         Console.WriteLine(appList);
-        this.appId = appList.Value.GetProperty("apps")[0].GetProperty("app_id").GetString();
-        Console.WriteLine(this.appId);
+        appId = appList.Value.GetProperty("apps")[0].GetProperty("app_id").GetString();
+    }
+
+    [Fact]
+    public async void TestEntryList()
+    {
+        var entryList = await api.entryList(appId, new Dictionary<string, object>());
+        Assert.True(entryList != null);
+        entryId = entryList.Value.GetProperty("forms")[0].GetProperty("entry_id").GetString();
+        Console.WriteLine(entryList);
     }
 }

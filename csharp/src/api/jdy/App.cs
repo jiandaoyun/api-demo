@@ -16,35 +16,37 @@ public class AppApiClient : ApiClient
     {
     }
 
-    public new async Task<JsonElement?> doRequest(string method, string path, IDictionary<string, string>? query, IDictionary<string, object>? payload)
+    public new async Task<JsonElement?> doRequest(IDictionary<string, object> option)
     {
         if (Array.IndexOf(validVersions, base.version) == -1)
         {
             base.version = defaultVersion;
         }
-        return await base.doRequest(method, path, query, payload);
+        return await base.doRequest(option);
     }
 
 
     /**
      * 用户应用查询接口
      */
-    public async Task<JsonElement?> appList(int skip, int limit)
+    public async Task<JsonElement?> appList(Dictionary<string, object> option)
     {
-        IDictionary<string, object> payload = new Dictionary<string, object>();
-        payload.Add("skip", skip);
-        payload.Add("limit", limit);
-        return await this.doRequest("POST", "app/retrieve_all", null, payload);
+        IDictionary<string, object> requestOption = new Dictionary<string, object>();
+        requestOption.Add("method", "POST");
+        requestOption.Add("path", "app/retrieve_all");
+        requestOption.Add("payload", option);
+        return await this.doRequest(requestOption);
     }
 
     /**
      * 用户表单查询接口
      */
-    public async Task<object?> entryList(string appId, int skip, int limit)
+    public async Task<JsonElement?> entryList(string appId, Dictionary<string, object> option)
     {
-        IDictionary<string, object> payload = new Dictionary<string, object>();
-        payload.Add("skip", skip);
-        payload.Add("limit", limit);
-        return await this.doRequest("POST", $"app/{appId}/ entry_retrieve", null, payload);
+        IDictionary<string, object> requestOption = new Dictionary<string, object>();
+        requestOption.Add("method", "POST");
+        requestOption.Add("path", $"app/{appId}/entry_retrieve");
+        requestOption.Add("payload", option);
+        return await this.doRequest(requestOption);
     }
 }

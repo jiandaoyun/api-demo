@@ -24,10 +24,28 @@ public class ApiClient
         this.version = version;
     }
 
-    public async Task<JsonElement?> doRequest(string method, string path, IDictionary<string, string>? query, IDictionary<string, object>? payload)
+    public async Task<JsonElement?> doRequest(IDictionary<string, object> option)
     {
+        // 参数获取
+        string? version = this.version;
+        if (option.ContainsKey("version"))
+        {
+            version = option["version"] as string;
+        }
+        string? method = option["method"] as string;
+        string? path = option["path"] as string;
+        IDictionary<string, object>? payload = new Dictionary<string, object>();
+        if (option.ContainsKey("payload"))
+        {
+            payload = option["payload"] as IDictionary<string, object>;
+        }
+        IDictionary<string, string>? query = new Dictionary<string, string>(); ;
+        if (option.ContainsKey("query"))
+        {
+            query = option["query"] as IDictionary<string, string>;
+        }
         // 创建request
-        HttpRequestMessage request = new HttpRequestMessage(new HttpMethod(method), BuildRequestUrl($"{host}/{this.version}/{path}", BuildQuery(query)));
+        HttpRequestMessage request = new HttpRequestMessage(new HttpMethod(method), BuildRequestUrl($"{host}/{version}/{path}", BuildQuery(query)));
         request.Headers.Add("Authorization", $"Bearer {this.apiKey}");
         if (payload != null && payload.Count > 0)
         {
