@@ -2,8 +2,6 @@ from ...util import http_util as http_util
 from ...constants.http_constant import HttpConstant
 from ...model.http.http_request_param import HttpRequestParam
 
-
-
 """
  获取部门成员（递归）
  Arguments:
@@ -12,8 +10,8 @@ from ...model.http.http_request_param import HttpRequestParam
 """
 
 
-def deptMemberList(dept_no, has_child):
-    url = HttpConstant.DEPT_BASE_URL + str(dept_no) + "/member_list"
+def deptMemberList(deptNo, has_child):
+    url = HttpConstant.DEPT_MEMBER_LIST_URL.format(deptNo=deptNo)
     request_param = HttpRequestParam(HttpConstant.API_KEY, url, {"has_child": has_child})
     return http_util.send_post(request_param)
 
@@ -26,7 +24,7 @@ Arguments:
 
 
 def userCreate(user_create_param):
-    url = HttpConstant.MEMBER_BASE_URL + 'create'
+    url = HttpConstant.MEMBER_URL.format(suffix='create')
     request_param = HttpRequestParam(HttpConstant.API_KEY, url, user_create_param)
     return http_util.send_post(request_param)
 
@@ -34,12 +32,12 @@ def userCreate(user_create_param):
 """
 根据成员名称 获取成员
 Arguments:
-    user_name: string 用户名称
+    userName: string 用户名称
 """
 
 
-def userInfo(user_name):
-    url = HttpConstant.MEMBER_BASE_URL + user_name + "/user_retrieve"
+def userInfo(userName):
+    url = HttpConstant.USER_INFO_URL.format(userName=userName)
     request_param = HttpRequestParam(HttpConstant.API_KEY, url, None)
     return http_util.send_post(request_param)
 
@@ -52,7 +50,8 @@ Arguments:
 
 
 def userUpdate(user_update_param):
-    url = HttpConstant.MEMBER_BASE_URL + user_update_param.getUserName() + "/update"
+    url = HttpConstant.USER_UPDATE_URL.format(userName=user_update_param.getUserName())
+
     request_param = HttpRequestParam(HttpConstant.API_KEY, url,
                                      {'name': user_update_param.getName(),
                                       'departments': user_update_param.getDepartments()})
@@ -67,7 +66,7 @@ Arguments:
 
 
 def userDelete(user_name):
-    url = HttpConstant.MEMBER_BASE_URL + user_name + "/delete"
+    url = HttpConstant.USER_DELETE_URL.format(userName=user_name)
     request_param = HttpRequestParam(HttpConstant.API_KEY, url, None)
     return http_util.send_post(request_param)
 
@@ -80,7 +79,7 @@ Arguments:
 
 
 def userBatchDelete(user_name_list):
-    url = HttpConstant.MEMBER_BASE_URL + "batch_delete"
+    url = HttpConstant.MEMBER_URL.format(suffix='batch_delete')
     request_param = HttpRequestParam(HttpConstant.API_KEY, url, {'usernames': user_name_list})
     return http_util.send_post(request_param)
 
@@ -93,6 +92,6 @@ Arguments:
 
 
 def userImport(users):
-    url = HttpConstant.MEMBER_BASE_URL + "import"
+    url = HttpConstant.MEMBER_URL.format(suffix='import')
     request_param = HttpRequestParam(HttpConstant.API_KEY, url, {'users': users})
     return http_util.send_post(request_param)

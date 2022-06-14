@@ -21,5 +21,5 @@ def corpCoopUserInfo():
 
 if __name__ == '__main__':
     corpCoopDepartList()
-    corpCoopMemberList()
-    corpCoopUserInfo()
+    # corpCoopMemberList()
+    # corpCoopUserInfo()

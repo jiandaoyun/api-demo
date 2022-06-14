@@ -1,11 +1,12 @@
 import src.api.jdy.file_demo as file_demo
 from src.constants.http_constant import HttpConstant
+import uuid
 
 
 # 测试 获取文件上传凭证和上传地址接口
 def uploadToken():
-    result = file_demo.uploadToken(HttpConstant.APP_ID, HttpConstant.ENTRY_ID, '87cd7d71-c6df-4281-9927-469094395678')
-    # print('uploadToken result:', result)
+    result = file_demo.uploadToken(HttpConstant.APP_ID, HttpConstant.ENTRY_ID)
+    print('uploadToken result:', result)
     return result
 
 

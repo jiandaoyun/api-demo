@@ -26,9 +26,9 @@ def roleGroupDelete():
 
 
 if __name__ == '__main__':
-    roleGroupCreate()
+    # roleGroupCreate()
     roleGroupList()
-    roleGroupUpdate()
-    roleGroupDelete()
+    # roleGroupUpdate()
+    # roleGroupDelete()
 
 

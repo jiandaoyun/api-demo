@@ -10,7 +10,7 @@ from ...model.http.http_request_param import HttpRequestParam
 
 
 def roleList(role_list_query_param):
-    url = HttpConstant.ROLE_BASE_URL + "list"
+    url = HttpConstant.ROLE_URL.format(suffix='list')
     request_param = HttpRequestParam(HttpConstant.API_KEY, url, role_list_query_param)
     return http_util.send_post(request_param)
 
@@ -24,7 +24,7 @@ def roleList(role_list_query_param):
 
 
 def roleCreate(name, group_no):
-    url = HttpConstant.ROLE_BASE_URL + "create"
+    url = HttpConstant.ROLE_URL.format(suffix='create')
     request_param = HttpRequestParam(HttpConstant.API_KEY, url, {'name': name, 'group_no': group_no})
     return http_util.send_post(request_param)
 
@@ -39,7 +39,7 @@ def roleCreate(name, group_no):
 
 
 def roleUpdate(name, group_no, role_no):
-    url = HttpConstant.ROLE_BASE_URL + "update"
+    url = HttpConstant.ROLE_URL.format(suffix='update')
     request_param = HttpRequestParam(HttpConstant.API_KEY, url,
                                      {'name': name, 'group_no': group_no, "role_no": role_no})
     return http_util.send_post(request_param)
@@ -53,7 +53,7 @@ def roleUpdate(name, group_no, role_no):
 
 
 def roleDelete(role_no):
-    url = HttpConstant.ROLE_BASE_URL + "delete"
+    url = HttpConstant.ROLE_URL.format(suffix='delete')
     request_param = HttpRequestParam(HttpConstant.API_KEY, url, {"role_no": role_no})
     return http_util.send_post(request_param)
 
@@ -68,7 +68,7 @@ def roleDelete(role_no):
 
 
 def roleMemberList(role_no, skip, limit):
-    url = HttpConstant.ROLE_BASE_URL + "member_list"
+    url = HttpConstant.ROLE_URL.format(suffix='member_list')
     request_param = HttpRequestParam(HttpConstant.API_KEY, url, {"role_no": role_no, "skip": skip, "limit": limit})
     return http_util.send_post(request_param)
 
@@ -82,9 +82,10 @@ def roleMemberList(role_no, skip, limit):
 
 
 def roleAddMembers(role_no, usernames):
-    url = HttpConstant.ROLE_BASE_URL + "add_members"
+    url = HttpConstant.ROLE_URL.format(suffix='add_members')
     request_param = HttpRequestParam(HttpConstant.API_KEY, url, {"role_no": role_no, "usernames": usernames})
     return http_util.send_post(request_param)
+
 
 '''
 为自建角色批量移除成员
@@ -95,7 +96,6 @@ def roleAddMembers(role_no, usernames):
 
 
 def roleRmoveMembers(role_no, usernames):
-    url = HttpConstant.ROLE_BASE_URL + "remove_members"
+    url = HttpConstant.ROLE_URL.format(suffix='remove_members')
     request_param = HttpRequestParam(HttpConstant.API_KEY, url, {"role_no": role_no, "usernames": usernames})
     return http_util.send_post(request_param)
-

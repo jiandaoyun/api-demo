@@ -11,7 +11,6 @@ Arguments:
 
 
 def formWidgets(appId, entryId):
-    url = HttpConstant.FORM_BASE_URL + appId + "/entry/" + entryId + "/widgets"
+    url = HttpConstant.FORM_WIDGETS_URL.format(appId=appId, entryId=entryId)
     request_param = HttpRequestParam(HttpConstant.API_KEY, url, None)
     return http_util.send_post(request_param)
-

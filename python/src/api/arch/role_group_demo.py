@@ -10,20 +10,7 @@ from ...model.http.http_request_param import HttpRequestParam
 
 
 def roleGroupList(role_group_list_query_param):
-    url = HttpConstant.ROLE_GROUP_BASE_URL + "list"
-    request_param = HttpRequestParam(HttpConstant.API_KEY, url, role_group_list_query_param)
-    return http_util.send_post(request_param)
-
-
-"""
-列出角色组
-Arguments:
-    role_list_query_param: RoleListQueryParam 实例
-"""
-
-
-def roleGroupList(role_group_list_query_param):
-    url = HttpConstant.ROLE_GROUP_BASE_URL + "list"
+    url = HttpConstant.ROLE_GROUP_URL.format(suffix='list')
     request_param = HttpRequestParam(HttpConstant.API_KEY, url, role_group_list_query_param)
     return http_util.send_post(request_param)
 
@@ -36,7 +23,7 @@ Arguments:
 
 
 def roleGroupCreate(name):
-    url = HttpConstant.ROLE_GROUP_BASE_URL + "create"
+    url = HttpConstant.ROLE_GROUP_URL.format(suffix='create')
     request_param = HttpRequestParam(HttpConstant.API_KEY, url, {"name": name})
     return http_util.send_post(request_param)
 
@@ -50,7 +37,7 @@ Arguments:
 
 
 def roleGroupUpdate(name, role_group_no):
-    url = HttpConstant.ROLE_GROUP_BASE_URL + "update"
+    url = HttpConstant.ROLE_GROUP_URL.format(suffix='update')
     request_param = HttpRequestParam(HttpConstant.API_KEY, url, {"name": name, "role_group_no": role_group_no})
     return http_util.send_post(request_param)
 
@@ -63,7 +50,6 @@ Arguments:
 
 
 def roleGroupDelete(role_group_no):
-    url = HttpConstant.ROLE_GROUP_BASE_URL + "delete"
+    url = HttpConstant.ROLE_GROUP_URL.format(suffix='delete')
     request_param = HttpRequestParam(HttpConstant.API_KEY, url, {"role_group_no": role_group_no})
     return http_util.send_post(request_param)
-

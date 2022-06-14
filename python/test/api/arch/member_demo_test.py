@@ -20,7 +20,7 @@ def deptMemberList():
 
 # 测试 获取部门成员（递归）
 def userInfo():
-    result = member_demo.userInfo('python_username_5')
+    result = member_demo.userInfo('jdy-lsipo954x6lf')
     print('userInfo result:', result)
 
 
@@ -46,10 +46,10 @@ def userImport():
 
 
 if __name__ == '__main__':
-    userCreate()
-    deptMemberList()
-    userInfo()
-    userUpdate()
+    # userCreate()
+    # deptMemberList()
+    # userInfo()
+    # userUpdate()
     userDelete()
-    userBatchDelete()
-    userImport()
+    # userBatchDelete()
+    # userImport()

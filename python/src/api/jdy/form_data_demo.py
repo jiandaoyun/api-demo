@@ -10,7 +10,7 @@ Arguments:
 
 
 def singleDataCreate(param):
-    url = HttpConstant.FORM_DATA_BASE_URL + param.app_id + "/entry/" + param.entry_id + "/data_create"
+    url = HttpConstant.SINGLE_DATA_CREATE_URL.format(appId=param.app_id, entryId=param.entry_id)
     request_param = HttpRequestParam(HttpConstant.API_KEY, url, param)
     return http_util.send_post(request_param)
 
@@ -25,7 +25,7 @@ Arguments:
 
 
 def singleDataQuery(app_id, entry_id, data_id):
-    url = HttpConstant.FORM_DATA_BASE_URL + app_id + "/entry/" + entry_id + "/data_retrieve"
+    url = HttpConstant.SINGLE_DATA_QUERY_URL.format(appId=app_id, entryId=entry_id)
     request_param = HttpRequestParam(HttpConstant.API_KEY, url, {'data_id': data_id})
     return http_util.send_post(request_param)
 
@@ -38,7 +38,7 @@ Arguments:
 
 
 def singleDataUpdate(param):
-    url = HttpConstant.FORM_DATA_BASE_URL + param.app_id + "/entry/" + param.entry_id + "/data_update"
+    url = HttpConstant.SINGLE_DATA_UPDATE_URL.format(appId=param.app_id, entryId=param.entry_id)
     request_param = HttpRequestParam(HttpConstant.API_KEY, url, param)
     return http_util.send_post(request_param)
 
@@ -51,7 +51,7 @@ Arguments:
 
 
 def singleDataRemove(param):
-    url = HttpConstant.APP_BASE_URL + param.app_id + "/entry/" + param.entry_id + "/data_delete"
+    url = HttpConstant.SINGLE_DATA_REMOVE_URL.format(appId=param.app_id, entryId=param.entry_id)
     request_param = HttpRequestParam(HttpConstant.API_KEY, url, param)
     return http_util.send_post(request_param)
 
@@ -64,7 +64,7 @@ Arguments:
 
 
 def batchDataCreate(param):
-    url = HttpConstant.APP_BASE_URL + param.app_id + "/entry/" + param.entry_id + "/data_batch_create"
+    url = HttpConstant.BATCH_DATA_CREATE_URL.format(appId=param.app_id, entryId=param.entry_id)
     request_param = HttpRequestParam(HttpConstant.API_KEY, url, param)
     return http_util.send_post(request_param)
 
@@ -77,7 +77,7 @@ Arguments:
 
 
 def batchDataQuery(param):
-    url = HttpConstant.APP_BASE_URL + param.app_id + "/entry/" + param.entry_id + "/data"
+    url = HttpConstant.BATCH_DATA_QUERY_URL.format(appId=param.app_id, entryId=param.entry_id)
     request_param = HttpRequestParam(HttpConstant.API_KEY, url, param)
     return http_util.send_post(request_param)
 
@@ -92,7 +92,7 @@ Arguments:
 
 
 def batchDataRemove(app_id, entry_id, data_ids):
-    url = HttpConstant.APP_BASE_URL + app_id + "/entry/" + entry_id + "/data_batch_delete"
+    url = HttpConstant.BATCH_DATA_DELETE_URL.format(appId=param.app_id, entryId=param.entry_id)
     request_param = HttpRequestParam(HttpConstant.API_KEY, url, {'data_ids': data_ids})
     return http_util.send_post(request_param)
 
@@ -105,9 +105,6 @@ Arguments:
 
 
 def batchDataUpdate(param):
-    url = HttpConstant.APP_BASE_URL + param.app_id + "/entry/" + param.entry_id + "/data_batch_update"
+    url = HttpConstant.BATCH_DATA_UPDATE_URL.format(appId=param.app_id, entryId=param.entry_id)
     request_param = HttpRequestParam(HttpConstant.API_KEY, url, param)
     return http_util.send_post(request_param)
-
-
-

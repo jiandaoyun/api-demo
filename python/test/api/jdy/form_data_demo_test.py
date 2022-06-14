@@ -28,7 +28,7 @@ def singleDataCreate():
 
 # 测试 查询单条数据接口
 def singleDataQuery():
-    result = form_data_demo.singleDataQuery(HttpConstant.APP_ID, HttpConstant.ENTRY_ID, '62a7e9b2eb048590fc94dde8')
+    result = form_data_demo.singleDataQuery(HttpConstant.APP_ID, HttpConstant.ENTRY_ID, '62a84cefd66b59a440060227')
     print('singleDataQuery result:', result)
 
 
@@ -46,7 +46,7 @@ def singleDataUpdate():
     # 日期
     data['_widget_1654848591194'] = {'value': 1654880900000}
     form_data_update_param.setData(data)
-    form_data_update_param.setDataId('62a7e9b2eb048590fc94dde8')
+    form_data_update_param.setDataId('62a84cefd66b59a440060227')
     result = form_data_demo.singleDataUpdate(form_data_update_param)
     print('singleDataUpdate result:', result)
 
@@ -81,7 +81,7 @@ def batchDataCreate():
 
 
 # 测试 查询多条数据接口
-def singleDataRemove():
+def batchDataQuery():
     form_data_query_param = FormDataQueryParam(HttpConstant.APP_ID, HttpConstant.ENTRY_ID)
     # 从 62a2fc6f5e66850006738f73 这条数据开始 查找10条数据
     form_data_query_param.setDataId('62a2fc6f5e66850006738f73')
@@ -118,10 +118,10 @@ def batchDataUpdate():
 
 if __name__ == '__main__':
     singleDataCreate()
-    singleDataQuery()
-    singleDataUpdate()
-    singleDataRemove()
-    batchDataCreate()
-    singleDataRemove()
-    batchDataRemove()
-    batchDataUpdate()
+    # singleDataQuery()
+    # singleDataUpdate()
+    # singleDataRemove()
+    # batchDataCreate()
+    # batchDataQuery()
+    # singleDataRemove()
+    # batchDataUpdate()

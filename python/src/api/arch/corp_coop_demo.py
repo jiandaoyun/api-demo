@@ -10,7 +10,7 @@ Arguments:
 
 
 def corpCoopDepartList(dept_no):
-    url = HttpConstant.CORP_COOP_BASE_URL + 'guest/department_list'
+    url = HttpConstant.CORP_COOP_URL.format(suffix='guest/department_list')
     request_param = HttpRequestParam(HttpConstant.API_KEY, url, {"dept_no": dept_no})
     return http_util.send_post(request_param)
 
@@ -23,7 +23,7 @@ Arguments:
 
 
 def corpCoopMemberList(dept_no):
-    url = HttpConstant.CORP_COOP_BASE_URL + 'guest/member_list'
+    url = HttpConstant.CORP_COOP_URL.format(suffix='guest/member_list')
     request_param = HttpRequestParam(HttpConstant.API_KEY, url, {"dept_no": dept_no})
     return http_util.send_post(request_param)
 
@@ -36,6 +36,6 @@ Arguments:
 
 
 def corpCoopUserInfo(user_name):
-    url = HttpConstant.CORP_COOP_BASE_URL + 'guest/user_retrieve'
+    url = HttpConstant.CORP_COOP_URL.format(suffix='guest/user_retrieve')
     request_param = HttpRequestParam(HttpConstant.API_KEY, url, {"username": user_name})
     return http_util.send_post(request_param)

@@ -12,7 +12,7 @@ Arguments:
 
 
 def appList(skip, limit):
-    url = HttpConstant.APP_BASE_URL + 'retrieve_all'
+    url = HttpConstant.APP_URL.format(suffix='retrieve_all')
     request_param = HttpRequestParam(HttpConstant.API_KEY, url, {'skip': skip, 'limit': limit})
     return http_util.send_post(request_param)
 
@@ -27,6 +27,6 @@ Arguments:
 
 
 def entryList(appId, skip, limit):
-    url = HttpConstant.APP_BASE_URL + appId + "/entry_retrieve"
+    url = HttpConstant.ENTRY_LIST_URL.format(appId=appId)
     request_param = HttpRequestParam(HttpConstant.API_KEY, url, {'skip': skip, 'limit': limit})
     return http_util.send_post(request_param)
