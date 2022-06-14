@@ -79,7 +79,12 @@ func (api *ApiClient) DoRequest(option *RequestOption) (responseBody []byte, err
 	}
 	defer response.Body.Close()
 
-	return ioutil.ReadAll(response.Body)
+	responseBody, err = ioutil.ReadAll(response.Body)
+
+	if response.StatusCode != http.StatusOK {
+		err = fmt.Errorf("request fail, response code: %d, response body: %s", response.StatusCode, string(responseBody))
+	}
+	return
 }
 
 // JsonIndentString json换行缩进字符串

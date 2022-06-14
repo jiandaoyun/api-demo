@@ -19,3 +19,8 @@ type Role struct {
 type RoleList struct {
 	Roles []Role `json:"roles"`
 }
+
+// RoleResponse 角色响应
+type RoleResponse struct {
+	Role `json:"role"`
+}
