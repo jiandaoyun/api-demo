@@ -56,7 +56,7 @@ public class ApiClient
         Global.DefaultLimiter.TryBeforeRun();
         // 发起http请求
         var response = await Global.DefaultHttpClient.SendAsync(request);
-        response.EnsureSuccessStatusCode();
+        // response.EnsureSuccessStatusCode();
         return await JsonSerializer.DeserializeAsync<JsonElement>(response.Content.ReadAsStream());
     }
 

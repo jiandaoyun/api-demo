@@ -9,6 +9,7 @@ using Src.Base;
 
 namespace Test;
 
+[Collection("App")]
 [TestCaseOrderer("XUnit.Project.Orderers.AlphabeticalOrderer", "Test")]
 public class AppTest
 {

@@ -12,4 +12,11 @@ namespace XUnit.Project.Orderers
             IEnumerable<TTestCase> testCases) where TTestCase : ITestCase =>
             testCases.OrderBy(testCase => testCase.TestMethod.Method.Name);
     }
+
+    public class DisplayNameOrderer : ITestCollectionOrderer
+    {
+        public IEnumerable<ITestCollection> OrderTestCollections(
+            IEnumerable<ITestCollection> testCollections) =>
+            testCollections.OrderBy(collection => collection.DisplayName);
+    }
 }

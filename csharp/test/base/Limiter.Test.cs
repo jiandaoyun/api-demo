@@ -6,6 +6,8 @@
 using Src.Base;
 
 namespace Test;
+
+[Collection("Limiter")]
 public class LimiterTest
 {
     [Fact]
