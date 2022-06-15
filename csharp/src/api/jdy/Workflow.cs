@@ -1,18 +1,18 @@
 /**
 * Copyright (c) 2015-2022, FineX, All Rights Reserved.
 * @author Thomas.Zhuang
-* @date 2022/06/01
+* @date 2022/06/14
 */
 using System.Text.Json;
 using Src.Base;
 
 namespace Src.Api.Jdy;
 
-public class AppApiClient : ApiClient
+public class WorkflowApiClient : ApiClient
 {
     private readonly static string[] validVersions = { "v1" };
     private readonly static string defaultVersion = "v1";
-    public AppApiClient(string host, string apiKey, string version = "") : base(host, apiKey, version)
+    public WorkflowApiClient(string host, string apiKey, string version = "") : base(host, apiKey, version)
     {
     }
 
@@ -25,27 +25,14 @@ public class AppApiClient : ApiClient
         return await base.doRequest(option);
     }
 
-
     /**
-     * 用户应用查询接口
-     */
-    public async Task<JsonElement?> appList(Dictionary<string, object> option)
+    * 获取单条表单流程数据的审批意见
+    */
+    public async Task<JsonElement?> approvalComments(string appId, string entryId, string dataId, IDictionary<string, object> option)
     {
         IDictionary<string, object> requestOption = new Dictionary<string, object>();
         requestOption.Add("method", "POST");
-        requestOption.Add("path", "app/retrieve_all");
-        requestOption.Add("payload", option);
-        return await this.doRequest(requestOption);
-    }
-
-    /**
-     * 用户表单查询接口
-     */
-    public async Task<JsonElement?> entryList(string appId, Dictionary<string, object> option)
-    {
-        IDictionary<string, object> requestOption = new Dictionary<string, object>();
-        requestOption.Add("method", "POST");
-        requestOption.Add("path", $"app/{appId}/entry_retrieve");
+        requestOption.Add("path", $"app/{appId}/entry/{entryId}/data/{dataId}/approval_comments");
         requestOption.Add("payload", option);
         return await this.doRequest(requestOption);
     }

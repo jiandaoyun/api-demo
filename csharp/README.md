@@ -40,6 +40,6 @@ To install additional .NET runtimes or SDKs:
 
 ## test
 
-* 用户修改 `src/base/api_client.cs` 内的ApiKey和Host
+* 用户修改 `src/base/Global.cs` 内的ApiKey和Host
 * `cd test`
 * `dotnet test`
