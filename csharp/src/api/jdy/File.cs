@@ -6,6 +6,7 @@
 
 using System.Text.Json;
 using Src.Base;
+using System.Text;
 
 namespace Src.Api.Jdy;
 
@@ -41,19 +42,16 @@ public class FileApiClient : ApiClient
     }
 
     /**
-     * FIXME 文件上传接口
+     * 文件上传接口
      */
     public async Task<JsonElement?> uploadFile(string url, string token, FileStream file)
     {
-        HttpRequestMessage request = new HttpRequestMessage(new HttpMethod("POST"), url);
-        string boundary = DateTime.Now.Ticks.ToString("X");
-        MultipartFormDataContent formData = new MultipartFormDataContent(boundary);
+        MultipartFormDataContent formData = new MultipartFormDataContent();
         formData.Add(new StringContent(token), "token");
-        ByteArrayContent fileContent = new ByteArrayContent(new BinaryReader(file).ReadBytes((int)file.Length));
-        formData.Add(fileContent, "file");
+        formData.Add(new StreamContent(file), "file", file.Name);
         // 发起http请求
-        var response = await Global.DefaultHttpClient.SendAsync(request);
-        response.EnsureSuccessStatusCode();
+        var response = Global.DefaultHttpClient.PostAsync(url, formData).Result;
+        // response.EnsureSuccessStatusCode();
         return await JsonSerializer.DeserializeAsync<JsonElement>(response.Content.ReadAsStream());
     }
 }

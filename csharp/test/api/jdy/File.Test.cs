@@ -5,6 +5,7 @@
 */
 using Src.Api.Jdy;
 using Src.Base;
+using System.Text;
 
 namespace Test;
 
@@ -30,13 +31,14 @@ public class FileTest
         Console.WriteLine(token);
     }
 
-    // [Fact]
-    // public async void Test2()
-    // {
-    //     FileStream file = File.Create("./file");
-    //     file.Write(Encoding.ASCII.GetBytes("上传文件"));
-    //     var response = await api.uploadFile(url, token, file);
-    //     Assert.True(response != null);
-    //     Console.WriteLine(response);
-    // }
+    [Fact]
+    public async void Test2()
+    {
+        FileStream file = File.Create("./file");
+        file.Write(Encoding.ASCII.GetBytes("upload file"));
+        file.Close();
+        var response = await api.uploadFile(url, token, new FileStream("./file", FileMode.Open, FileAccess.Read));
+        Assert.True(response != null);
+        Console.WriteLine(response);
+    }
 }
