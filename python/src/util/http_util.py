@@ -2,6 +2,7 @@ import requests
 import json
 from .limit_util import Limiter
 import threading
+from .encoder_util import MyEncoder
 
 limiter = Limiter(1000, 5)
 
@@ -29,7 +30,7 @@ def send_post(request_param):
     # 如果有 data 的话 把 data 序列化
     if request_param.data:
         if isinstance(request_param.data, dict):
-            data = json.dumps(request_param.data)
+            data = json.dumps(request_param.data, cls=MyEncoder)
         else:
             data = json.dumps(request_param.data.__dict__)
     try:
@@ -48,4 +49,9 @@ def handle_result(res):
     if res.status_code >= 400:
         raise Exception('Opps，Something Wrong: ', res.text)
     else:
-        return res.json()
+        return "success" if len(res.text) == 0 else res.json()
+
+
+def send_post_with_file(url, data, file):
+    response = requests.post(url=url, files=file, data=data)
+    return handle_result(response)

@@ -2,8 +2,6 @@ from ...util import http_util as http_util
 from ...constants.http_constant import HttpConstant
 from ...model.http.http_request_param import HttpRequestParam
 
-
-
 """
 创建 部门
 Arguments:
@@ -12,7 +10,7 @@ Arguments:
 
 
 def deptCreate(dept_create_param):
-    url = HttpConstant.DEPT_BASE_URL + 'create'
+    url = HttpConstant.DEPT_URL.format(suffix='create')
     request_param = HttpRequestParam(HttpConstant.API_KEY, url, dept_create_param)
     return http_util.send_post(request_param)
 
@@ -24,9 +22,9 @@ Arguments:
 """
 
 
-def deptList(deptNo):
-    url = HttpConstant.DEPT_BASE_URL + str(deptNo) + "/department_list"
-    request_param = HttpRequestParam(HttpConstant.API_KEY, url, {"has_child": True})
+def deptList(deptNo, has_child):
+    url = HttpConstant.DEPT_LIST_URL.format(deptNo=deptNo)
+    request_param = HttpRequestParam(HttpConstant.API_KEY, url, {"has_child": has_child})
     return http_util.send_post(request_param)
 
 
@@ -38,8 +36,8 @@ Arguments:
 """
 
 
-def deptUpdate(dept_no, name):
-    url = HttpConstant.DEPT_BASE_URL + str(dept_no) + "/update"
+def deptUpdate(deptNo, name):
+    url = HttpConstant.UPDATE_DEPT_URL.format(deptNo=deptNo)
     request_param = HttpRequestParam(HttpConstant.API_KEY, url, {"name": name})
     return http_util.send_post(request_param)
 
@@ -52,7 +50,7 @@ Arguments:
 
 
 def deptDelete(deptNo):
-    url = HttpConstant.DEPT_BASE_URL + str(deptNo) + "/delete"
+    url = HttpConstant.DELETE_DEPT_URL.format(deptNo=deptNo)
     request_param = HttpRequestParam(HttpConstant.API_KEY, url, None)
     return http_util.send_post(request_param)
 
@@ -65,6 +63,19 @@ Arguments:
 
 
 def deptByIntegrateId(integrateId):
-    url = HttpConstant.DEPT_BASE_URL + "get_deptno_by_integrateid"
+    url = HttpConstant.DEPT_URL.format(suffix='get_deptno_by_integrateid')
     request_param = HttpRequestParam(HttpConstant.API_KEY, url, {"integrate_id": integrateId})
+    return http_util.send_post(request_param)
+
+
+"""
+批量导入部门
+Arguments:
+    departments: list<DeptCreateParam>
+"""
+
+
+def departmentImport(departments):
+    url = HttpConstant.DEPT_URL.format(suffix='import')
+    request_param = HttpRequestParam(HttpConstant.API_KEY, url, {"departments": departments})
     return http_util.send_post(request_param)

@@ -13,7 +13,7 @@ def deptCreate():
 
 # 测试部门列表
 def deptList():
-    result = dept_demo.deptList(209)
+    result = dept_demo.deptList(1, True)
     print('deptList result:', result)
 
 
@@ -35,9 +35,28 @@ def deptByIntegrateId():
     print('deptByIntegrateId result:', result)
 
 
+# 测试 批量导入部门
+def departmentImport():
+    departments = []
+    parentDept = DeptCreateParam('python-parent-name')
+    parentDept.setDeptNo(104)
+    departments.append(parentDept)
+
+    sonDept = DeptCreateParam('python-son-name')
+    sonDept.setDeptNo(105)
+    sonDept.setParentNo(104)
+    departments.append(sonDept)
+
+
+    result = dept_demo.departmentImport(departments)
+    print('departmentImport result:', result)
+
+
+
 if __name__ == '__main__':
     deptCreate()
     deptList()
     deptUpdate()
     deptDelete()
     deptByIntegrateId()
+    departmentImport()

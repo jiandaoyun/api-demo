@@ -73,7 +73,7 @@ public class RoleDemo {
         if (StringUtils.isBlank(name) || groupNo == null || roleNo == null) {
             throw new RuntimeException("param lack!");
         }
-        String url = ROLE_BASE_URL + "create";
+        String url = ROLE_BASE_URL + "update";
         HttpRequestParam param = new HttpRequestParam();
         param.setApiKey(HttpConstant.API_KEY);
         param.setUrl(url);
