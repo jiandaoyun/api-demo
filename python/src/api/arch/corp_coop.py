@@ -8,7 +8,7 @@ valid_versions = ('v4')
 default_version = 'v4'
 
 
-class CorpCoopApi(ApiClient):
+class CorpCoopApiClient(ApiClient):
 
     def __init__(self, api_key, host):
         ApiClient.__init__(self, api_key, host, valid_versions, default_version)
