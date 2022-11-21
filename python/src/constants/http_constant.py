@@ -1,5 +1,5 @@
 class HttpConstant:
-    HOST = "https://api.jiandaoyun.com/api"
+    HOST = "https://api-dev.jiandaoyun.com/api"
 
     HOST_V2 = HOST + "/v2"
     HOST_V1 = HOST + "/v1"
@@ -23,7 +23,7 @@ class HttpConstant:
     FORM_DATA_BASE_URL = HOST_V4 + "/app/"
 
     #   把 API_KEY 修改成自己的API_KEY
-    API_KEY = "API_KEY"
+    API_KEY = "pVCkWk96tzghiDttdjXxcj3fTZpdQ5AV"
 
     APP_ID = "APP_ID"
 
@@ -32,7 +32,9 @@ class HttpConstant:
     ENTRY_ID = "ENTRY_ID"
 
     # 企业互联的接口
-    CORP_COOP_URL = HOST_V4 + "/corp_coop/{suffix}"
+    # CORP_COOP_URL = HOST_V4 + "/corp_coop/{suffix}"
+    CORP_COOP_URL = "/{version}/corp_coop/{suffix}"
+
     # 部门相关的接口
     DEPT_URL = HOST_V2 + "/department/{suffix}"
     # 成员相关的接
