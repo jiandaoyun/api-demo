@@ -6,7 +6,7 @@ deptApiClient = DeptApiClient(HttpConstant.API_KEY, HttpConstant.HOST)
 
 deptName = 'python-v5-name-'
 parentNo = 1
-deptNo = 14321
+deptNo = 14329
 
 
 #  测试创建部门

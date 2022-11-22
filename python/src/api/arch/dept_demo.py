@@ -34,8 +34,8 @@ class DeptApiClient(ApiClient):
     """
 
     def deptList(self, dept_no, has_child, version=default_version):
-        url = HttpConstant.DEPT_LIST_URL.format(dept_no=dept_no,
-                                                version=self.getValidVersion(version))
+        url = HttpConstant.DEPT_BASE_URL.format(dept_no=dept_no,
+                                                version=self.getValidVersion(version), suffix='department_list')
         request_param = HttpRequestParam(HttpConstant.API_KEY, url, {"has_child": has_child})
         return self.send_post(request_param)
 
@@ -48,8 +48,8 @@ class DeptApiClient(ApiClient):
     """
 
     def deptUpdate(self, dept_no, name, version=default_version):
-        url = HttpConstant.UPDATE_DEPT_URL.format(dept_no=dept_no,
-                                                  version=self.getValidVersion(version))
+        url = HttpConstant.DEPT_BASE_URL.format(dept_no=dept_no,
+                                                  version=self.getValidVersion(version), suffix='update')
         request_param = HttpRequestParam(HttpConstant.API_KEY, url, {"name": name})
         return self.send_post(request_param)
 
@@ -61,8 +61,8 @@ class DeptApiClient(ApiClient):
     """
 
     def deptDelete(self, dept_no, version=default_version):
-        url = HttpConstant.DELETE_DEPT_URL.format(dept_no=dept_no,
-                                                  version=self.getValidVersion(version))
+        url = HttpConstant.DEPT_BASE_URL.format(dept_no=dept_no,
+                                                  version=self.getValidVersion(version), suffix='delete')
         request_param = HttpRequestParam(HttpConstant.API_KEY, url, None)
         return self.send_post(request_param)
 

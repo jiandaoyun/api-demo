@@ -5,7 +5,7 @@ from src.constants.http_constant import HttpConstant
 
 memberApiClient = MemberApiClient(HttpConstant.API_KEY, HttpConstant.HOST)
 
-random = '108'
+random = '127'
 name = 'name' + random
 user_name = 'user_name' + random
 

@@ -22,7 +22,8 @@ class MemberApiClient(ApiClient):
     """
 
     def deptMemberList(self, dept_no, has_child, version=default_version):
-        url = HttpConstant.DEPT_MEMBER_LIST_URL.format(dept_no=dept_no, version=self.getValidVersion(version))
+        url = HttpConstant.DEPT_BASE_URL.format(suffix='member_list', dept_no=dept_no,
+                                             version=self.getValidVersion(version))
         request_param = HttpRequestParam(HttpConstant.API_KEY, url, {"has_child": has_child})
         return self.send_post(request_param)
 
@@ -46,7 +47,8 @@ class MemberApiClient(ApiClient):
     """
 
     def userInfo(self, user_name, version=default_version):
-        url = HttpConstant.USER_INFO_URL.format(user_name=user_name, version=self.getValidVersion(version))
+        url = HttpConstant.MEMBER_BASE_URL.format(user_name=user_name, version=self.getValidVersion(version),
+                                                  suffix='user_retrieve')
         request_param = HttpRequestParam(HttpConstant.API_KEY, url, None)
         return self.send_post(request_param)
 
@@ -58,8 +60,8 @@ class MemberApiClient(ApiClient):
     """
 
     def userUpdate(self, user_update_param, version=default_version):
-        url = HttpConstant.USER_UPDATE_URL.format(user_name=user_update_param.getUserName(),
-                                                  version=self.getValidVersion(version))
+        url = HttpConstant.MEMBER_BASE_URL.format(user_name=user_update_param.getUserName(),
+                                                  version=self.getValidVersion(version), suffix='update')
         request_param = HttpRequestParam(HttpConstant.API_KEY, url,
                                          {'name': user_update_param.getName(),
                                           'departments': user_update_param.getDepartments()})
@@ -73,7 +75,8 @@ class MemberApiClient(ApiClient):
     """
 
     def userDelete(self, user_name, version=default_version):
-        url = HttpConstant.USER_DELETE_URL.format(user_name=user_name, version=self.getValidVersion(version))
+        url = HttpConstant.MEMBER_BASE_URL.format(user_name=user_name, version=self.getValidVersion(version),
+                                                  suffix='delete')
         request_param = HttpRequestParam(HttpConstant.API_KEY, url, None)
         return self.send_post(request_param)
 
