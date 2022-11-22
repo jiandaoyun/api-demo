@@ -9,7 +9,7 @@ class HttpConstant:
     #     部门相关的接口前缀
     DEPT_BASE_URL = "/{version}/department/"
     #     成员相关的接口前缀
-    MEMBER_BASE_URL = HOST_V2 + "/user/"
+    MEMBER_BASE_URL = "/{version}/user/"
     #     应用相关的接口前缀
     APP_BASE_URL = HOST_V1 + "/app/"
     # 企业互联的接口前缀
@@ -23,7 +23,7 @@ class HttpConstant:
     # 表单数据相关的接口前缀
     FORM_DATA_BASE_URL = HOST_V4 + "/app/"
 
-    #   把 API_KEY 修改成自己的API_KEY
+    #   把 API_KEY 修改成自己的API_KEY  集成模式 6Q1X2kbk4quufIaFnNu5EdqxgLYOSyxT。公共模式：pVCkWk96tzghiDttdjXxcj3fTZpdQ5AV
     API_KEY = "pVCkWk96tzghiDttdjXxcj3fTZpdQ5AV"
 
     APP_ID = "APP_ID"
@@ -39,7 +39,7 @@ class HttpConstant:
     # 部门相关的接口
     DEPT_URL = "/{version}/department/{suffix}"
     # 成员相关的接
-    MEMBER_URL = HOST_V2 + "/user/{suffix}"
+    MEMBER_URL = "/{version}/user/{suffix}"
     # 角色的接口前缀
     ROLE_URL = HOST_V2 + "/role/{suffix}"
     # 角色组相关的前缀
@@ -59,7 +59,7 @@ class HttpConstant:
     # 部门成员的url
     DEPT_MEMBER_LIST_URL = DEPT_BASE_URL + '{deptNo}/member_list'
     # 获取成员信息的url
-    USER_INFO_URL = MEMBER_BASE_URL + '{userName}/user_retrieve'
+    USER_INFO_URL = MEMBER_BASE_URL + '{user_name}/user_retrieve'
     # 更新成员信息的url
     USER_UPDATE_URL = MEMBER_BASE_URL + '{userName}/update'
     # 更新成员信息的url

@@ -4,57 +4,58 @@ from src.api.arch.dept_demo import DeptApiClient
 
 deptApiClient = DeptApiClient(HttpConstant.API_KEY, HttpConstant.HOST)
 
-
+deptName = 'python-v5-name-'
 parentNo = 1
 deptNo = 14321
 
+
 #  测试创建部门
 def deptCreate():
-    dept_create_param = DeptCreateParam('python-v5-name-'+str(deptNo))
+    dept_create_param = DeptCreateParam(deptName + str(deptNo))
     dept_create_param.setDeptNo(deptNo)
     dept_create_param.setParentNo(parentNo)
-    result = deptApiClient.deptCreate(dept_create_param, 'v2')
+    result = deptApiClient.deptCreate(dept_create_param)
     print('dept_create result:', result)
 
 
 # 测试部门列表
 def deptList():
-    result = deptApiClient.deptList(parentNo, True, 'v2')
+    result = deptApiClient.deptList(parentNo, True)
     print('deptList result:', result)
 
 
 # 测试 更新部门
 def deptUpdate():
-    result = deptApiClient.deptUpdate(deptNo, 'python-name18','v2')
+    result = deptApiClient.deptUpdate(deptNo, 'python-update')
     print('deptUpdate result:', result)
 
 
 # 根据部门编号 删除部门
 def deptDelete():
-    result = deptApiClient.deptDelete(deptNo,'v2')
+    result = deptApiClient.deptDelete(deptNo)
     print('deptDelete result:', result)
 
 
 # 测试 根据集成模式通讯录的部门ID获取部门编号
 def deptByIntegrateId():
-    result = deptApiClient.deptByIntegrateId('135813157','v2')
+    result = deptApiClient.deptByIntegrateId('58335612')
     print('deptByIntegrateId result:', result)
 
 
 # 测试 批量导入部门
 def departmentImport():
     departments = []
-    deptOne = DeptCreateParam('python-dept-one')
+    deptOne = DeptCreateParam(deptName + '-one')
     deptOne.setParentNo(parentNo)
-    deptOne.setDeptNo(parentNo+100)
+    deptOne.setDeptNo(parentNo + 100)
     departments.append(deptOne)
 
-    deptTwo = DeptCreateParam('python-dept-two')
-    deptTwo.setDeptNo(parentNo+200)
+    deptTwo = DeptCreateParam(deptName+'-two')
+    deptTwo.setDeptNo(parentNo + 200)
     deptTwo.setParentNo(parentNo)
     departments.append(deptTwo)
 
-    result = deptApiClient.departmentImport(departments,'v2')
+    result = deptApiClient.departmentImport(departments)
     print('departmentImport result:', result)
 
 

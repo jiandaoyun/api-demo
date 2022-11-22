@@ -19,7 +19,7 @@ class DeptApiClient(ApiClient):
         version: 版本
     """
 
-    def deptCreate(self, dept_create_param, version):
+    def deptCreate(self, dept_create_param, version=default_version):
         url = HttpConstant.DEPT_URL.format(suffix='create',
                                            version=self.getValidVersion(version))
         request_param = HttpRequestParam(HttpConstant.API_KEY, url, dept_create_param)
@@ -32,7 +32,7 @@ class DeptApiClient(ApiClient):
         version: 版本
     """
 
-    def deptList(self, deptNo, has_child, version):
+    def deptList(self, deptNo, has_child, version=default_version):
         url = HttpConstant.DEPT_LIST_URL.format(deptNo=deptNo,
                                                 version=self.getValidVersion(version))
         request_param = HttpRequestParam(HttpConstant.API_KEY, url, {"has_child": has_child})
@@ -46,7 +46,7 @@ class DeptApiClient(ApiClient):
         version: 版本
     """
 
-    def deptUpdate(self, deptNo, name, version):
+    def deptUpdate(self, deptNo, name, version=default_version):
         url = HttpConstant.UPDATE_DEPT_URL.format(deptNo=deptNo,
                                                   version=self.getValidVersion(version))
         request_param = HttpRequestParam(HttpConstant.API_KEY, url, {"name": name})
@@ -59,7 +59,7 @@ class DeptApiClient(ApiClient):
         version: 版本
     """
 
-    def deptDelete(self, deptNo, version):
+    def deptDelete(self, deptNo, version=default_version):
         url = HttpConstant.DELETE_DEPT_URL.format(deptNo=deptNo,
                                                   version=self.getValidVersion(version))
         request_param = HttpRequestParam(HttpConstant.API_KEY, url, None)
@@ -72,7 +72,7 @@ class DeptApiClient(ApiClient):
         version: 版本
     """
 
-    def deptByIntegrateId(self, integrateId, version):
+    def deptByIntegrateId(self, integrateId, version=default_version):
         url = HttpConstant.DEPT_URL.format(suffix='get_deptno_by_integrateid',
                                            version=self.getValidVersion(version))
         request_param = HttpRequestParam(HttpConstant.API_KEY, url, {"integrate_id": integrateId})
@@ -85,7 +85,7 @@ class DeptApiClient(ApiClient):
         version: 版本
     """
 
-    def departmentImport(self, departments, version):
+    def departmentImport(self, departments, version=default_version):
         url = HttpConstant.DEPT_URL.format(suffix='import',
                                            version=self.getValidVersion(version))
         request_param = HttpRequestParam(HttpConstant.API_KEY, url, {"departments": departments})

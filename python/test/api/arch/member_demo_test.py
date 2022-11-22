@@ -1,55 +1,66 @@
-import src.api.arch.member_demo as member_demo
 from src.model.user.user_create_param import UserCreateParam
 from src.model.user.user_update_param import UserUpdateParam
+from src.api.arch.member_demo import MemberApiClient
+from src.constants.http_constant import HttpConstant
 
+memberApiClient = MemberApiClient(HttpConstant.API_KEY, HttpConstant.HOST)
+
+random = '108'
+name = 'name' + random
+user_name = 'user_name' + random
+
+deptNo = 1
+
+user_create_param = UserCreateParam(name, user_name)
+departments = [deptNo]
+user_create_param.setDepartments(departments)
 
 # 测试 创建成员
 def userCreate():
-    user_create_param = UserCreateParam('python_name_6', 'python_username_6')
-    departments = [213]
-    user_create_param.setDepartments(departments)
-    result = member_demo.userCreate(user_create_param)
+    result = memberApiClient.userCreate(user_create_param)
     print('userCreate result:', result)
 
 
 # 测试 获取部门成员（递归）
 def deptMemberList():
-    result = member_demo.deptMemberList(1, True)
+    result = memberApiClient.deptMemberList(deptNo, True)
     print('deptMemberList result:', result)
 
 
 # 测试 获取部门成员（递归）
 def userInfo():
-    result = member_demo.userInfo('jdy-lsipo954x6lf')
+    result = memberApiClient.userInfo(user_name)
     print('userInfo result:', result)
 
 
 def userUpdate():
-    user_update_param = UserUpdateParam('python_name_5', 'python_username_4')
-    user_update_param.setDepartments([209])
-    result = member_demo.userUpdate(user_update_param)
+    user_update_param = UserUpdateParam(name, user_name)
+    user_update_param.setDepartments([101,201])
+    result = memberApiClient.userUpdate(user_update_param)
     print('userUpdate result:', result)
 
 
 def userDelete():
-    result = member_demo.userDelete('python_username_4')
+    result = memberApiClient.userDelete(user_name)
     print('userDelete result:', result)
 
 
-def userBatchDelete():
-    result = member_demo.userBatchDelete(['python_username_6', 'python_username_5'])
-    print('userDelete result:', result)
 
 def userImport():
-    result = member_demo.userImport(['python_username_6', 'python_username_5'])
+    result = memberApiClient.userImport([user_create_param])
     print('userImport result:', result)
+
+def userBatchDelete():
+    result = memberApiClient.userBatchDelete([user_create_param.username])
+    print('userDelete result:', result)
+
 
 
 if __name__ == '__main__':
-    # userCreate()
-    # deptMemberList()
-    # userInfo()
-    # userUpdate()
+    userCreate()
+    deptMemberList()
+    userInfo()
+    userUpdate()
     userDelete()
-    # userBatchDelete()
-    # userImport()
+    userImport()
+    userBatchDelete()
