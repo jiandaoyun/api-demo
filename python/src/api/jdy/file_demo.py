@@ -23,7 +23,7 @@ class FileApiClient(ApiClient):
     def uploadToken(self, app_id, entry_id, version=default_version):
         url = HttpConstant.FILE_UPLOAD_URL.format(app_id=app_id, entry_id=entry_id,
                                                   version=self.getValidVersion(version))
-        request_param = HttpRequestParam(HttpConstant.API_KEY, url, generateTransactionId())
+        request_param = HttpRequestParam(url, generateTransactionId())
         return self.send_post(request_param)
 
     """
@@ -34,6 +34,6 @@ class FileApiClient(ApiClient):
         file: 
     """
 
-    def uploadFile(self, url, token, file, version=default_version):
+    def uploadFile(self, url, token, file):
         data = {'token': token}
         return self.send_post_with_file(url, data, file)

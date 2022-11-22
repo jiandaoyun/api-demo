@@ -44,7 +44,7 @@ class ApiClient:
     """
 
     def send_post(self, request_param):
-        headers = self.get_req_header(request_param.apiKey)
+        headers = self.get_req_header(self.api_key)
         data = None
         url = self.host + request_param.url
         print('url======'+url)

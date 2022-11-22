@@ -24,5 +24,5 @@ class WorkFlowApiClient(ApiClient):
         url = HttpConstant.APPROVAL_COMMENTS_URL.format(app_id=param.app_id, entry_id=param.entry_id,
                                                         data_id=param.data_id, version=self.getValidVersion(version))
         query_param = {'limit': param.limit, 'skip': param.skip}
-        request_param = HttpRequestParam(HttpConstant.API_KEY, url, query_param)
+        request_param = HttpRequestParam(url, query_param)
         return self.send_post(request_param)

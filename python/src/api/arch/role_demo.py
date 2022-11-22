@@ -22,7 +22,7 @@ class RoleApiClient(ApiClient):
 
     def roleList(self, role_list_query_param, version=default_version):
         url = HttpConstant.ROLE_URL.format(suffix='list', version=self.getValidVersion(version))
-        request_param = HttpRequestParam(HttpConstant.API_KEY, url, role_list_query_param)
+        request_param = HttpRequestParam(url, role_list_query_param)
         return self.send_post(request_param)
 
     '''
@@ -35,7 +35,7 @@ class RoleApiClient(ApiClient):
 
     def roleCreate(self, name, group_no, version=default_version):
         url = HttpConstant.ROLE_URL.format(suffix='create', version=self.getValidVersion(version))
-        request_param = HttpRequestParam(HttpConstant.API_KEY, url, {'name': name, 'group_no': group_no})
+        request_param = HttpRequestParam(url, {'name': name, 'group_no': group_no})
         return self.send_post(request_param)
 
     '''
@@ -49,7 +49,7 @@ class RoleApiClient(ApiClient):
 
     def roleUpdate(self, name, group_no, role_no, version=default_version):
         url = HttpConstant.ROLE_URL.format(suffix='update', version=self.getValidVersion(version))
-        request_param = HttpRequestParam(HttpConstant.API_KEY, url,
+        request_param = HttpRequestParam(url,
                                          {'name': name, 'group_no': group_no, "role_no": role_no})
         return self.send_post(request_param)
 
@@ -62,7 +62,7 @@ class RoleApiClient(ApiClient):
 
     def roleDelete(self, role_no, version=default_version):
         url = HttpConstant.ROLE_URL.format(suffix='delete', version=self.getValidVersion(version))
-        request_param = HttpRequestParam(HttpConstant.API_KEY, url, {"role_no": role_no})
+        request_param = HttpRequestParam(url, {"role_no": role_no})
         return self.send_post(request_param)
 
     '''
@@ -76,7 +76,7 @@ class RoleApiClient(ApiClient):
 
     def roleMemberList(self, role_no, skip, limit, version=default_version):
         url = HttpConstant.ROLE_URL.format(suffix='member_list', version=self.getValidVersion(version))
-        request_param = HttpRequestParam(HttpConstant.API_KEY, url, {"role_no": role_no, "skip": skip, "limit": limit})
+        request_param = HttpRequestParam(url, {"role_no": role_no, "skip": skip, "limit": limit})
         return self.send_post(request_param)
 
     '''
@@ -89,7 +89,7 @@ class RoleApiClient(ApiClient):
 
     def roleAddMembers(self, role_no, usernames, version=default_version):
         url = HttpConstant.ROLE_URL.format(suffix='add_members', version=self.getValidVersion(version))
-        request_param = HttpRequestParam(HttpConstant.API_KEY, url, {"role_no": role_no, "usernames": usernames})
+        request_param = HttpRequestParam(url, {"role_no": role_no, "usernames": usernames})
         return self.send_post(request_param)
 
     '''
@@ -102,5 +102,5 @@ class RoleApiClient(ApiClient):
 
     def roleRmoveMembers(self, role_no, usernames, version=default_version):
         url = HttpConstant.ROLE_URL.format(suffix='remove_members', version=self.getValidVersion(version))
-        request_param = HttpRequestParam(HttpConstant.API_KEY, url, {"role_no": role_no, "usernames": usernames})
+        request_param = HttpRequestParam(url, {"role_no": role_no, "usernames": usernames})
         return self.send_post(request_param)

@@ -23,8 +23,8 @@ class MemberApiClient(ApiClient):
 
     def deptMemberList(self, dept_no, has_child, version=default_version):
         url = HttpConstant.DEPT_BASE_URL.format(suffix='member_list', dept_no=dept_no,
-                                             version=self.getValidVersion(version))
-        request_param = HttpRequestParam(HttpConstant.API_KEY, url, {"has_child": has_child})
+                                                version=self.getValidVersion(version))
+        request_param = HttpRequestParam(url, {"has_child": has_child})
         return self.send_post(request_param)
 
     """
@@ -36,7 +36,7 @@ class MemberApiClient(ApiClient):
 
     def userCreate(self, user_create_param, version=default_version):
         url = HttpConstant.MEMBER_URL.format(suffix='create', version=self.getValidVersion(version))
-        request_param = HttpRequestParam(HttpConstant.API_KEY, url, user_create_param)
+        request_param = HttpRequestParam(url, user_create_param)
         return self.send_post(request_param)
 
     """
@@ -49,7 +49,7 @@ class MemberApiClient(ApiClient):
     def userInfo(self, user_name, version=default_version):
         url = HttpConstant.MEMBER_BASE_URL.format(user_name=user_name, version=self.getValidVersion(version),
                                                   suffix='user_retrieve')
-        request_param = HttpRequestParam(HttpConstant.API_KEY, url, None)
+        request_param = HttpRequestParam(url, None)
         return self.send_post(request_param)
 
     """
@@ -62,7 +62,7 @@ class MemberApiClient(ApiClient):
     def userUpdate(self, user_update_param, version=default_version):
         url = HttpConstant.MEMBER_BASE_URL.format(user_name=user_update_param.getUserName(),
                                                   version=self.getValidVersion(version), suffix='update')
-        request_param = HttpRequestParam(HttpConstant.API_KEY, url,
+        request_param = HttpRequestParam(url,
                                          {'name': user_update_param.getName(),
                                           'departments': user_update_param.getDepartments()})
         return self.send_post(request_param)
@@ -77,7 +77,7 @@ class MemberApiClient(ApiClient):
     def userDelete(self, user_name, version=default_version):
         url = HttpConstant.MEMBER_BASE_URL.format(user_name=user_name, version=self.getValidVersion(version),
                                                   suffix='delete')
-        request_param = HttpRequestParam(HttpConstant.API_KEY, url, None)
+        request_param = HttpRequestParam(url, None)
         return self.send_post(request_param)
 
     """
@@ -89,7 +89,7 @@ class MemberApiClient(ApiClient):
 
     def userBatchDelete(self, user_name_list, version=default_version):
         url = HttpConstant.MEMBER_URL.format(suffix='batch_delete', version=self.getValidVersion(version))
-        request_param = HttpRequestParam(HttpConstant.API_KEY, url, {'usernames': user_name_list})
+        request_param = HttpRequestParam(url, {'usernames': user_name_list})
         return self.send_post(request_param)
 
     '''
@@ -101,5 +101,5 @@ class MemberApiClient(ApiClient):
 
     def userImport(self, users, version=default_version):
         url = HttpConstant.MEMBER_URL.format(suffix='import', version=self.getValidVersion(version))
-        request_param = HttpRequestParam(HttpConstant.API_KEY, url, {'users': users})
+        request_param = HttpRequestParam(url, {'users': users})
         return self.send_post(request_param)

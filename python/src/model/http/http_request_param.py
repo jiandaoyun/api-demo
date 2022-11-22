@@ -2,8 +2,7 @@ import uuid
 
 
 class HttpRequestParam:
-    def __init__(self, api_key, url, data):
-        self.apiKey = api_key
+    def __init__(self, url, data):
         self.url = url
         self.data = data
 

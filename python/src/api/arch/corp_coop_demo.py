@@ -22,8 +22,8 @@ class CorpCoopApiClient(ApiClient):
 
     def corpCoopDepartList(self, dept_no, version=default_version):
         url = HttpConstant.CORP_COOP_URL.format(suffix='guest/department_list',
-                                                            version=self.getValidVersion(version))
-        request_param = HttpRequestParam(self.api_key, url, {"dept_no": dept_no})
+                                                version=self.getValidVersion(version))
+        request_param = HttpRequestParam(url, {"dept_no": dept_no})
         return self.send_post(request_param)
 
     '''
@@ -35,8 +35,8 @@ class CorpCoopApiClient(ApiClient):
 
     def corpCoopMemberList(self, dept_no, version=default_version):
         url = HttpConstant.CORP_COOP_URL.format(suffix='guest/member_list',
-                                                            version=self.getValidVersion(version))
-        request_param = HttpRequestParam(self.api_key, url, {"dept_no": dept_no})
+                                                version=self.getValidVersion(version))
+        request_param = HttpRequestParam(url, {"dept_no": dept_no})
         return self.send_post(request_param)
 
     '''
@@ -48,6 +48,6 @@ class CorpCoopApiClient(ApiClient):
 
     def corpCoopUserInfo(self, user_name, version=default_version):
         url = HttpConstant.CORP_COOP_URL.format(suffix='guest/user_retrieve',
-                                                            version=self.getValidVersion(version))
-        request_param = HttpRequestParam(self.api_key, url, {"username": user_name})
+                                                version=self.getValidVersion(version))
+        request_param = HttpRequestParam(url, {"username": user_name})
         return self.send_post(request_param)

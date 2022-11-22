@@ -22,7 +22,7 @@ class RoleGroupApiClient(ApiClient):
 
     def roleGroupList(self, role_group_list_query_param, version=default_version):
         url = HttpConstant.ROLE_GROUP_URL.format(suffix='list', version=self.getValidVersion(version))
-        request_param = HttpRequestParam(HttpConstant.API_KEY, url, role_group_list_query_param)
+        request_param = HttpRequestParam( url, role_group_list_query_param)
         return self.send_post(request_param)
 
     """
@@ -34,7 +34,7 @@ class RoleGroupApiClient(ApiClient):
 
     def roleGroupCreate(self, name, version=default_version):
         url = HttpConstant.ROLE_GROUP_URL.format(suffix='create', version=self.getValidVersion(version))
-        request_param = HttpRequestParam(HttpConstant.API_KEY, url, {"name": name})
+        request_param = HttpRequestParam( url, {"name": name})
         return self.send_post(request_param)
 
     """
@@ -47,7 +47,7 @@ class RoleGroupApiClient(ApiClient):
 
     def roleGroupUpdate(self, name, role_group_no, version=default_version):
         url = HttpConstant.ROLE_GROUP_URL.format(suffix='update', version=self.getValidVersion(version))
-        request_param = HttpRequestParam(HttpConstant.API_KEY, url, {"name": name, "role_group_no": role_group_no})
+        request_param = HttpRequestParam(url, {"name": name, "role_group_no": role_group_no})
         return self.send_post(request_param)
 
     """
@@ -59,5 +59,5 @@ class RoleGroupApiClient(ApiClient):
 
     def roleGroupDelete(self, role_group_no, version=default_version):
         url = HttpConstant.ROLE_GROUP_URL.format(suffix='delete', version=self.getValidVersion(version))
-        request_param = HttpRequestParam(HttpConstant.API_KEY, url, {"role_group_no": role_group_no})
+        request_param = HttpRequestParam(url, {"role_group_no": role_group_no})
         return self.send_post(request_param)
