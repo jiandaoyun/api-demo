@@ -1,6 +1,6 @@
 from src.constants.http_constant import HttpConstant
 from src.model.flow.work_flow_param import WorkFlowApprovalCommentQueryParam
-from src.api.jdy.work_flow_demo import WorkFlowApiClient
+from src.api.jdy.work_flow import WorkFlowApiClient
 
 workFlowApiClient = WorkFlowApiClient(HttpConstant.API_KEY, HttpConstant.HOST)
 

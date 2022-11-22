@@ -11,5 +11,3 @@ class FormDataBatchCreateParam:
 
     def setTransaction_id(self, transaction_id):
         self.transaction_id = transaction_id
-
-

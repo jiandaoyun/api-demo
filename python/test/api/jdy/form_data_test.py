@@ -5,7 +5,7 @@ from src.model.form.form_data_delete_param import FormDataDeleteParam
 from src.model.form.form_data_batch_create_param import FormDataBatchCreateParam
 from src.model.form.form_data_query_param import FormDataQueryParam
 from src.model.form.form_data_batch_update_param import FormDataBatchUpdateParam
-from src.api.jdy.form_data_demo import FormDataApiClient
+from src.api.jdy.form_data import FormDataApiClient
 
 formDataApiClient = FormDataApiClient(HttpConstant.API_KEY, HttpConstant.HOST)
 
@@ -144,5 +144,3 @@ if __name__ == '__main__':
     batchDataUpdate()
     batchDataQuery()
     batchDataRemove()
-
-

@@ -1,6 +1,6 @@
 from src.model.dept.dept_create_param import DeptCreateParam
 from src.constants.http_constant import HttpConstant
-from src.api.arch.dept_demo import DeptApiClient
+from src.api.arch.dept import DeptApiClient
 
 deptApiClient = DeptApiClient(HttpConstant.API_KEY, HttpConstant.HOST)
 
@@ -50,7 +50,7 @@ def departmentImport():
     deptOne.setDeptNo(parentNo + 100)
     departments.append(deptOne)
 
-    deptTwo = DeptCreateParam(deptName+'_two')
+    deptTwo = DeptCreateParam(deptName + '_two')
     deptTwo.setDeptNo(parentNo + 200)
     deptTwo.setParentNo(parentNo)
     departments.append(deptTwo)

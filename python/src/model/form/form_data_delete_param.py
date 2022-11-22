@@ -11,5 +11,3 @@ class FormDataDeleteParam:
 
     def setDataIds(self, data_ids):
         self.data_ids = data_ids
-
-

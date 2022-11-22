@@ -1,5 +1,5 @@
 from src.constants.http_constant import HttpConstant
-from src.api.jdy.app_demo import AppApiClient
+from src.api.jdy.app import AppApiClient
 
 appApiCilent = AppApiClient(HttpConstant.API_KEY, HttpConstant.HOST)
 

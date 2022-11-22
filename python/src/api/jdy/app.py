@@ -23,7 +23,7 @@ class AppApiClient(ApiClient):
 
     def appList(self, skip, limit, version=default_version):
         url = HttpConstant.APP_URL.format(suffix='retrieve_all', version=self.getValidVersion(version))
-        request_param = HttpRequestParam( url, {'skip': skip, 'limit': limit})
+        request_param = HttpRequestParam(url, {'skip': skip, 'limit': limit})
         return self.send_post(request_param)
 
     """

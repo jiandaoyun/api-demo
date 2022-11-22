@@ -1,5 +1,6 @@
 import time
 
+
 # 限流器
 class Limiter:
     def __init__(self, duration, limit):
@@ -21,6 +22,3 @@ class Limiter:
         else:
             self.request_time_list[self.seq] = now_mill_time
         self.seq = (self.seq + 1) % len(self.request_time_list)
-
-
-

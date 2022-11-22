@@ -1,7 +1,7 @@
-from src.api.arch.corp_coop_demo import CorpCoopApiClient
+from src.api.arch.corp_coop import CorpCoopApiClient
 from src.constants.http_constant import HttpConstant
 
-corpCoopApiClient = CorpCoopApiClient(HttpConstant.API_KEY,HttpConstant.HOST)
+corpCoopApiClient = CorpCoopApiClient(HttpConstant.API_KEY, HttpConstant.HOST)
 
 
 #  列出我连接的企业

@@ -14,5 +14,3 @@ class FormDataQueryParam:
 
     def setFilter(self, filter):
         self.filter = filter
-
-

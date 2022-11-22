@@ -1,6 +1,6 @@
-import src.api.jdy.file_demo as file_demo
+import src.api.jdy.file as file_demo
 from src.constants.http_constant import HttpConstant
-from src.api.jdy.file_demo import FileApiClient
+from src.api.jdy.file import FileApiClient
 
 fileApiDemo = FileApiClient(HttpConstant.API_KEY, HttpConstant.HOST)
 

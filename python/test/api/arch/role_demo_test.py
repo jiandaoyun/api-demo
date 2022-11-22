@@ -1,5 +1,5 @@
 from src.model.role.role_list_query_param import RoleListQueryParam
-from src.api.arch.role_demo import RoleApiClient
+from src.api.arch.role import RoleApiClient
 from src.constants.http_constant import HttpConstant
 
 roleApiClient = RoleApiClient(HttpConstant.API_KEY, HttpConstant.HOST)

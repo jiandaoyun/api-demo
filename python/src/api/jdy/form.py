@@ -24,5 +24,5 @@ class FormApiClient(ApiClient):
     def formWidgets(self, app_id, entry_id, version=default_version):
         url = HttpConstant.FORM_WIDGETS_URL.format(app_id=app_id, entry_id=entry_id,
                                                    version=self.getValidVersion(version))
-        request_param = HttpRequestParam( url, None)
+        request_param = HttpRequestParam(url, None)
         return self.send_post(request_param)

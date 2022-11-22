@@ -1,5 +1,5 @@
 from src.constants.http_constant import HttpConstant
-from src.api.jdy.form_demo import FormApiClient
+from src.api.jdy.form import FormApiClient
 
 formApiClient = FormApiClient(HttpConstant.API_KEY, HttpConstant.HOST)
 
