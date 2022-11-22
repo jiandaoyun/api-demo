@@ -1,4 +1,4 @@
-from src.api.arch.corp_coop import CorpCoopApiClient
+from src.api.arch.corp_coop_demo import CorpCoopApiClient
 from src.constants.http_constant import HttpConstant
 
 corpCoopApiClient = CorpCoopApiClient(HttpConstant.API_KEY,HttpConstant.HOST)
@@ -18,7 +18,7 @@ def corpCoopMemberList():
 
 # 列出我连接的企业对接人详细信息
 def corpCoopUserInfo():
-    result = corpCoopApiClient.corpCoopUserInfo('R-60e2767055c8760006ac79bc-jdy-y4r83c4jpqzg', 'v2')
+    result = corpCoopApiClient.corpCoopUserInfo('R-60e2767055c8760006ac79bc-jdy-y4r83c4jpqzg', 'v4')
     print('corpCoopUserInfo result:', result)
 
 

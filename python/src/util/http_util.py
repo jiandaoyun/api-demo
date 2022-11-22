@@ -18,7 +18,7 @@ class ApiClient:
         self.default_version = default_version
 
     """ 
-    返回合法的版本信息
+    返回合法的版本
     """
 
     def getValidVersion(self, version):
@@ -46,6 +46,7 @@ class ApiClient:
     def send_post(self, request_param):
         headers = self.get_req_header(request_param.apiKey)
         data = None
+        url = self.host + request_param.url
         # 如果有 data 的话 把 data 序列化
         if request_param.data:
             if isinstance(request_param.data, dict):
@@ -57,7 +58,7 @@ class ApiClient:
             lock.acquire()
             limiter.tryBeforeRun()
             # 这里传入的data,是body里面的数据。params是拼接url时的参数
-            res = requests.post(url=request_param.url, data=data, headers=headers)
+            res = requests.post(url=url, data=data, headers=headers)
             return self.handle_result(res)
         finally:
             lock.release()

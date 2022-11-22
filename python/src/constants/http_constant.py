@@ -1,12 +1,13 @@
 class HttpConstant:
-    HOST = "https://api-dev.jiandaoyun.com/api"
+    # HOST = "https://api-dev.jiandaoyun.com/api"
+    HOST = "http://localhost:3000/api"
 
     HOST_V2 = HOST + "/v2"
     HOST_V1 = HOST + "/v1"
     HOST_V4 = HOST + "/v4"
 
     #     部门相关的接口前缀
-    DEPT_BASE_URL = HOST_V2 + "/department/"
+    DEPT_BASE_URL = "/{version}/department/"
     #     成员相关的接口前缀
     MEMBER_BASE_URL = HOST_V2 + "/user/"
     #     应用相关的接口前缀
@@ -36,7 +37,7 @@ class HttpConstant:
     CORP_COOP_URL = "/{version}/corp_coop/{suffix}"
 
     # 部门相关的接口
-    DEPT_URL = HOST_V2 + "/department/{suffix}"
+    DEPT_URL = "/{version}/department/{suffix}"
     # 成员相关的接
     MEMBER_URL = HOST_V2 + "/user/{suffix}"
     # 角色的接口前缀
