@@ -18,6 +18,7 @@ class AppApiClient(ApiClient):
     Arguments:
         skip: int 跳过的数量
         limit: int 取多少数据
+        version: 版本
     """
 
     def appList(self, skip, limit, version=default_version):
@@ -31,9 +32,10 @@ class AppApiClient(ApiClient):
         appId: string 应用id
         skip: int 跳过的数量
         limit: int 取多少数据
+        version: 版本
     """
 
-    def entryList(self, appId, skip, limit, version=default_version):
-        url = HttpConstant.ENTRY_LIST_URL.format(appId=appId, version=self.getValidVersion(version))
+    def entryList(self, app_id, skip, limit, version=default_version):
+        url = HttpConstant.ENTRY_LIST_URL.format(app_id=app_id, version=self.getValidVersion(version))
         request_param = HttpRequestParam(HttpConstant.API_KEY, url, {'skip': skip, 'limit': limit})
         return self.send_post(request_param)

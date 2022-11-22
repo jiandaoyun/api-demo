@@ -16,13 +16,13 @@ class MemberApiClient(ApiClient):
     """
      获取部门成员（递归）
      Arguments:
-        deptNo: int 部门编号
+        dept_no: int 部门编号
         hasChild: boolean 是否递归获取
         version: 版本
     """
 
-    def deptMemberList(self, deptNo, has_child, version=default_version):
-        url = HttpConstant.DEPT_MEMBER_LIST_URL.format(deptNo=deptNo, version=self.getValidVersion(version))
+    def deptMemberList(self, dept_no, has_child, version=default_version):
+        url = HttpConstant.DEPT_MEMBER_LIST_URL.format(dept_no=dept_no, version=self.getValidVersion(version))
         request_param = HttpRequestParam(HttpConstant.API_KEY, url, {"has_child": has_child})
         return self.send_post(request_param)
 
@@ -58,7 +58,7 @@ class MemberApiClient(ApiClient):
     """
 
     def userUpdate(self, user_update_param, version=default_version):
-        url = HttpConstant.USER_UPDATE_URL.format(userName=user_update_param.getUserName(),
+        url = HttpConstant.USER_UPDATE_URL.format(user_name=user_update_param.getUserName(),
                                                   version=self.getValidVersion(version))
         request_param = HttpRequestParam(HttpConstant.API_KEY, url,
                                          {'name': user_update_param.getName(),
@@ -73,7 +73,7 @@ class MemberApiClient(ApiClient):
     """
 
     def userDelete(self, user_name, version=default_version):
-        url = HttpConstant.USER_DELETE_URL.format(userName=user_name, version=self.getValidVersion(version))
+        url = HttpConstant.USER_DELETE_URL.format(user_name=user_name, version=self.getValidVersion(version))
         request_param = HttpRequestParam(HttpConstant.API_KEY, url, None)
         return self.send_post(request_param)
 

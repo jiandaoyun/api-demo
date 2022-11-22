@@ -1,4 +1,3 @@
-import src.api.jdy.app_demo as app_demo
 from src.constants.http_constant import HttpConstant
 from src.api.jdy.app_demo import AppApiClient
 

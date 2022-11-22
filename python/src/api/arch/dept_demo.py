@@ -29,12 +29,12 @@ class DeptApiClient(ApiClient):
     """
     获取部门编号对应部门列表 （递归）
     Arguments:
-        deptNo: int 部门编号
+        dept_no: int 部门编号
         version: 版本
     """
 
-    def deptList(self, deptNo, has_child, version=default_version):
-        url = HttpConstant.DEPT_LIST_URL.format(deptNo=deptNo,
+    def deptList(self, dept_no, has_child, version=default_version):
+        url = HttpConstant.DEPT_LIST_URL.format(dept_no=dept_no,
                                                 version=self.getValidVersion(version))
         request_param = HttpRequestParam(HttpConstant.API_KEY, url, {"has_child": has_child})
         return self.send_post(request_param)
@@ -42,13 +42,13 @@ class DeptApiClient(ApiClient):
     """
     根据部门编号 更新部门名称
     Arguments:
-        deptNo: int 部门编号
+        dept_no: int 部门编号
         name: sting 新的部门名称
         version: 版本
     """
 
-    def deptUpdate(self, deptNo, name, version=default_version):
-        url = HttpConstant.UPDATE_DEPT_URL.format(deptNo=deptNo,
+    def deptUpdate(self, dept_no, name, version=default_version):
+        url = HttpConstant.UPDATE_DEPT_URL.format(dept_no=dept_no,
                                                   version=self.getValidVersion(version))
         request_param = HttpRequestParam(HttpConstant.API_KEY, url, {"name": name})
         return self.send_post(request_param)
@@ -56,12 +56,12 @@ class DeptApiClient(ApiClient):
     """
     根据部门编号 删除部门
     Arguments:
-        deptNo: int 部门编号
+        dept_no: int 部门编号
         version: 版本
     """
 
-    def deptDelete(self, deptNo, version=default_version):
-        url = HttpConstant.DELETE_DEPT_URL.format(deptNo=deptNo,
+    def deptDelete(self, dept_no, version=default_version):
+        url = HttpConstant.DELETE_DEPT_URL.format(dept_no=dept_no,
                                                   version=self.getValidVersion(version))
         request_param = HttpRequestParam(HttpConstant.API_KEY, url, None)
         return self.send_post(request_param)
@@ -69,14 +69,14 @@ class DeptApiClient(ApiClient):
     """
     根据集成模式通讯录的部门ID获取部门编号
     Arguments:
-        integrateId: string
+        integrate_id: string
         version: 版本
     """
 
-    def deptByIntegrateId(self, integrateId, version=default_version):
+    def deptByIntegrateId(self, integrate_id, version=default_version):
         url = HttpConstant.DEPT_URL.format(suffix='get_deptno_by_integrateid',
                                            version=self.getValidVersion(version))
-        request_param = HttpRequestParam(HttpConstant.API_KEY, url, {"integrate_id": integrateId})
+        request_param = HttpRequestParam(HttpConstant.API_KEY, url, {"integrate_id": integrate_id})
         return self.send_post(request_param)
 
     """

@@ -47,6 +47,7 @@ class ApiClient:
         headers = self.get_req_header(request_param.apiKey)
         data = None
         url = self.host + request_param.url
+        print('url======'+url)
         # 如果有 data 的话 把 data 序列化
         if request_param.data:
             if isinstance(request_param.data, dict):

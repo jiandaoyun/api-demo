@@ -9,5 +9,7 @@ class FormDataDeleteParam:
     def setIsStartTrigger(self, is_start_trigger):
         self.is_start_trigger = is_start_trigger
 
+    def setDataIds(self, data_ids):
+        self.data_ids = data_ids
 
 
