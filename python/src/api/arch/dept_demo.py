@@ -9,6 +9,7 @@ default_version = 'v2'
 
 
 class DeptApiClient(ApiClient):
+
     def __init__(self, api_key, host):
         ApiClient.__init__(self, api_key, host, valid_versions, default_version)
 

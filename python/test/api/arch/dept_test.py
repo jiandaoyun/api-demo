@@ -45,12 +45,12 @@ def deptByIntegrateId():
 # 测试 批量导入部门
 def departmentImport():
     departments = []
-    deptOne = DeptCreateParam(deptName + '-one')
+    deptOne = DeptCreateParam(deptName + '_one')
     deptOne.setParentNo(parentNo)
     deptOne.setDeptNo(parentNo + 100)
     departments.append(deptOne)
 
-    deptTwo = DeptCreateParam(deptName+'-two')
+    deptTwo = DeptCreateParam(deptName+'_two')
     deptTwo.setDeptNo(parentNo + 200)
     deptTwo.setParentNo(parentNo)
     departments.append(deptTwo)

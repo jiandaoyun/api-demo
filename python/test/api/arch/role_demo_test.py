@@ -1,58 +1,66 @@
-import src.api.arch.role_demo as role_demo
 from src.model.role.role_list_query_param import RoleListQueryParam
+from src.api.arch.role_demo import RoleApiClient
+from src.constants.http_constant import HttpConstant
 
+roleApiClient = RoleApiClient(HttpConstant.API_KEY, HttpConstant.HOST)
+
+group_no = 120
+role_name = 'role_name' + str(group_no)
+
+role_no = 0
+user_names = ['R-gDIIDws8']
 
 
 # 测试 列出角色
 def roleList():
     role_list_query_param = RoleListQueryParam(0, 10)
-    result = role_demo.roleList(role_list_query_param)
+    result = roleApiClient.roleList(role_list_query_param)
     print('roleList result:', result)
 
 
 # 测试 创建角色
 def roleCreate():
-    result = role_demo.roleCreate('python-name',2300)
+    result = roleApiClient.roleCreate(role_name, group_no)
     print('roleCreate result:', result)
+    return result
+
 
 # 测试 修改角色
 def roleUpdate():
-    result = role_demo.roleUpdate('python-name-1',2319,2329)
+    result = roleApiClient.roleUpdate(role_name + '_update', group_no, role_no)
     print('roleUpdate result:', result)
-
 
 
 # 测试 删除角色
 def roleDelete():
-    result = role_demo.roleDelete(2333)
+    result = roleApiClient.roleDelete(role_no)
     print('roleDelete result:', result)
-
-
-# 测试 列出角色下的所有成员
-def roleMemberList():
-    result = role_demo.roleMemberList(2334,0,10)
-    print('roleMemberList result:', result)
 
 
 # 测试 批量给已有的成员设置自建角色
 def roleAddMembers():
-    result = role_demo.roleAddMembers(2334,['R-TygTJmwo','R-RS8aHUlr'])
+    result = roleApiClient.roleAddMembers(role_no, user_names)
     print('roleAddMembers result:', result)
 
-#
+
+# 测试 列出角色下的所有成员
+def roleMemberList():
+    result = roleApiClient.roleMemberList(role_no, 0, 10)
+    print('roleMemberList result:', result)
+
+
 # 测试 为自建角色批量移除成员
 def roleRmoveMembers():
-    result = role_demo.roleRmoveMembers(2334, ['R-TygTJmwo', 'R-RS8aHUlr'])
+    result = roleApiClient.roleRmoveMembers(role_no, user_names)
     print('roleRmoveMembers result:', result)
 
 
 if __name__ == '__main__':
-    roleCreate()
+    role = roleCreate()
+    role_no = role['role']['role_no']
     roleList()
     roleUpdate()
-    roleDelete()
-    roleMemberList()
     roleAddMembers()
+    roleMemberList()
     roleRmoveMembers()
-
-
+    roleDelete()

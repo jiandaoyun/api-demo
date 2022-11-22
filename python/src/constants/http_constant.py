@@ -11,7 +11,7 @@ class HttpConstant:
     #     成员相关的接口前缀
     MEMBER_BASE_URL = "/{version}/user/"
     #     应用相关的接口前缀
-    APP_BASE_URL = HOST_V1 + "/app/"
+    APP_BASE_URL = "/{version}/app/"
     # 企业互联的接口前缀
     CORP_COOP_BASE_URL = HOST_V4 + "/corp_coop/"
     # 角色的接口前缀
@@ -26,7 +26,7 @@ class HttpConstant:
     #   把 API_KEY 修改成自己的API_KEY  集成模式 6Q1X2kbk4quufIaFnNu5EdqxgLYOSyxT。公共模式：pVCkWk96tzghiDttdjXxcj3fTZpdQ5AV
     API_KEY = "pVCkWk96tzghiDttdjXxcj3fTZpdQ5AV"
 
-    APP_ID = "APP_ID"
+    APP_ID = "60ac60f87c921c00068855b8"
 
     WORK_FLOW_ENTRY_ID = "WORK_FLOW_ENTRY_ID"
 
@@ -41,11 +41,11 @@ class HttpConstant:
     # 成员相关的接
     MEMBER_URL = "/{version}/user/{suffix}"
     # 角色的接口前缀
-    ROLE_URL = HOST_V2 + "/role/{suffix}"
+    ROLE_URL = "/{version}/role/{suffix}"
     # 角色组相关的前缀
-    ROLE_GROUP_URL = HOST_V2 + "/role_group/{suffix}"
+    ROLE_GROUP_URL = "/{version}/role_group/{suffix}"
     # 应用相关的接口前缀
-    APP_URL = HOST_V1 + "/app/{suffix}"
+    APP_URL = "/{version}/app/{suffix}"
 
     # 上传文件的url
     FILE_UPLOAD_URL = APP_BASE_URL + '{app_id}/entry/{entry_id}/file/get_upload_token'
