@@ -1,5 +1,5 @@
 from ...model.http.http_request_param import HttpRequestParam
-from src.model.http.http_util import ApiClient
+from src.model.http.api_client import ApiClient
 from ...constants.http_constant import HttpConstant
 
 # 合法的版本

@@ -1,6 +1,6 @@
 from ...constants.http_constant import HttpConstant
 from ...model.http.http_request_param import HttpRequestParam
-from src.model.http.http_util import ApiClient
+from src.model.http.api_client import ApiClient
 
 # 合法的版本
 valid_versions = ('v4', 'v3', 'v2', 'v1')
