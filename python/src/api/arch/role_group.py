@@ -1,4 +1,4 @@
-from src.model.http.api_client import ApiClient
+from src.model.http.http_util import ApiClient
 from ...constants.http_constant import HttpConstant
 from ...model.http.http_request_param import HttpRequestParam
 
@@ -21,8 +21,8 @@ class RoleGroupApiClient(ApiClient):
     """
 
     def roleGroupList(self, role_group_list_query_param, version=default_version):
-        url = HttpConstant.ROLE_GROUP_URL.format(suffix='list', version=self.getValidVersion(version))
-        request_param = HttpRequestParam( url, role_group_list_query_param)
+        path = HttpConstant.ROLE_GROUP_PATH.format(suffix='list', version=self.getValidVersion(version))
+        request_param = HttpRequestParam(path, role_group_list_query_param)
         return self.send_post(request_param)
 
     """
@@ -33,8 +33,8 @@ class RoleGroupApiClient(ApiClient):
     """
 
     def roleGroupCreate(self, name, version=default_version):
-        url = HttpConstant.ROLE_GROUP_URL.format(suffix='create', version=self.getValidVersion(version))
-        request_param = HttpRequestParam( url, {"name": name})
+        path = HttpConstant.ROLE_GROUP_PATH.format(suffix='create', version=self.getValidVersion(version))
+        request_param = HttpRequestParam(path, {"name": name})
         return self.send_post(request_param)
 
     """
@@ -46,8 +46,8 @@ class RoleGroupApiClient(ApiClient):
     """
 
     def roleGroupUpdate(self, name, role_group_no, version=default_version):
-        url = HttpConstant.ROLE_GROUP_URL.format(suffix='update', version=self.getValidVersion(version))
-        request_param = HttpRequestParam(url, {"name": name, "role_group_no": role_group_no})
+        path = HttpConstant.ROLE_GROUP_PATH.format(suffix='update', version=self.getValidVersion(version))
+        request_param = HttpRequestParam(path, {"name": name, "role_group_no": role_group_no})
         return self.send_post(request_param)
 
     """
@@ -58,6 +58,6 @@ class RoleGroupApiClient(ApiClient):
     """
 
     def roleGroupDelete(self, role_group_no, version=default_version):
-        url = HttpConstant.ROLE_GROUP_URL.format(suffix='delete', version=self.getValidVersion(version))
-        request_param = HttpRequestParam(url, {"role_group_no": role_group_no})
+        path = HttpConstant.ROLE_GROUP_PATH.format(suffix='delete', version=self.getValidVersion(version))
+        request_param = HttpRequestParam(path, {"role_group_no": role_group_no})
         return self.send_post(request_param)

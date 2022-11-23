@@ -1,5 +1,5 @@
 from ...model.http.http_request_param import HttpRequestParam
-from src.model.http.api_client import ApiClient
+from src.model.http.http_util import ApiClient
 from ...constants.http_constant import HttpConstant
 
 # 合法的版本
@@ -22,8 +22,8 @@ class AppApiClient(ApiClient):
     """
 
     def appList(self, skip, limit, version=default_version):
-        url = HttpConstant.APP_URL.format(suffix='retrieve_all', version=self.getValidVersion(version))
-        request_param = HttpRequestParam(url, {'skip': skip, 'limit': limit})
+        path = HttpConstant.APP_PATH.format(suffix='retrieve_all', version=self.getValidVersion(version))
+        request_param = HttpRequestParam(path, {'skip': skip, 'limit': limit})
         return self.send_post(request_param)
 
     """
@@ -36,6 +36,6 @@ class AppApiClient(ApiClient):
     """
 
     def entryList(self, app_id, skip, limit, version=default_version):
-        url = HttpConstant.ENTRY_LIST_URL.format(app_id=app_id, version=self.getValidVersion(version))
-        request_param = HttpRequestParam(url, {'skip': skip, 'limit': limit})
+        path = HttpConstant.ENTRY_LIST_PATH.format(app_id=app_id, version=self.getValidVersion(version))
+        request_param = HttpRequestParam(path, {'skip': skip, 'limit': limit})
         return self.send_post(request_param)

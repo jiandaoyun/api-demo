@@ -1,4 +1,4 @@
-from src.model.http.api_client import ApiClient
+from src.model.http.http_util import ApiClient
 from ...constants.http_constant import HttpConstant
 from ...model.http.http_request_param import HttpRequestParam
 
@@ -22,9 +22,9 @@ class MemberApiClient(ApiClient):
     """
 
     def deptMemberList(self, dept_no, has_child, version=default_version):
-        url = HttpConstant.DEPT_BASE_URL.format(suffix='member_list', dept_no=dept_no,
-                                                version=self.getValidVersion(version))
-        request_param = HttpRequestParam(url, {"has_child": has_child})
+        path = HttpConstant.DEPT_BASE_PATH.format(suffix='member_list', dept_no=dept_no,
+                                                  version=self.getValidVersion(version))
+        request_param = HttpRequestParam(path, {"has_child": has_child})
         return self.send_post(request_param)
 
     """
@@ -35,8 +35,8 @@ class MemberApiClient(ApiClient):
     """
 
     def userCreate(self, user_create_param, version=default_version):
-        url = HttpConstant.MEMBER_URL.format(suffix='create', version=self.getValidVersion(version))
-        request_param = HttpRequestParam(url, user_create_param)
+        path = HttpConstant.MEMBER_PATH.format(suffix='create', version=self.getValidVersion(version))
+        request_param = HttpRequestParam(path, user_create_param)
         return self.send_post(request_param)
 
     """
@@ -47,9 +47,9 @@ class MemberApiClient(ApiClient):
     """
 
     def userInfo(self, user_name, version=default_version):
-        url = HttpConstant.MEMBER_BASE_URL.format(user_name=user_name, version=self.getValidVersion(version),
-                                                  suffix='user_retrieve')
-        request_param = HttpRequestParam(url, None)
+        path = HttpConstant.MEMBER_BASE_PATH.format(user_name=user_name, version=self.getValidVersion(version),
+                                                    suffix='user_retrieve')
+        request_param = HttpRequestParam(path, None)
         return self.send_post(request_param)
 
     """
@@ -60,9 +60,9 @@ class MemberApiClient(ApiClient):
     """
 
     def userUpdate(self, user_update_param, version=default_version):
-        url = HttpConstant.MEMBER_BASE_URL.format(user_name=user_update_param.getUserName(),
-                                                  version=self.getValidVersion(version), suffix='update')
-        request_param = HttpRequestParam(url,
+        path = HttpConstant.MEMBER_BASE_PATH.format(user_name=user_update_param.getUserName(),
+                                                    version=self.getValidVersion(version), suffix='update')
+        request_param = HttpRequestParam(path,
                                          {'name': user_update_param.getName(),
                                           'departments': user_update_param.getDepartments()})
         return self.send_post(request_param)
@@ -75,9 +75,9 @@ class MemberApiClient(ApiClient):
     """
 
     def userDelete(self, user_name, version=default_version):
-        url = HttpConstant.MEMBER_BASE_URL.format(user_name=user_name, version=self.getValidVersion(version),
-                                                  suffix='delete')
-        request_param = HttpRequestParam(url, None)
+        path = HttpConstant.MEMBER_BASE_PATH.format(user_name=user_name, version=self.getValidVersion(version),
+                                                    suffix='delete')
+        request_param = HttpRequestParam(path, None)
         return self.send_post(request_param)
 
     """
@@ -88,8 +88,8 @@ class MemberApiClient(ApiClient):
     """
 
     def userBatchDelete(self, user_name_list, version=default_version):
-        url = HttpConstant.MEMBER_URL.format(suffix='batch_delete', version=self.getValidVersion(version))
-        request_param = HttpRequestParam(url, {'usernames': user_name_list})
+        path = HttpConstant.MEMBER_PATH.format(suffix='batch_delete', version=self.getValidVersion(version))
+        request_param = HttpRequestParam(path, {'usernames': user_name_list})
         return self.send_post(request_param)
 
     '''
@@ -100,6 +100,6 @@ class MemberApiClient(ApiClient):
     '''
 
     def userImport(self, users, version=default_version):
-        url = HttpConstant.MEMBER_URL.format(suffix='import', version=self.getValidVersion(version))
-        request_param = HttpRequestParam(url, {'users': users})
+        path = HttpConstant.MEMBER_PATH.format(suffix='import', version=self.getValidVersion(version))
+        request_param = HttpRequestParam(path, {'users': users})
         return self.send_post(request_param)

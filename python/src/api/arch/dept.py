@@ -1,4 +1,4 @@
-from src.model.http.api_client import ApiClient
+from src.model.http.http_util import ApiClient
 from ...constants.http_constant import HttpConstant
 from ...model.http.http_request_param import HttpRequestParam
 
@@ -21,9 +21,9 @@ class DeptApiClient(ApiClient):
     """
 
     def deptCreate(self, dept_create_param, version=default_version):
-        url = HttpConstant.DEPT_URL.format(suffix='create',
-                                           version=self.getValidVersion(version))
-        request_param = HttpRequestParam(url, dept_create_param)
+        path = HttpConstant.DEPT_PATH.format(suffix='create',
+                                             version=self.getValidVersion(version))
+        request_param = HttpRequestParam(path, dept_create_param)
         return self.send_post(request_param)
 
     """
@@ -34,8 +34,8 @@ class DeptApiClient(ApiClient):
     """
 
     def deptList(self, dept_no, has_child, version=default_version):
-        url = HttpConstant.DEPT_BASE_URL.format(dept_no=dept_no,
-                                                version=self.getValidVersion(version), suffix='department_list')
+        url = HttpConstant.DEPT_BASE_PATH.format(dept_no=dept_no,
+                                                 version=self.getValidVersion(version), suffix='department_list')
         request_param = HttpRequestParam(url, {"has_child": has_child})
         return self.send_post(request_param)
 
@@ -48,8 +48,8 @@ class DeptApiClient(ApiClient):
     """
 
     def deptUpdate(self, dept_no, name, version=default_version):
-        url = HttpConstant.DEPT_BASE_URL.format(dept_no=dept_no,
-                                                version=self.getValidVersion(version), suffix='update')
+        url = HttpConstant.DEPT_BASE_PATH.format(dept_no=dept_no,
+                                                 version=self.getValidVersion(version), suffix='update')
         request_param = HttpRequestParam(url, {"name": name})
         return self.send_post(request_param)
 
@@ -61,8 +61,8 @@ class DeptApiClient(ApiClient):
     """
 
     def deptDelete(self, dept_no, version=default_version):
-        url = HttpConstant.DEPT_BASE_URL.format(dept_no=dept_no,
-                                                version=self.getValidVersion(version), suffix='delete')
+        url = HttpConstant.DEPT_BASE_PATH.format(dept_no=dept_no,
+                                                 version=self.getValidVersion(version), suffix='delete')
         request_param = HttpRequestParam(url, None)
         return self.send_post(request_param)
 
@@ -74,8 +74,8 @@ class DeptApiClient(ApiClient):
     """
 
     def deptByIntegrateId(self, integrate_id, version=default_version):
-        url = HttpConstant.DEPT_URL.format(suffix='get_deptno_by_integrateid',
-                                           version=self.getValidVersion(version))
+        url = HttpConstant.DEPT_PATH.format(suffix='get_deptno_by_integrateid',
+                                            version=self.getValidVersion(version))
         request_param = HttpRequestParam(url, {"integrate_id": integrate_id})
         return self.send_post(request_param)
 
@@ -87,7 +87,7 @@ class DeptApiClient(ApiClient):
     """
 
     def departmentImport(self, departments, version=default_version):
-        url = HttpConstant.DEPT_URL.format(suffix='import',
-                                           version=self.getValidVersion(version))
+        url = HttpConstant.DEPT_PATH.format(suffix='import',
+                                            version=self.getValidVersion(version))
         request_param = HttpRequestParam(url, {"departments": departments})
         return self.send_post(request_param)

@@ -46,7 +46,7 @@ class ApiClient:
     def send_post(self, request_param):
         headers = self.get_req_header(self.api_key)
         data = None
-        url = self.host + request_param.url
+        url = self.host + request_param.path
         # 如果有 data 的话 把 data 序列化
         if request_param.data:
             if isinstance(request_param.data, dict):

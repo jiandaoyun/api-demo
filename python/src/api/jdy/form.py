@@ -1,6 +1,6 @@
 from ...constants.http_constant import HttpConstant
 from ...model.http.http_request_param import HttpRequestParam
-from src.model.http.api_client import ApiClient
+from src.model.http.http_util import ApiClient
 
 # 合法的版本
 valid_versions = ('v2', 'v1')
@@ -22,7 +22,7 @@ class FormApiClient(ApiClient):
     """
 
     def formWidgets(self, app_id, entry_id, version=default_version):
-        url = HttpConstant.FORM_WIDGETS_URL.format(app_id=app_id, entry_id=entry_id,
+        path = HttpConstant.FORM_WIDGETS_PATH.format(app_id=app_id, entry_id=entry_id,
                                                    version=self.getValidVersion(version))
-        request_param = HttpRequestParam(url, None)
+        request_param = HttpRequestParam(path, None)
         return self.send_post(request_param)

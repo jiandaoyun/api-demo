@@ -1,4 +1,4 @@
-from src.model.http.api_client import ApiClient
+from src.model.http.http_util import ApiClient
 from ...constants.http_constant import HttpConstant
 from ...model.http.http_request_param import HttpRequestParam
 
@@ -21,8 +21,8 @@ class RoleApiClient(ApiClient):
     """
 
     def roleList(self, role_list_query_param, version=default_version):
-        url = HttpConstant.ROLE_URL.format(suffix='list', version=self.getValidVersion(version))
-        request_param = HttpRequestParam(url, role_list_query_param)
+        path = HttpConstant.ROLE_PATH.format(suffix='list', version=self.getValidVersion(version))
+        request_param = HttpRequestParam(path, role_list_query_param)
         return self.send_post(request_param)
 
     '''
@@ -34,8 +34,8 @@ class RoleApiClient(ApiClient):
     '''
 
     def roleCreate(self, name, group_no, version=default_version):
-        url = HttpConstant.ROLE_URL.format(suffix='create', version=self.getValidVersion(version))
-        request_param = HttpRequestParam(url, {'name': name, 'group_no': group_no})
+        path = HttpConstant.ROLE_PATH.format(suffix='create', version=self.getValidVersion(version))
+        request_param = HttpRequestParam(path, {'name': name, 'group_no': group_no})
         return self.send_post(request_param)
 
     '''
@@ -48,8 +48,8 @@ class RoleApiClient(ApiClient):
     '''
 
     def roleUpdate(self, name, group_no, role_no, version=default_version):
-        url = HttpConstant.ROLE_URL.format(suffix='update', version=self.getValidVersion(version))
-        request_param = HttpRequestParam(url,
+        path = HttpConstant.ROLE_PATH.format(suffix='update', version=self.getValidVersion(version))
+        request_param = HttpRequestParam(path,
                                          {'name': name, 'group_no': group_no, "role_no": role_no})
         return self.send_post(request_param)
 
@@ -61,8 +61,8 @@ class RoleApiClient(ApiClient):
     '''
 
     def roleDelete(self, role_no, version=default_version):
-        url = HttpConstant.ROLE_URL.format(suffix='delete', version=self.getValidVersion(version))
-        request_param = HttpRequestParam(url, {"role_no": role_no})
+        path = HttpConstant.ROLE_PATH.format(suffix='delete', version=self.getValidVersion(version))
+        request_param = HttpRequestParam(path, {"role_no": role_no})
         return self.send_post(request_param)
 
     '''
@@ -75,8 +75,8 @@ class RoleApiClient(ApiClient):
     '''
 
     def roleMemberList(self, role_no, skip, limit, version=default_version):
-        url = HttpConstant.ROLE_URL.format(suffix='member_list', version=self.getValidVersion(version))
-        request_param = HttpRequestParam(url, {"role_no": role_no, "skip": skip, "limit": limit})
+        path = HttpConstant.ROLE_PATH.format(suffix='member_list', version=self.getValidVersion(version))
+        request_param = HttpRequestParam(path, {"role_no": role_no, "skip": skip, "limit": limit})
         return self.send_post(request_param)
 
     '''
@@ -88,8 +88,8 @@ class RoleApiClient(ApiClient):
     '''
 
     def roleAddMembers(self, role_no, usernames, version=default_version):
-        url = HttpConstant.ROLE_URL.format(suffix='add_members', version=self.getValidVersion(version))
-        request_param = HttpRequestParam(url, {"role_no": role_no, "usernames": usernames})
+        path = HttpConstant.ROLE_PATH.format(suffix='add_members', version=self.getValidVersion(version))
+        request_param = HttpRequestParam(path, {"role_no": role_no, "usernames": usernames})
         return self.send_post(request_param)
 
     '''
@@ -101,6 +101,6 @@ class RoleApiClient(ApiClient):
     '''
 
     def roleRmoveMembers(self, role_no, usernames, version=default_version):
-        url = HttpConstant.ROLE_URL.format(suffix='remove_members', version=self.getValidVersion(version))
-        request_param = HttpRequestParam(url, {"role_no": role_no, "usernames": usernames})
+        path = HttpConstant.ROLE_PATH.format(suffix='remove_members', version=self.getValidVersion(version))
+        request_param = HttpRequestParam(path, {"role_no": role_no, "usernames": usernames})
         return self.send_post(request_param)

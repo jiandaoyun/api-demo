@@ -1,6 +1,6 @@
 from ...constants.http_constant import HttpConstant
 from ...model.http.http_request_param import HttpRequestParam
-from src.model.http.api_client import ApiClient
+from src.model.http.http_util import ApiClient
 
 # 合法的版本
 valid_versions = ('v1')
@@ -21,8 +21,8 @@ class WorkFlowApiClient(ApiClient):
     """
 
     def approvalComments(self, param, version=default_version):
-        url = HttpConstant.APPROVAL_COMMENTS_URL.format(app_id=param.app_id, entry_id=param.entry_id,
+        path = HttpConstant.APPROVAL_COMMENTS_PATH.format(app_id=param.app_id, entry_id=param.entry_id,
                                                         data_id=param.data_id, version=self.getValidVersion(version))
         query_param = {'limit': param.limit, 'skip': param.skip}
-        request_param = HttpRequestParam(url, query_param)
+        request_param = HttpRequestParam(path, query_param)
         return self.send_post(request_param)

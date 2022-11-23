@@ -64,5 +64,5 @@ if __name__ == '__main__':
     deptList()
     deptUpdate()
     deptDelete()
-    deptByIntegrateId()
     departmentImport()
+    deptByIntegrateId()

@@ -1,6 +1,6 @@
 from ...constants.http_constant import HttpConstant
 from ...model.http.http_request_param import HttpRequestParam
-from src.model.http.api_client import ApiClient
+from src.model.http.http_util import ApiClient
 
 # 合法的版本
 valid_versions = ('v4', 'v3', 'v2', 'v1')
@@ -21,9 +21,9 @@ class FormDataApiClient(ApiClient):
     """
 
     def singleDataCreate(self, param, version=default_version):
-        url = HttpConstant.DATA_URL.format(app_id=param.app_id, entry_id=param.entry_id,
+        path = HttpConstant.DATA_PATH.format(app_id=param.app_id, entry_id=param.entry_id,
                                            version=self.getValidVersion(version), suffix='data_create')
-        request_param = HttpRequestParam(url, param)
+        request_param = HttpRequestParam(path, param)
         return self.send_post(request_param)
 
     """
@@ -36,9 +36,9 @@ class FormDataApiClient(ApiClient):
     """
 
     def singleDataQuery(self, app_id, entry_id, data_id, version=default_version):
-        url = HttpConstant.DATA_URL.format(app_id=app_id, entry_id=entry_id,
+        path = HttpConstant.DATA_PATH.format(app_id=app_id, entry_id=entry_id,
                                            version=self.getValidVersion(version), suffix='data_retrieve')
-        request_param = HttpRequestParam(url, {'data_id': data_id})
+        request_param = HttpRequestParam(path, {'data_id': data_id})
         return self.send_post(request_param)
 
     """
@@ -49,9 +49,9 @@ class FormDataApiClient(ApiClient):
     """
 
     def singleDataUpdate(self, param, version=default_version):
-        url = HttpConstant.DATA_URL.format(app_id=param.app_id, entry_id=param.entry_id,
+        path = HttpConstant.DATA_PATH.format(app_id=param.app_id, entry_id=param.entry_id,
                                            version=self.getValidVersion(version), suffix='data_update')
-        request_param = HttpRequestParam(url, param)
+        request_param = HttpRequestParam(path, param)
         return self.send_post(request_param)
 
     """
@@ -62,9 +62,9 @@ class FormDataApiClient(ApiClient):
     """
 
     def singleDataRemove(self, param):
-        url = HttpConstant.DATA_V1_URL.format(app_id=param.app_id, entry_id=param.entry_id,
+        path = HttpConstant.DATA_V1_PATH.format(app_id=param.app_id, entry_id=param.entry_id,
                                               suffix='data_delete')
-        request_param = HttpRequestParam(url, param)
+        request_param = HttpRequestParam(path, param)
         return self.send_post(request_param)
 
     """
@@ -75,9 +75,9 @@ class FormDataApiClient(ApiClient):
     """
 
     def batchDataCreate(self, param):
-        url = HttpConstant.DATA_V1_URL.format(app_id=param.app_id, entry_id=param.entry_id,
+        path = HttpConstant.DATA_V1_PATH.format(app_id=param.app_id, entry_id=param.entry_id,
                                               suffix='data_batch_create')
-        request_param = HttpRequestParam(url, param)
+        request_param = HttpRequestParam(path, param)
         return self.send_post(request_param)
 
     """
@@ -88,8 +88,8 @@ class FormDataApiClient(ApiClient):
     """
 
     def batchDataQuery(self, param):
-        url = HttpConstant.DATA_V1_URL.format(app_id=param.app_id, entry_id=param.entry_id, suffix='data')
-        request_param = HttpRequestParam(url, param)
+        path = HttpConstant.DATA_V1_PATH.format(app_id=param.app_id, entry_id=param.entry_id, suffix='data')
+        request_param = HttpRequestParam(path, param)
         return self.send_post(request_param)
 
     """
@@ -101,9 +101,9 @@ class FormDataApiClient(ApiClient):
     """
 
     def batchDataRemove(self, param):
-        url = HttpConstant.DATA_V1_URL.format(app_id=param.app_id, entry_id=param.entry_id,
+        path = HttpConstant.DATA_V1_PATH.format(app_id=param.app_id, entry_id=param.entry_id,
                                               suffix='data_batch_delete')
-        request_param = HttpRequestParam(url, {'data_ids': param.data_ids})
+        request_param = HttpRequestParam(path, {'data_ids': param.data_ids})
         return self.send_post(request_param)
 
     """
@@ -114,7 +114,7 @@ class FormDataApiClient(ApiClient):
     """
 
     def batchDataUpdate(self, param):
-        url = HttpConstant.DATA_V1_URL.format(app_id=param.app_id, entry_id=param.entry_id,
+        path = HttpConstant.DATA_V1_PATH.format(app_id=param.app_id, entry_id=param.entry_id,
                                               suffix='data_batch_update')
-        request_param = HttpRequestParam(url, param)
+        request_param = HttpRequestParam(path, param)
         return self.send_post(request_param)
