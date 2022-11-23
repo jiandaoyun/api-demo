@@ -1,8 +1,8 @@
 import requests
 import json
-from .limit_util import Limiter
+from src.util.limit_util import Limiter
 import threading
-from .encoder_util import MyEncoder
+from src.util.encoder_util import MyEncoder
 
 limiter = Limiter(1000, 5)
 
