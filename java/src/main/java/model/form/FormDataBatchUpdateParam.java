@@ -1,5 +1,8 @@
 package model.form;
 
+import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
+
 import java.util.List;
 import java.util.Map;
 
@@ -72,6 +75,12 @@ public class FormDataBatchUpdateParam {
 
     public void setDataIds(List<String> dataIds) {
         this.dataIds = dataIds;
+    }
+
+    public boolean isValid() {
+        return StringUtils.isNotBlank(this.getAppId()) && StringUtils.isNotBlank(this.getEntryId())
+                && CollectionUtils.isNotEmpty(this.getDataIds());
+
     }
 
     @Override

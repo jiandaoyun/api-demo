@@ -2,10 +2,11 @@ from src.model.user.user_create_param import UserCreateParam
 from src.model.user.user_update_param import UserUpdateParam
 from src.api.arch.member import MemberApiClient
 from src.constants.http_constant import HttpConstant
+import random
 
 memberApiClient = MemberApiClient(HttpConstant.API_KEY, HttpConstant.HOST)
 
-random = '127'
+random = str(random.randint(100 , 200) )
 name = 'name' + random
 user_name = 'user_name' + random
 

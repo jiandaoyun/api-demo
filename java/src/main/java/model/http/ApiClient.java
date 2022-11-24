@@ -1,54 +1,118 @@
-package util;
+package model.http;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import model.http.HttpRequestParam;
 import org.apache.commons.codec.Charsets;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.Header;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpRequestBase;
 import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
 import org.apache.http.entity.ContentType;
 import org.apache.http.entity.StringEntity;
-import org.apache.http.entity.mime.HttpMultipartMode;
 import org.apache.http.entity.mime.MultipartEntityBuilder;
 import org.apache.http.entity.mime.content.StringBody;
-import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicHeader;
 import org.apache.http.ssl.SSLContextBuilder;
-import org.apache.http.ssl.TrustStrategy;
-import org.apache.http.util.EntityUtils;
+import util.LimitUtil;
 
 import javax.net.ssl.SSLContext;
 import java.io.File;
-import java.io.IOException;
-import java.security.cert.CertificateException;
-import java.security.cert.X509Certificate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class HttpUtil {
+public class ApiClient {
+
+    /**
+     * apiKey
+     */
+    private String apiKey;
+
+    /**
+     * 地址
+     */
+    private String host;
+
+    /**
+     * 默认版本
+     */
+    private String defaultVersion;
+
+    /**
+     * 合法版本
+     */
+    private List<String> validVersionList;
+
+    public ApiClient(String apiKey, String host) {
+        this.apiKey = apiKey;
+        this.host = host;
+    }
+
+    public String getApiKey() {
+        return apiKey;
+    }
+
+    public void setApiKey(String apiKey) {
+        this.apiKey = apiKey;
+    }
+
+    public String getHost() {
+        return host;
+    }
+
+    public void setHost(String host) {
+        this.host = host;
+    }
+
+    public String getDefaultVersion() {
+        return defaultVersion;
+    }
+
+    public void setDefaultVersion(String defaultVersion) {
+        this.defaultVersion = defaultVersion;
+    }
+
+    public List<String> getValidVersionList() {
+        return validVersionList;
+    }
+
+    public void setValidVersionList(List<String> validVersionList) {
+        this.validVersionList = validVersionList;
+    }
+
+    /**
+     * 获得合法的版本号
+     *
+     * @param version - 版本号
+     * @return 合法的版本号
+     */
+    public String getValidVersion(String version) {
+        if (this.getValidVersionList() != null && this.getValidVersionList().contains(version)) {
+            return version;
+        }
+        return this.getDefaultVersion();
+    }
 
     /**
      * 发送POST请求
      *
      * @param param - 请求参数
-     * @throws Exception
+     * @return 接口返回参数
      */
-    public static Map<String, Object> sendPostRequest(HttpRequestParam param) throws Exception {
-        if (param == null || StringUtils.isBlank(param.getUrl()) || StringUtils.isBlank(param.getApiKey())) {
+    public Map<String, Object> sendPostRequest(HttpRequestParam param) throws Exception {
+        if (param == null || StringUtils.isBlank(param.getPath())) {
             throw new RuntimeException("缺失参数！");
         }
         HttpClient client = getSSLHttpClient();
-        Header[] headers = getHttpHeaders(param.getApiKey());
-        HttpRequestBase request = new HttpPost(param.getUrl());
+        Header[] headers = getHttpHeaders(this.getApiKey());
+        String url = this.host + param.getPath();
+        System.out.println("url===" + url);
+        HttpRequestBase request = new HttpPost(url);
 
         // 请求参数
         if (param.getData() != null) {
@@ -79,13 +143,9 @@ public class HttpUtil {
     }
 
     private static HttpClient getSSLHttpClient() throws Exception {
-        SSLContext sslContext = new SSLContextBuilder().loadTrustMaterial(null, new TrustStrategy() {
-            //信任所有
-            @Override
-            public boolean isTrusted(X509Certificate[] chain, String authType) throws CertificateException {
-                return true;
-            }
-        }).build();
+        //信任所有
+        SSLContext sslContext =
+                new SSLContextBuilder().loadTrustMaterial(null, (chain, authType) -> true).build();
         SSLConnectionSocketFactory sslsf = new SSLConnectionSocketFactory(sslContext);
         return HttpClients.custom().setSSLSocketFactory(sslsf).build();
     }
@@ -93,16 +153,16 @@ public class HttpUtil {
     /**
      * 获取请求头信息
      *
-     * @return
+     * @return 请求头信息
      */
-    private static Header[] getHttpHeaders(String apiKey) {
-        List<Header> headerList = new ArrayList<Header>();
+    private Header[] getHttpHeaders(String apiKey) {
+        List<Header> headerList = new ArrayList<>();
         headerList.add(new BasicHeader("Authorization", "Bearer " + apiKey));
         headerList.add(new BasicHeader("Content-Type", "application/json;charset=utf-8"));
         return headerList.toArray(new Header[headerList.size()]);
     }
 
-    public static Map<String, Object> httpPostFile(String url, String token, File file) throws Exception {
+    public Map<String, Object> httpPostFile(String url, String token, File file) throws Exception {
         HttpClient client = getSSLHttpClient();
         HttpPost httpPost = new HttpPost(url);
         MultipartEntityBuilder builder = MultipartEntityBuilder.create();

@@ -1,5 +1,7 @@
 package model.form;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.util.List;
 import java.util.Map;
 
@@ -34,6 +36,13 @@ public class FormDataQueryParam {
      */
     private Map<String, Object> filter;
 
+    public boolean isValid() {
+        return StringUtils.isNotBlank(this.getAppId()) && StringUtils.isNotBlank(this.getEntryId());
+    }
+
+    public boolean isSingleQueryValid() {
+        return this.isValid() && StringUtils.isNotBlank(this.getDataId());
+    }
 
     public FormDataQueryParam() {
     }

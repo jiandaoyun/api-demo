@@ -1,5 +1,7 @@
 package model.form;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.util.List;
 import java.util.Map;
 
@@ -71,6 +73,10 @@ public class FormDataBatchCreateParam {
 
     public void setDataList(List<Map<String, Object>> dataList) {
         this.dataList = dataList;
+    }
+
+    public boolean isValid() {
+        return StringUtils.isNotBlank(this.getAppId()) && StringUtils.isNotBlank(this.getEntryId());
     }
 
     @Override

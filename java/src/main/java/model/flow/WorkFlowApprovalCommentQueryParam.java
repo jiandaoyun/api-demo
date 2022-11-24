@@ -1,15 +1,14 @@
 package model.flow;
 
-public class WorkFlowApprovalCommentQueryParam {
+import model.base.PageBaseParam;
+import org.apache.commons.lang3.StringUtils;
+
+public class WorkFlowApprovalCommentQueryParam extends PageBaseParam {
     private String appId;
 
     private String entryId;
 
     private String dataId;
-
-    private Integer skip;
-
-    private Integer limit;
 
     public String getAppId() {
         return appId;
@@ -35,20 +34,9 @@ public class WorkFlowApprovalCommentQueryParam {
         this.dataId = dataId;
     }
 
-    public Integer getSkip() {
-        return skip;
-    }
-
-    public void setSkip(Integer skip) {
-        this.skip = skip;
-    }
-
-    public Integer getLimit() {
-        return limit;
-    }
-
-    public void setLimit(Integer limit) {
-        this.limit = limit;
+    public boolean isValid() {
+        return super.isValid() && StringUtils.isNotBlank(this.getAppId()) && StringUtils.isNotBlank(this.getEntryId())
+                && StringUtils.isNotBlank(this.getDataId());
     }
 
     @Override
@@ -57,8 +45,8 @@ public class WorkFlowApprovalCommentQueryParam {
                 "appId='" + appId + '\'' +
                 ", entryId='" + entryId + '\'' +
                 ", dataId='" + dataId + '\'' +
-                ", skip=" + skip +
-                ", limit=" + limit +
+                ", skip=" + super.getSkip() +
+                ", limit=" + super.getLimit() +
                 '}';
     }
 }

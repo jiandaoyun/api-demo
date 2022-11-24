@@ -1,5 +1,7 @@
 package model.form;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.util.Map;
 
 public class FormDataCreateParam {
@@ -79,6 +81,10 @@ public class FormDataCreateParam {
 
     public void setTransaction_id(String transaction_id) {
         this.transaction_id = transaction_id;
+    }
+
+    public boolean isValid() {
+        return StringUtils.isNotBlank(this.getAppId()) && StringUtils.isNotBlank(this.getEntryId());
     }
 
     @Override

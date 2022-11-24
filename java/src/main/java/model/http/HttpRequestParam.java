@@ -4,12 +4,10 @@ import java.util.Map;
 
 public class HttpRequestParam {
 
-    private String apiKey;
-
     /**
      * 请求路径
      */
-    private String url;
+    private String path;
 
     /**
      * 请求参数
@@ -19,21 +17,17 @@ public class HttpRequestParam {
     public HttpRequestParam() {
     }
 
-
-    public String getApiKey() {
-        return apiKey;
+    public HttpRequestParam(String path, Map<String, Object> data) {
+        this.path = path;
+        this.data = data;
     }
 
-    public void setApiKey(String apiKey) {
-        this.apiKey = apiKey;
+    public String getPath() {
+        return path;
     }
 
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
+    public void setPath(String path) {
+        this.path = path;
     }
 
     public Map<String, Object> getData() {
@@ -47,8 +41,7 @@ public class HttpRequestParam {
     @Override
     public String toString() {
         return "HttpRequestParam{" +
-                ", apiKey='" + apiKey + '\'' +
-                ", url='" + url + '\'' +
+                ", path='" + path + '\'' +
                 ", data=" + data +
                 '}';
     }
