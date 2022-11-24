@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 部门接口测试
+ * 部门相关接口测试
  */
 public class DeptApiClientTest {
 
@@ -18,7 +18,7 @@ public class DeptApiClientTest {
 
     private static final String DEPT_NAME = "Java_Api_";
 
-    private static DeptApiClient deptApiClient = new DeptApiClient(HttpConstant.API_KEY, HttpConstant.HOST);
+    private static final DeptApiClient deptApiClient = new DeptApiClient(HttpConstant.API_KEY, HttpConstant.HOST);
 
     public static void main(String[] args) throws Exception {
         // 创建部门

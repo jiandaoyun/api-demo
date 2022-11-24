@@ -10,11 +10,11 @@ import static constants.HttpConstant.API_KEY;
 import static constants.HttpConstant.APP_ID;
 
 /**
- * 应用 Demo 测试
+ * 应用相关接口测试
  */
 public class AppApiClientTest {
 
-    private static AppApiClient appApiClient = new AppApiClient(API_KEY, HttpConstant.HOST);
+    private static final AppApiClient appApiClient = new AppApiClient(API_KEY, HttpConstant.HOST);
 
 
     public static void main(String[] args) throws Exception {

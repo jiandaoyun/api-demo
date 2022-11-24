@@ -7,9 +7,12 @@ import java.util.Map;
 import static constants.HttpConstant.APP_ID;
 import static constants.HttpConstant.ENTRY_ID;
 
+/**
+ * 表单相关接口测试
+ */
 public class FormApiClientTest {
 
-    private static FormApiClient formApiClient = new FormApiClient(HttpConstant.API_KEY, HttpConstant.HOST);
+    private static final FormApiClient formApiClient = new FormApiClient(HttpConstant.API_KEY, HttpConstant.HOST);
 
     public static void main(String[] args) throws Exception {
         // 表单字段查询接口

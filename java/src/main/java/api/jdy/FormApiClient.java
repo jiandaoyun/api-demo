@@ -11,7 +11,7 @@ import java.util.Map;
 import static constants.HttpConstant.FORM_BASE_PATH;
 
 /**
- * 表单相关的请求接口
+ * 表单相关接口
  */
 public class FormApiClient extends ApiClient {
     private static final String DEFAULT_VERSION = "v2";

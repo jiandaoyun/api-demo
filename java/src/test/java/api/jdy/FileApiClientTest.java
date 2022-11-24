@@ -10,8 +10,11 @@ import java.util.Map;
 import static constants.HttpConstant.APP_ID;
 import static constants.HttpConstant.ENTRY_ID;
 
+/**
+ * 文件相关接口测试
+ */
 public class FileApiClientTest {
-    private static FileApiClient fileApiClient = new FileApiClient(HttpConstant.API_KEY, HttpConstant.HOST);
+    private static final FileApiClient fileApiClient = new FileApiClient(HttpConstant.API_KEY, HttpConstant.HOST);
 
     public static void main(String[] args) throws Exception {
         // 获取文件上传凭证和上传地址接口

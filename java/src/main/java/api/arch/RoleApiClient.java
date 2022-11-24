@@ -18,7 +18,7 @@ import java.util.Map;
 import static constants.HttpConstant.ROLE_BASE_PATH;
 
 /**
- * 角色相关的接口
+ * 角色相关接口
  */
 public class RoleApiClient extends ApiClient {
     private static final String DEFAULT_VERSION = "v2";

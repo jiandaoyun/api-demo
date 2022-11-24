@@ -7,7 +7,7 @@ public class LimitUtilThread implements Runnable {
 
     private final String threadName;
 
-    private static DeptApiClient deptApiClient = new DeptApiClient(HttpConstant.API_KEY, HttpConstant.HOST);
+    private static final DeptApiClient deptApiClient = new DeptApiClient(HttpConstant.API_KEY, HttpConstant.HOST);
 
     public LimitUtilThread(String threadName) {
         this.threadName = threadName;

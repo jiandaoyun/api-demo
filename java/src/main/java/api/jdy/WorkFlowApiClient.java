@@ -11,6 +11,9 @@ import java.util.Map;
 
 import static constants.HttpConstant.APP_BASE_PATH;
 
+/**
+ * 流程表单相关接口
+ */
 public class WorkFlowApiClient extends ApiClient {
     private static final String DEFAULT_VERSION = "v1";
     private static final List<String> VALID_VERSION_LIST = Collections.singletonList("v1");

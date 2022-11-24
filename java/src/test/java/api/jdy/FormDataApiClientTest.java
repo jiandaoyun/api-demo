@@ -8,9 +8,12 @@ import java.util.*;
 import static constants.HttpConstant.APP_ID;
 import static constants.HttpConstant.ENTRY_ID;
 
+/**
+ * 表单数据相关接口测试
+ */
 public class FormDataApiClientTest {
 
-    private static FormDataApiClient formDataApiClient = new FormDataApiClient(HttpConstant.API_KEY, HttpConstant.HOST);
+    private static final FormDataApiClient formDataApiClient = new FormDataApiClient(HttpConstant.API_KEY, HttpConstant.HOST);
 
     private static final String NUM_WIDGET = "_widget_1669106585318";
     private static final String TEXT_WIDGET = "_widget_1669106585317";

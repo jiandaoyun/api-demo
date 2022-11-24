@@ -4,9 +4,12 @@ import constants.HttpConstant;
 
 import java.util.Map;
 
+/**
+ * 企业互联相关接口测试
+ */
 public class CorpCoopApiClientTest {
 
-    private static CorpCoopApiClient corpCoopApiClient = new CorpCoopApiClient(HttpConstant.API_KEY, HttpConstant.HOST);
+    private static final CorpCoopApiClient corpCoopApiClient = new CorpCoopApiClient(HttpConstant.API_KEY, HttpConstant.HOST);
 
     public static void main(String[] args) throws Exception {
         // 列出我连接的企业

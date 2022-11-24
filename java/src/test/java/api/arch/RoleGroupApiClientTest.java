@@ -5,9 +5,12 @@ import model.role.RoleGroupListQueryParam;
 
 import java.util.Map;
 
+/**
+ * 角色组相关接口测试
+ */
 public class RoleGroupApiClientTest {
 
-    private static RoleGroupApiClient roleGroupApiClient = new RoleGroupApiClient(HttpConstant.API_KEY, HttpConstant.HOST);
+    private static final RoleGroupApiClient roleGroupApiClient = new RoleGroupApiClient(HttpConstant.API_KEY, HttpConstant.HOST);
 
     private static final String GROUP_NAME = "group_name";
 

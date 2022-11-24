@@ -13,6 +13,9 @@ import java.util.Map;
 
 import static constants.HttpConstant.APP_BASE_PATH;
 
+/**
+ * 文件相关接口
+ */
 public class FileApiClient extends ApiClient {
 
     private static final String DEFAULT_VERSION = "v1";

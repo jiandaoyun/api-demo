@@ -16,7 +16,7 @@ import java.util.Map;
 import static constants.HttpConstant.ROLE_GROUP_BASE_PATH;
 
 /**
- * 角色组相关的接口
+ * 角色组相关接口
  */
 public class RoleGroupApiClient extends ApiClient {
 

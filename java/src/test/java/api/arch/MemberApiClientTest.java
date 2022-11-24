@@ -7,7 +7,7 @@ import model.user.UserUpdateParam;
 import java.util.*;
 
 /**
- * 用户接口测试
+ * 成员相关接口测试
  */
 public class MemberApiClientTest {
     private static final Integer DEPT_NO = 1;
@@ -16,7 +16,7 @@ public class MemberApiClientTest {
 
     private static final String USER_NAME = "user_name";
 
-    private static MemberApiClient memberApiClient = new MemberApiClient(HttpConstant.API_KEY, HttpConstant.HOST);
+    private static final MemberApiClient memberApiClient = new MemberApiClient(HttpConstant.API_KEY, HttpConstant.HOST);
 
     public static void main(String[] args) throws Exception {
 

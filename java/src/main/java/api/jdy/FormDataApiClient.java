@@ -14,7 +14,7 @@ import static constants.HttpConstant.APP_BASE_PATH;
 import static constants.HttpConstant.FORM_DATA_BASE_PATH;
 
 /**
- * 表单数据相关的请求接口
+ * 表单数据相关接口
  */
 public class FormDataApiClient extends ApiClient {
 
@@ -31,8 +31,8 @@ public class FormDataApiClient extends ApiClient {
     /**
      * 新建单条数据接口
      *
-     * @param createParam
-     * @throws Exception
+     * @param createParam - 表单数据信息
+     * @return 新增的数据信息
      */
     public Map<String, Object> singleDataCreate(FormDataCreateParam createParam, String version) throws Exception {
         if (createParam == null || !createParam.isValid()) {

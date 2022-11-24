@@ -9,9 +9,12 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * 角色相关接口测试
+ */
 public class RoleApiClientTest {
 
-    private static RoleApiClient roleApiClient = new RoleApiClient(HttpConstant.API_KEY, HttpConstant.HOST);
+    private static final RoleApiClient roleApiClient = new RoleApiClient(HttpConstant.API_KEY, HttpConstant.HOST);
 
     private static final int GROUP_NO = 120;
 
@@ -19,7 +22,7 @@ public class RoleApiClientTest {
 
     private static Integer roleNo = null;
 
-    private static List<String> userNameList = Collections.singletonList("R-gDIIDws8");
+    private static final List<String> userNameList = Collections.singletonList("R-gDIIDws8");
 
     public static void main(String[] args) throws Exception {
         // 创建角色

@@ -15,7 +15,7 @@ import static constants.HttpConstant.APP_BASE_PATH;
 
 
 /**
- * 应用请求相关的接口
+ * 应用相关接口
  */
 public class AppApiClient extends ApiClient {
 
