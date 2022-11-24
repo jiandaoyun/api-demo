@@ -4,10 +4,7 @@ package constants;
  * http 相关的常量
  */
 public class HttpConstant {
-//    public static final String HOST = "https://api.jiandaoyun.com/api";
-
-    public static final String HOST = "http://localhost:3000/api/";
-
+    public static final String HOST = "https://api.jiandaoyun.com/api";
 
     /**
      * 部门相关的接口前缀
@@ -50,12 +47,12 @@ public class HttpConstant {
      */
     public static final String FORM_DATA_BASE_PATH = "/app/";
 
-    public static final String API_KEY = "pVCkWk96tzghiDttdjXxcj3fTZpdQ5AV";
+    public static final String API_KEY = "API_KEY";
 
-    public static final String APP_ID = "63567f0eac9f4e0007c92645";
+    public static final String APP_ID = "APP_ID";
 
-    public static final String WORK_FLOW_ENTRY_ID = "637c83b646be44000747e3d4";
+    public static final String WORK_FLOW_ENTRY_ID = "WORK_FLOW_ENTRY_ID";
 
-    public static final String ENTRY_ID = "637c8b9830ebbc0007bc496f";
+    public static final String ENTRY_ID = "ENTRY_ID";
 
 }
