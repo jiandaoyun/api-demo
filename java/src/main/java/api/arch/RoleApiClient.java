@@ -21,8 +21,8 @@ import static constants.HttpConstant.ROLE_BASE_PATH;
  * 角色相关接口
  */
 public class RoleApiClient extends ApiClient {
-    private static final String DEFAULT_VERSION = "v2";
-    private static final List<String> VALID_VERSION_LIST = Collections.singletonList("v2");
+    private static final String DEFAULT_VERSION = "v5";
+    private static final List<String> VALID_VERSION_LIST = Collections.singletonList("v5");
 
     public RoleApiClient(String apiKey, String host) {
         super(apiKey, host);
@@ -114,7 +114,7 @@ public class RoleApiClient extends ApiClient {
         if (queryParam == null || !queryParam.isValid()) {
             throw new RuntimeException("param lack!");
         }
-        String path = super.getValidVersion(version) + ROLE_BASE_PATH + "member_list";
+        String path = super.getValidVersion(version) + ROLE_BASE_PATH + "user/list";
         // 请求参数 将 queryParam 里面的属性转换成map
         Map<String, Object> data =
                 new ObjectMapper().convertValue(queryParam, new TypeReference<Map<String, Object>>() {

@@ -16,8 +16,8 @@ import static constants.HttpConstant.CORP_COOP_BASE_PATH;
  */
 public class CorpCoopApiClient extends ApiClient {
 
-    private static final String DEFAULT_VERSION = "v4";
-    private static final List<String> VALID_VERSION_LIST = Collections.singletonList("v4");
+    private static final String DEFAULT_VERSION = "v5";
+    private static final List<String> VALID_VERSION_LIST = Collections.singletonList("v5");
 
 
     public CorpCoopApiClient(String apiKey, String host) {
@@ -33,7 +33,7 @@ public class CorpCoopApiClient extends ApiClient {
      * @return 我连接的企业
      */
     public Map<String, Object> corpCoopDepartList(Integer deptNo, String version) throws Exception {
-        String path = super.getValidVersion(version) + CORP_COOP_BASE_PATH + "department_list";
+        String path = super.getValidVersion(version) + CORP_COOP_BASE_PATH + "department/list";
         // 请求参数
         Map<String, Object> data = new HashMap<>();
         data.put("dept_no", deptNo);
@@ -48,7 +48,7 @@ public class CorpCoopApiClient extends ApiClient {
      * @return 我连接的企业对接人
      */
     public Map<String, Object> corpCoopMemberList(Integer deptNo, String version) throws Exception {
-        String path = super.getValidVersion(version) + CORP_COOP_BASE_PATH + "member_list";
+        String path = super.getValidVersion(version) + CORP_COOP_BASE_PATH + "user/list";
         // 请求参数
         Map<String, Object> data = new HashMap<>();
         data.put("dept_no", deptNo);
@@ -65,7 +65,7 @@ public class CorpCoopApiClient extends ApiClient {
         if (StringUtils.isBlank(userName)) {
             throw new RuntimeException("param lack!");
         }
-        String path = super.getValidVersion(version) + CORP_COOP_BASE_PATH + "user_retrieve";
+        String path = super.getValidVersion(version) + CORP_COOP_BASE_PATH + "user/get";
         // 请求参数
         Map<String, Object> data = new HashMap<>();
         data.put("username", userName);

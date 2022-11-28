@@ -9,12 +9,12 @@ public class FormDataQueryParam {
     /**
      * 应用id
      */
-    private String appId;
+    private String app_id;
 
     /**
      * 表单id
      */
-    private String entryId;
+    private String entry_id;
 
     /**
      * 数据ID
@@ -37,7 +37,7 @@ public class FormDataQueryParam {
     private Map<String, Object> filter;
 
     public boolean isValid() {
-        return StringUtils.isNotBlank(this.getAppId()) && StringUtils.isNotBlank(this.getEntryId());
+        return StringUtils.isNotBlank(this.getApp_id()) && StringUtils.isNotBlank(this.getEntry_id());
     }
 
     public boolean isSingleQueryValid() {
@@ -47,26 +47,25 @@ public class FormDataQueryParam {
     public FormDataQueryParam() {
     }
 
-    public FormDataQueryParam(String appId, String entryId, String dataId) {
-        this.appId = appId;
-        this.entryId = entryId;
-        this.dataId = dataId;
+    public FormDataQueryParam(String app_id, String entry_id) {
+        this.app_id = app_id;
+        this.entry_id = entry_id;
     }
 
-    public String getAppId() {
-        return appId;
+    public String getApp_id() {
+        return app_id;
     }
 
-    public void setAppId(String appId) {
-        this.appId = appId;
+    public void setApp_id(String app_id) {
+        this.app_id = app_id;
     }
 
-    public String getEntryId() {
-        return entryId;
+    public String getEntry_id() {
+        return entry_id;
     }
 
-    public void setEntryId(String entryId) {
-        this.entryId = entryId;
+    public void setEntry_id(String entry_id) {
+        this.entry_id = entry_id;
     }
 
     public String getDataId() {
@@ -104,8 +103,8 @@ public class FormDataQueryParam {
     @Override
     public String toString() {
         return "FormDataQueryParam{" +
-                "appId='" + appId + '\'' +
-                ", entryId='" + entryId + '\'' +
+                "app_id='" + app_id + '\'' +
+                ", entry_id='" + entry_id + '\'' +
                 ", dataId='" + dataId + '\'' +
                 ", limit=" + limit +
                 ", fieldList=" + fieldList +

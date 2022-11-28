@@ -19,7 +19,6 @@ public class MemberApiClientTest {
     private static final MemberApiClient memberApiClient = new MemberApiClient(HttpConstant.API_KEY, HttpConstant.HOST);
 
     public static void main(String[] args) throws Exception {
-
         // 用户创建
         userCreate();
         // 部门用户列表

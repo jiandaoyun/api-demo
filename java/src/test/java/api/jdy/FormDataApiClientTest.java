@@ -25,19 +25,19 @@ public class FormDataApiClientTest {
 
 
     public static void main(String[] args) throws Exception {
-        // 新建单条数据接口
-        singleDataCreate();
-        // 查询单条数据接口
-        singleDataQuery();
-        // 更新单条数据接口
-        singleDataUpdate();
-        // 删除单条数据
-        singleDataRemove();
+//        // 新建单条数据接口
+//        singleDataCreate();
+//        // 查询单条数据接口
+//        singleDataQuery();
+//        // 更新单条数据接口
+//        singleDataUpdate();
+//        // 删除单条数据
+//        singleDataRemove();
 
         // 新建多条数据接口
         batchDataCreate();
         // 查询多条数据
-        batchDataQuery();
+//        batchDataQuery();
         //  修改多条数据接口
         batchDataUpdate();
         // 删除多条数据接口
@@ -53,22 +53,21 @@ public class FormDataApiClientTest {
                 put("value", 2);
             }
         });
-        param.setData(data);
-        param.setDataIds(dataIdList);
-        Map<String, Object> result = formDataApiClient.batchDataUpdate(param);
+        param.setData_list(data);
+        param.setData_ids(dataIdList);
+        Map<String, Object> result = formDataApiClient.batchDataUpdate(param, null);
         System.out.println("batchDataUpdate result \n" + result);
     }
 
     private static void batchDataRemove() throws Exception {
-        Map<String, Object> result = formDataApiClient.batchDataRemove(APP_ID, ENTRY_ID,
+        FormDataBatchRemoveParam param = new FormDataBatchRemoveParam(APP_ID, ENTRY_ID,
                 dataIdList);
+        Map<String, Object> result = formDataApiClient.batchDataRemove(param, null);
         System.out.println("batchDataRemove result \n" + result);
     }
 
     private static void batchDataQuery() throws Exception {
-        FormDataQueryParam param = new FormDataQueryParam();
-        param.setAppId(APP_ID);
-        param.setEntryId(ENTRY_ID);
+        FormDataQueryParam param = new FormDataQueryParam(APP_ID, ENTRY_ID);
         param.setLimit(10);
         // 只查这两个字段，不传为查全部字段
         param.setFieldList(Arrays.asList(NUM_WIDGET, TEXT_WIDGET));
@@ -91,7 +90,7 @@ public class FormDataApiClientTest {
             }
         };
         param.setFilter(filter);
-        Map<String, Object> result = formDataApiClient.batchDataQuery(param);
+        Map<String, Object> result = formDataApiClient.batchDataQuery(param, null);
         System.out.println("batchDataQuery result \n" + result);
     }
 
@@ -135,7 +134,7 @@ public class FormDataApiClientTest {
 
         FormDataBatchCreateParam createParam =
                 new FormDataBatchCreateParam(APP_ID, ENTRY_ID, dataList);
-        Map<String, Object> result = formDataApiClient.batchDataCreate(createParam);
+        Map<String, Object> result = formDataApiClient.batchDataCreate(createParam, null);
         System.out.println("batchDataCreate result \n" + result);
         if (result.get("success_ids") != null) {
             dataIdList = (List<String>) result.get("success_ids");
@@ -144,7 +143,7 @@ public class FormDataApiClientTest {
 
     private static void singleDataRemove() throws Exception {
         FormDataDeleteParam deleteParam = new FormDataDeleteParam(APP_ID, ENTRY_ID, dataId);
-        Map<String, Object> result = formDataApiClient.singleDataRemove(deleteParam);
+        Map<String, Object> result = formDataApiClient.singleDataRemove(deleteParam, null);
         System.out.println("singleDataRemove result \n" + result);
     }
 
@@ -184,7 +183,7 @@ public class FormDataApiClientTest {
 
         FormDataUpdateParam updateParam =
                 new FormDataUpdateParam(APP_ID, ENTRY_ID, data);
-        updateParam.setDataId(dataId);
+        updateParam.setData_id(dataId);
         Map<String, Object> result = formDataApiClient.singleDataUpdate(updateParam, null);
         System.out.println("singleDataUpdate result \n" + result);
     }
@@ -234,9 +233,7 @@ public class FormDataApiClientTest {
     }
 
     private static void singleDataQuery() throws Exception {
-        FormDataQueryParam queryParam = new FormDataQueryParam();
-        queryParam.setAppId(APP_ID);
-        queryParam.setEntryId(ENTRY_ID);
+        FormDataQueryParam queryParam = new FormDataQueryParam(APP_ID,ENTRY_ID);
         queryParam.setDataId(dataId);
         Map<String, Object> result = formDataApiClient.singleDataQuery(queryParam, null);
         System.out.println("singleDataQuery result \n" + result);

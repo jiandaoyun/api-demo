@@ -11,15 +11,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static constants.HttpConstant.APP_BASE_PATH;
+import static constants.HttpConstant.FORM_BASE_PATH;
 
 /**
  * 文件相关接口
  */
 public class FileApiClient extends ApiClient {
 
-    private static final String DEFAULT_VERSION = "v1";
-    private static final List<String> VALID_VERSION_LIST = Collections.singletonList("v1");
+    private static final String DEFAULT_VERSION = "v5";
+    private static final List<String> VALID_VERSION_LIST = Collections.singletonList("v5");
 
     public FileApiClient(String apiKey, String host) {
         super(apiKey, host);
@@ -37,11 +37,12 @@ public class FileApiClient extends ApiClient {
         if (uploadTokenParam == null || !uploadTokenParam.isValid()) {
             throw new RuntimeException("param lack!");
         }
-        String path = super.getValidVersion(version) + APP_BASE_PATH + uploadTokenParam.getAppId()
-                + "/entry/" + uploadTokenParam.getEntryId() + "/file/get_upload_token";
+        String path = super.getValidVersion(version) + FORM_BASE_PATH + "file/get_upload_token";
         // 请求参数
         Map<String, Object> data = new HashMap<>();
         data.put("transaction_id", uploadTokenParam.getTransactionId());
+        data.put("app_id", uploadTokenParam.getAppId());
+        data.put("entry_id", uploadTokenParam.getEntryId());
         HttpRequestParam param = new HttpRequestParam(path, data);
         return this.sendPostRequest(param);
     }

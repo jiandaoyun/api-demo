@@ -12,11 +12,11 @@ import java.util.Map;
  */
 public class DeptApiClientTest {
 
-    private static final Integer DEPT_NO = 10012;
+    private static final Integer DEPT_NO = 10015;
 
     private static final Integer PARENT_NO = 1;
 
-    private static final String DEPT_NAME = "Java_Api_";
+    private static final String DEPT_NAME = "Java_v5_";
 
     private static final DeptApiClient deptApiClient = new DeptApiClient(HttpConstant.API_KEY, HttpConstant.HOST);
 
@@ -44,7 +44,7 @@ public class DeptApiClientTest {
         paramList.add(deptOne);
         DeptCreateParam deptTwo = new DeptCreateParam(DEPT_NAME + "two");
         deptTwo.setDept_no(DEPT_NO + 200);
-        deptTwo.setParent_no(deptTwo.getDept_no());
+        deptTwo.setParent_no(PARENT_NO);
         deptOne.setParent_no(PARENT_NO);
         paramList.add(deptTwo);
         Map<String, Object> result = deptApiClient.departmentImport(paramList, null);

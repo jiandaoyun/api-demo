@@ -8,12 +8,12 @@ public class FormDataCreateParam {
     /**
      * 应用id
      */
-    private String appId;
+    private String app_id;
 
     /**
      * 表单id
      */
-    private String entryId;
+    private String entry_id;
 
     /**
      * 数据
@@ -29,26 +29,26 @@ public class FormDataCreateParam {
     public FormDataCreateParam() {
     }
 
-    public FormDataCreateParam(String appId, String entryId, Map<String, Object> data) {
-        this.appId = appId;
-        this.entryId = entryId;
+    public FormDataCreateParam(String app_id, String entry_id, Map<String, Object> data) {
+        this.app_id = app_id;
+        this.entry_id = entry_id;
         this.data = data;
     }
 
-    public String getAppId() {
-        return appId;
+    public String getApp_id() {
+        return app_id;
     }
 
-    public void setAppId(String appId) {
-        this.appId = appId;
+    public void setApp_id(String app_id) {
+        this.app_id = app_id;
     }
 
-    public String getEntryId() {
-        return entryId;
+    public String getEntry_id() {
+        return entry_id;
     }
 
-    public void setEntryId(String entryId) {
-        this.entryId = entryId;
+    public void setEntry_id(String entry_id) {
+        this.entry_id = entry_id;
     }
 
     public Map<String, Object> getData() {
@@ -84,14 +84,14 @@ public class FormDataCreateParam {
     }
 
     public boolean isValid() {
-        return StringUtils.isNotBlank(this.getAppId()) && StringUtils.isNotBlank(this.getEntryId());
+        return StringUtils.isNotBlank(this.getApp_id()) && StringUtils.isNotBlank(this.getEntry_id());
     }
 
     @Override
     public String toString() {
         return "FormDataCreateParam{" +
-                "appId='" + appId + '\'' +
-                ", entryId='" + entryId + '\'' +
+                "app_id='" + app_id + '\'' +
+                ", entry_id='" + entry_id + '\'' +
                 ", data=" + data +
                 ", is_start_workflow=" + is_start_workflow +
                 ", is_start_trigger=" + is_start_trigger +

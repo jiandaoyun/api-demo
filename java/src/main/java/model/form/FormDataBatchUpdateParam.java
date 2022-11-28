@@ -10,19 +10,19 @@ public class FormDataBatchUpdateParam {
     /**
      * 应用id
      */
-    private String appId;
+    private String app_id;
 
     /**
      * 表单id
      */
-    private String entryId;
+    private String entry_id;
 
-    private List<String> dataIds;
+    private List<String> data_ids;
 
     /**
      * 数据
      */
-    private Map<String, Object> data;
+    private Map<String, Object> data_list;
 
 
     private String transaction_id;
@@ -30,34 +30,9 @@ public class FormDataBatchUpdateParam {
     public FormDataBatchUpdateParam() {
     }
 
-    public FormDataBatchUpdateParam(String appId, String entryId) {
-        this.appId = appId;
-        this.entryId = entryId;
-    }
-
-
-    public String getAppId() {
-        return appId;
-    }
-
-    public void setAppId(String appId) {
-        this.appId = appId;
-    }
-
-    public String getEntryId() {
-        return entryId;
-    }
-
-    public void setEntryId(String entryId) {
-        this.entryId = entryId;
-    }
-
-    public Map<String, Object> getData() {
-        return data;
-    }
-
-    public void setData(Map<String, Object> data) {
-        this.data = data;
+    public FormDataBatchUpdateParam(String app_id, String entry_id) {
+        this.app_id = app_id;
+        this.entry_id = entry_id;
     }
 
 
@@ -69,27 +44,51 @@ public class FormDataBatchUpdateParam {
         this.transaction_id = transaction_id;
     }
 
-    public List<String> getDataIds() {
-        return dataIds;
+    public String getApp_id() {
+        return app_id;
     }
 
-    public void setDataIds(List<String> dataIds) {
-        this.dataIds = dataIds;
+    public void setApp_id(String app_id) {
+        this.app_id = app_id;
+    }
+
+    public String getEntry_id() {
+        return entry_id;
+    }
+
+    public void setEntry_id(String entry_id) {
+        this.entry_id = entry_id;
+    }
+
+    public List<String> getData_ids() {
+        return data_ids;
+    }
+
+    public void setData_ids(List<String> data_ids) {
+        this.data_ids = data_ids;
+    }
+
+    public Map<String, Object> getData_list() {
+        return data_list;
+    }
+
+    public void setData_list(Map<String, Object> data_list) {
+        this.data_list = data_list;
     }
 
     public boolean isValid() {
-        return StringUtils.isNotBlank(this.getAppId()) && StringUtils.isNotBlank(this.getEntryId())
-                && CollectionUtils.isNotEmpty(this.getDataIds());
+        return StringUtils.isNotBlank(this.getApp_id()) && StringUtils.isNotBlank(this.getEntry_id())
+                && CollectionUtils.isNotEmpty(this.getData_ids());
 
     }
 
     @Override
     public String toString() {
         return "FormDataBatchUpdateParam{" +
-                "appId='" + appId + '\'' +
-                ", entryId='" + entryId + '\'' +
-                ", dataIds=" + dataIds +
-                ", data=" + data +
+                "app_id='" + app_id + '\'' +
+                ", entry_id='" + entry_id + '\'' +
+                ", data_ids=" + data_ids +
+                ", data_list=" + data_list +
                 ", transaction_id='" + transaction_id + '\'' +
                 '}';
     }

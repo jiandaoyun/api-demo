@@ -36,7 +36,7 @@ public class AppApiClientTest {
         FormQueryParam queryParam = new FormQueryParam();
         queryParam.setSkip(0);
         queryParam.setLimit(0);
-        queryParam.setAppId(APP_ID);
+        queryParam.setApp_id(APP_ID);
         Map<String, Object> result = appApiClient.entryList(queryParam, null);
         System.out.println("entryList result \n" + result);
     }

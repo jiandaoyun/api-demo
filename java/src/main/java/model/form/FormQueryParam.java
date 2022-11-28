@@ -5,18 +5,18 @@ import org.apache.commons.lang3.StringUtils;
 
 public class FormQueryParam extends PageBaseParam {
 
-    private String appId;
+    private String app_id;
 
-    public String getAppId() {
-        return appId;
+    public String getApp_id() {
+        return app_id;
     }
 
-    public void setAppId(String appId) {
-        this.appId = appId;
+    public void setApp_id(String app_id) {
+        this.app_id = app_id;
     }
 
     public boolean isValid() {
-        return StringUtils.isNotBlank(this.getAppId()) && super.isValid();
+        return StringUtils.isNotBlank(this.getApp_id()) && super.isValid();
     }
 
     @Override
@@ -24,7 +24,7 @@ public class FormQueryParam extends PageBaseParam {
         return "FormQueryParam{" +
                 "skip=" + super.getSkip() +
                 ", limit=" + super.getLimit() +
-                ", appId=" + appId +
+                ", app_id=" + app_id +
                 '}';
     }
 }

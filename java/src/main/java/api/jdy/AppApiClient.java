@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 import static constants.HttpConstant.APP_BASE_PATH;
+import static constants.HttpConstant.FORM_BASE_PATH;
 
 
 /**
@@ -19,8 +20,8 @@ import static constants.HttpConstant.APP_BASE_PATH;
  */
 public class AppApiClient extends ApiClient {
 
-    private static final String DEFAULT_VERSION = "v1";
-    private static final List<String> VALID_VERSION_LIST = Collections.singletonList("v1");
+    private static final String DEFAULT_VERSION = "v5";
+    private static final List<String> VALID_VERSION_LIST = Collections.singletonList("v5");
 
     public AppApiClient(String apiKey, String host) {
         super(apiKey, host);
@@ -38,7 +39,7 @@ public class AppApiClient extends ApiClient {
         if (queryParam == null || !queryParam.isValid()) {
             throw new RuntimeException("param lack!");
         }
-        String path = super.getValidVersion(version) + APP_BASE_PATH + "retrieve_all";
+        String path = super.getValidVersion(version) + APP_BASE_PATH + "list";
         // 请求参数 将 queryParam 里面的属性转换成map
         Map<String, Object> data =
                 new ObjectMapper().convertValue(queryParam, new TypeReference<Map<String, Object>>() {
@@ -57,7 +58,7 @@ public class AppApiClient extends ApiClient {
         if (queryParam == null || !queryParam.isValid()) {
             throw new RuntimeException("param lack!");
         }
-        String path = super.getValidVersion(version) + APP_BASE_PATH + queryParam.getAppId() + "/entry_retrieve";
+        String path = super.getValidVersion(version) + FORM_BASE_PATH + "list";
         // 请求参数 将 queryParam 里面的属性转换成map
         Map<String, Object> data =
                 new ObjectMapper().convertValue(queryParam, new TypeReference<Map<String, Object>>() {

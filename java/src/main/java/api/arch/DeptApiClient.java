@@ -6,10 +6,7 @@ import model.http.HttpRequestParam;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static constants.HttpConstant.DEPT_BASE_PATH;
 
@@ -17,8 +14,8 @@ import static constants.HttpConstant.DEPT_BASE_PATH;
  * 部门相关接口
  */
 public class DeptApiClient extends ApiClient {
-    private static final String DEFAULT_VERSION = "v2";
-    private static final List<String> VALID_VERSION_LIST = Arrays.asList("v2", "v1");
+    private static final String DEFAULT_VERSION = "v5";
+    private static final List<String> VALID_VERSION_LIST = Collections.singletonList("v5");
 
     public DeptApiClient(String apiKey, String host) {
         super(apiKey, host);
@@ -36,10 +33,11 @@ public class DeptApiClient extends ApiClient {
         if (deptNo == null) {
             throw new RuntimeException("param lack!");
         }
-        String path = super.getValidVersion(version) + DEPT_BASE_PATH + deptNo + "/department_list";
+        String path = super.getValidVersion(version) + DEPT_BASE_PATH + "list";
         // 请求参数
         Map<String, Object> data = new HashMap<>();
         data.put("has_child", hasChild);
+        data.put("dept_no", deptNo);
         HttpRequestParam param = new HttpRequestParam(path, data);
         return this.sendPostRequest(param);
     }
@@ -76,10 +74,11 @@ public class DeptApiClient extends ApiClient {
         if (deptNo == null || StringUtils.isBlank(name)) {
             throw new RuntimeException("param lack!");
         }
-        String path = super.getValidVersion(version) + DEPT_BASE_PATH + deptNo + "/update";
+        String path = super.getValidVersion(version) + DEPT_BASE_PATH + "update";
         // 请求参数
         Map<String, Object> data = new HashMap<>();
         data.put("name", name);
+        data.put("dept_no",deptNo);
         HttpRequestParam httpRequestParam = new HttpRequestParam(path, data);
         return this.sendPostRequest(httpRequestParam);
     }
@@ -94,8 +93,11 @@ public class DeptApiClient extends ApiClient {
         if (deptNo == null) {
             throw new RuntimeException("param lack!");
         }
-        String path = super.getValidVersion(version) + DEPT_BASE_PATH + deptNo + "/delete";
-        HttpRequestParam httpRequestParam = new HttpRequestParam(path, null);
+        String path = super.getValidVersion(version) + DEPT_BASE_PATH + "delete";
+        // 请求参数
+        Map<String, Object> data = new HashMap<>();
+        data.put("dept_no",deptNo);
+        HttpRequestParam httpRequestParam = new HttpRequestParam(path, data);
         return this.sendPostRequest(httpRequestParam);
     }
 
@@ -109,7 +111,7 @@ public class DeptApiClient extends ApiClient {
         if (StringUtils.isBlank(integrateId)) {
             throw new RuntimeException("param lack!");
         }
-        String path = super.getValidVersion(version) + DEPT_BASE_PATH + "get_deptno_by_integrateid";
+        String path = super.getValidVersion(version) + DEPT_BASE_PATH + "dept_no/get";
         // 请求参数
         Map<String, Object> data = new HashMap<>();
         data.put("integrate_id", integrateId);

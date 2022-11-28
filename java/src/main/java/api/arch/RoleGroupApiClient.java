@@ -20,8 +20,8 @@ import static constants.HttpConstant.ROLE_GROUP_BASE_PATH;
  */
 public class RoleGroupApiClient extends ApiClient {
 
-    private static final String DEFAULT_VERSION = "v2";
-    private static final List<String> VALID_VERSION_LIST = Collections.singletonList("v2");
+    private static final String DEFAULT_VERSION = "v5";
+    private static final List<String> VALID_VERSION_LIST = Collections.singletonList("v5");
 
     public RoleGroupApiClient(String apiKey, String host) {
         super(apiKey, host);

@@ -1,16 +1,13 @@
 package api.jdy;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import model.form.*;
 import model.http.ApiClient;
 import model.http.HttpRequestParam;
-import org.apache.commons.lang3.StringUtils;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
-import static constants.HttpConstant.APP_BASE_PATH;
 import static constants.HttpConstant.FORM_DATA_BASE_PATH;
 
 /**
@@ -18,8 +15,8 @@ import static constants.HttpConstant.FORM_DATA_BASE_PATH;
  */
 public class FormDataApiClient extends ApiClient {
 
-    private static final String DEFAULT_VERSION = "v4";
-    private static final List<String> VALID_VERSION_LIST = Arrays.asList("v4", "v3", "v2", "v1");
+    private static final String DEFAULT_VERSION = "v5";
+    private static final List<String> VALID_VERSION_LIST = Collections.singletonList("v5");
 
     public FormDataApiClient(String apiKey, String host) {
         super(apiKey, host);
@@ -38,13 +35,11 @@ public class FormDataApiClient extends ApiClient {
         if (createParam == null || !createParam.isValid()) {
             throw new RuntimeException("param lack!");
         }
-        String path = super.getValidVersion(version) + FORM_DATA_BASE_PATH + createParam.getAppId() + "/entry/"
-                + createParam.getEntryId() + "/data_create";
-        Map<String, Object> data = new HashMap<>();
-        data.put("data", createParam.getData());
-        data.put("is_start_workflow", createParam.getIs_start_workflow());
-        data.put("is_start_trigger", createParam.getIs_start_trigger());
-        data.put("transaction_id", createParam.getTransaction_id());
+        String path = super.getValidVersion(version) + FORM_DATA_BASE_PATH + "create";
+        // 请求参数 将 queryParam 里面的属性转换成map
+        Map<String, Object> data =
+                new ObjectMapper().convertValue(createParam, new TypeReference<Map<String, Object>>() {
+                });
         HttpRequestParam param = new HttpRequestParam(path, data);
         return this.sendPostRequest(param);
     }
@@ -60,10 +55,11 @@ public class FormDataApiClient extends ApiClient {
         if (queryParam == null || !queryParam.isSingleQueryValid()) {
             throw new RuntimeException("param lack!");
         }
-        String path = super.getValidVersion(version) + FORM_DATA_BASE_PATH + queryParam.getAppId()
-                + "/entry/" + queryParam.getEntryId() + "/data_retrieve";
+        String path = super.getValidVersion(version) + FORM_DATA_BASE_PATH + "get";
         Map<String, Object> data = new HashMap<>();
         data.put("data_id", queryParam.getDataId());
+        data.put("app_id", queryParam.getApp_id());
+        data.put("entry_id", queryParam.getEntry_id());
         HttpRequestParam param = new HttpRequestParam(path, data);
         return this.sendPostRequest(param);
     }
@@ -78,13 +74,11 @@ public class FormDataApiClient extends ApiClient {
         if (updateParam == null || !updateParam.isValid()) {
             throw new RuntimeException("param lack!");
         }
-        String path = super.getValidVersion(version) + FORM_DATA_BASE_PATH + updateParam.getAppId() + "/entry/"
-                + updateParam.getEntryId() + "/data_update";
-        Map<String, Object> data = new HashMap<>();
-        data.put("data_id", updateParam.getDataId());
-        data.put("data", updateParam.getData());
-        data.put("is_start_trigger", updateParam.getIs_start_trigger());
-        data.put("transaction_id", updateParam.getTransaction_id());
+        String path = super.getValidVersion(version) + FORM_DATA_BASE_PATH + "update";
+        // 请求参数 将 queryParam 里面的属性转换成map
+        Map<String, Object> data =
+                new ObjectMapper().convertValue(updateParam, new TypeReference<Map<String, Object>>() {
+                });
         HttpRequestParam param = new HttpRequestParam(path, data);
         return this.sendPostRequest(param);
     }
@@ -94,17 +88,17 @@ public class FormDataApiClient extends ApiClient {
      * 刪除单条数据接口
      *
      * @param deleteParam - 删除的数据信息
+     * @param version     - 版本
      * @return status
      */
-    public Map<String, Object> singleDataRemove(FormDataDeleteParam deleteParam) throws Exception {
-        if (StringUtils.isBlank(deleteParam.getAppId()) || StringUtils.isBlank(deleteParam.getDataId()) ||
-                StringUtils.isBlank(deleteParam.getEntryId())) {
+    public Map<String, Object> singleDataRemove(FormDataDeleteParam deleteParam, String version) throws Exception {
+        if (deleteParam == null || !deleteParam.isValid()) {
             throw new RuntimeException("param lack!");
         }
-        String path = super.getValidVersion("v1") + APP_BASE_PATH + deleteParam.getAppId() + "/entry/" + deleteParam.getEntryId() + "/data_delete";
-        Map<String, Object> data = new HashMap<>();
-        data.put("data_id", deleteParam.getDataId());
-        data.put("is_start_trigger", deleteParam.getIs_start_trigger());
+        String path = super.getValidVersion(version) + FORM_DATA_BASE_PATH + "delete";
+        Map<String, Object> data =
+                new ObjectMapper().convertValue(deleteParam, new TypeReference<Map<String, Object>>() {
+                });
         HttpRequestParam param = new HttpRequestParam(path, data);
         return this.sendPostRequest(param);
     }
@@ -113,17 +107,17 @@ public class FormDataApiClient extends ApiClient {
      * 新建多条数据接口
      *
      * @param createParam - 新建的数据信息
+     * @param version     - 版本
      * @return success_count
      */
-    public Map<String, Object> batchDataCreate(FormDataBatchCreateParam createParam) throws Exception {
+    public Map<String, Object> batchDataCreate(FormDataBatchCreateParam createParam, String version) throws Exception {
         if (createParam == null || !createParam.isValid()) {
             throw new RuntimeException("param lack!");
         }
-        String path = super.getValidVersion("v1") + APP_BASE_PATH + createParam.getAppId() + "/entry/" + createParam.getEntryId() + "/data_batch_create";
-        Map<String, Object> data = new HashMap<>();
-        data.put("data_list", createParam.getDataList());
-        data.put("is_start_workflow", createParam.getIs_start_workflow());
-        data.put("transaction_id", createParam.getTransaction_id());
+        String path = super.getValidVersion(version) + FORM_DATA_BASE_PATH + "batch_create";
+        Map<String, Object> data =
+                new ObjectMapper().convertValue(createParam, new TypeReference<Map<String, Object>>() {
+                });
         HttpRequestParam param = new HttpRequestParam(path, data);
         return this.sendPostRequest(param);
     }
@@ -132,19 +126,17 @@ public class FormDataApiClient extends ApiClient {
      * 查询多条数据接口
      *
      * @param queryParam - 查询参数
+     * @param version    - 版本
      * @return 数据信息
      */
-    public Map<String, Object> batchDataQuery(FormDataQueryParam queryParam) throws Exception {
+    public Map<String, Object> batchDataQuery(FormDataQueryParam queryParam, String version) throws Exception {
         if (queryParam == null || !queryParam.isValid()) {
             throw new RuntimeException("param lack!");
         }
-        String path = super.getValidVersion("v1") + APP_BASE_PATH + queryParam.getAppId() + "/entry/"
-                + queryParam.getEntryId() + "/data";
-        Map<String, Object> data = new HashMap<>();
-        data.put("data_id", queryParam.getDataId());
-        data.put("fields", queryParam.getFieldList());
-        data.put("filter", queryParam.getFilter());
-        data.put("limit", queryParam.getLimit());
+        String path = super.getValidVersion(version) + FORM_DATA_BASE_PATH + "list";
+        Map<String, Object> data =
+                new ObjectMapper().convertValue(queryParam, new TypeReference<Map<String, Object>>() {
+                });
         HttpRequestParam param = new HttpRequestParam(path, data);
         return this.sendPostRequest(param);
     }
@@ -152,18 +144,18 @@ public class FormDataApiClient extends ApiClient {
     /**
      * 删除多条数据接口
      *
-     * @param appId - 应用 Id
-     * @param entryId - 表单 Id
-     * @param dataIdList - 数据 Id 列表
+     * @param removeParam - 删除参数
+     * @param version     - 版本
      * @return status 和 success_count
      */
-    public Map<String, Object> batchDataRemove(String appId, String entryId, List<String> dataIdList) throws Exception {
-        if (StringUtils.isBlank(appId) || StringUtils.isBlank(entryId)) {
+    public Map<String, Object> batchDataRemove(FormDataBatchRemoveParam removeParam, String version) throws Exception {
+        if (removeParam == null || !removeParam.isValid()) {
             throw new RuntimeException("param lack!");
         }
-        String path = super.getValidVersion("v1") + APP_BASE_PATH + appId + "/entry/" + entryId + "/data_batch_delete";
-        Map<String, Object> data = new HashMap<>();
-        data.put("data_ids", dataIdList);
+        String path = super.getValidVersion(version) + FORM_DATA_BASE_PATH + "batch_delete";
+        Map<String, Object> data =
+                new ObjectMapper().convertValue(removeParam, new TypeReference<Map<String, Object>>() {
+                });
         HttpRequestParam param = new HttpRequestParam(path, data);
         return this.sendPostRequest(param);
     }
@@ -172,18 +164,17 @@ public class FormDataApiClient extends ApiClient {
      * 修改多条数据接口
      *
      * @param updateParam - 更新数据的信息
+     * @param version     - 版本
      * @return status 和 success_count
      */
-    public Map<String, Object> batchDataUpdate(FormDataBatchUpdateParam updateParam) throws Exception {
+    public Map<String, Object> batchDataUpdate(FormDataBatchUpdateParam updateParam, String version) throws Exception {
         if (updateParam == null || !updateParam.isValid()) {
             throw new RuntimeException("param lack!");
         }
-        String path = super.getValidVersion("v1") + APP_BASE_PATH + updateParam.getAppId() + "/entry/" + updateParam.getEntryId()
-                + "/data_batch_update";
-        Map<String, Object> data = new HashMap<>();
-        data.put("data_ids", updateParam.getDataIds());
-        data.put("transaction_id", updateParam.getTransaction_id());
-        data.put("data", updateParam.getData());
+        String path = super.getValidVersion(version) + FORM_DATA_BASE_PATH + "batch_update";
+        Map<String, Object> data =
+                new ObjectMapper().convertValue(updateParam, new TypeReference<Map<String, Object>>() {
+                });
         HttpRequestParam param = new HttpRequestParam(path, data);
         return this.sendPostRequest(param);
     }

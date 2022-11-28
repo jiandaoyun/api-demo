@@ -19,8 +19,8 @@ import static constants.HttpConstant.MEMBER_BASE_PATH;
  * 成员相关接口
  */
 public class MemberApiClient extends ApiClient {
-    private static final String DEFAULT_VERSION = "v2";
-    private static final List<String> VALID_VERSION_LIST = Arrays.asList("v2", "v1");
+    private static final String DEFAULT_VERSION = "v5";
+    private static final List<String> VALID_VERSION_LIST = Arrays.asList("v5");
 
     public MemberApiClient(String apiKey, String host) {
         super(apiKey, host);
@@ -39,10 +39,11 @@ public class MemberApiClient extends ApiClient {
         if (deptNo == null || hasChild == null) {
             throw new RuntimeException("param lack!");
         }
-        String path = super.getValidVersion(version) + DEPT_BASE_PATH + deptNo + "/member_list";
+        String path = super.getValidVersion(version) + DEPT_BASE_PATH + "user/list";
         // 请求参数
         Map<String, Object> data = new HashMap<>();
         data.put("has_child", hasChild);
+        data.put("dept_no", deptNo);
         HttpRequestParam param = new HttpRequestParam(path, data);
         return this.sendPostRequest(param);
     }
@@ -77,8 +78,11 @@ public class MemberApiClient extends ApiClient {
         if (StringUtils.isBlank(userName)) {
             throw new RuntimeException("param lack!");
         }
-        String path = super.getValidVersion(version) + MEMBER_BASE_PATH + userName + "/user_retrieve";
-        HttpRequestParam param = new HttpRequestParam(path, null);
+        String path = super.getValidVersion(version) + MEMBER_BASE_PATH + "get";
+        // 请求参数
+        Map<String, Object> data = new HashMap<>();
+        data.put("username", userName);
+        HttpRequestParam param = new HttpRequestParam(path, data);
         return this.sendPostRequest(param);
     }
 
@@ -92,10 +96,11 @@ public class MemberApiClient extends ApiClient {
         if (updateParam == null || !updateParam.isValid()) {
             throw new RuntimeException("param lack!");
         }
-        String path = super.getValidVersion(version) + MEMBER_BASE_PATH + updateParam.getUserName() + "/update";
+        String path = super.getValidVersion(version) + MEMBER_BASE_PATH + "update";
         // 请求参数
         Map<String, Object> data = new HashMap<>();
         data.put("name", updateParam.getName());
+        data.put("username", updateParam.getUserName());
         data.put("departments", updateParam.getDepartmentList());
         HttpRequestParam requestParam = new HttpRequestParam(path, data);
         return this.sendPostRequest(requestParam);
@@ -111,8 +116,11 @@ public class MemberApiClient extends ApiClient {
         if (StringUtils.isBlank(userName)) {
             throw new RuntimeException("param lack!");
         }
-        String path = super.getValidVersion(version) + MEMBER_BASE_PATH + userName + "/delete";
-        HttpRequestParam param = new HttpRequestParam(path, null);
+        String path = super.getValidVersion(version) + MEMBER_BASE_PATH +  "delete";
+        // 请求参数
+        Map<String, Object> data = new HashMap<>();
+        data.put("username", userName);
+        HttpRequestParam param = new HttpRequestParam(path, data);
         return this.sendPostRequest(param);
     }
 
