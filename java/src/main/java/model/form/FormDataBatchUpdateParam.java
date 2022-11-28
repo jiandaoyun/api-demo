@@ -22,7 +22,7 @@ public class FormDataBatchUpdateParam {
     /**
      * 数据
      */
-    private Map<String, Object> data_list;
+    private Map<String, Object> data;
 
 
     private String transaction_id;
@@ -68,12 +68,12 @@ public class FormDataBatchUpdateParam {
         this.data_ids = data_ids;
     }
 
-    public Map<String, Object> getData_list() {
-        return data_list;
+    public Map<String, Object> getData() {
+        return data;
     }
 
-    public void setData_list(Map<String, Object> data_list) {
-        this.data_list = data_list;
+    public void setData(Map<String, Object> data) {
+        this.data = data;
     }
 
     public boolean isValid() {
@@ -88,7 +88,7 @@ public class FormDataBatchUpdateParam {
                 "app_id='" + app_id + '\'' +
                 ", entry_id='" + entry_id + '\'' +
                 ", data_ids=" + data_ids +
-                ", data_list=" + data_list +
+                ", data=" + data +
                 ", transaction_id='" + transaction_id + '\'' +
                 '}';
     }

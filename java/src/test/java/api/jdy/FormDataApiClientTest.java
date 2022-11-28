@@ -25,19 +25,19 @@ public class FormDataApiClientTest {
 
 
     public static void main(String[] args) throws Exception {
-//        // 新建单条数据接口
-//        singleDataCreate();
-//        // 查询单条数据接口
-//        singleDataQuery();
-//        // 更新单条数据接口
-//        singleDataUpdate();
-//        // 删除单条数据
-//        singleDataRemove();
+        // 新建单条数据接口
+        singleDataCreate();
+        // 查询单条数据接口
+        singleDataQuery();
+        // 更新单条数据接口
+        singleDataUpdate();
+        // 删除单条数据
+        singleDataRemove();
 
         // 新建多条数据接口
         batchDataCreate();
         // 查询多条数据
-//        batchDataQuery();
+        batchDataQuery();
         //  修改多条数据接口
         batchDataUpdate();
         // 删除多条数据接口
@@ -53,7 +53,7 @@ public class FormDataApiClientTest {
                 put("value", 2);
             }
         });
-        param.setData_list(data);
+        param.setData(data);
         param.setData_ids(dataIdList);
         Map<String, Object> result = formDataApiClient.batchDataUpdate(param, null);
         System.out.println("batchDataUpdate result \n" + result);
