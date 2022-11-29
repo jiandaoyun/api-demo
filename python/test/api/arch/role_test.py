@@ -50,9 +50,9 @@ def roleMemberList():
 
 
 # 测试 为自建角色批量移除成员
-def roleRmoveMembers():
-    result = roleApiClient.roleRmoveMembers(role_no, user_names)
-    print('roleRmoveMembers result:', result)
+def roleRemoveMembers():
+    result = roleApiClient.roleRemoveMembers(role_no, user_names)
+    print('roleRemoveMembers result:', result)
 
 
 if __name__ == '__main__':
@@ -62,5 +62,5 @@ if __name__ == '__main__':
     roleUpdate()
     roleAddMembers()
     roleMemberList()
-    roleRmoveMembers()
+    roleRemoveMembers()
     roleDelete()

@@ -100,7 +100,7 @@ class RoleApiClient(ApiClient):
         version: 版本
     '''
 
-    def roleRmoveMembers(self, role_no, usernames, version=default_version):
+    def roleRemoveMembers(self, role_no, usernames, version=default_version):
         path = HttpConstant.ROLE_PATH.format(suffix='remove_members', version=self.getValidVersion(version))
         request_param = HttpRequestParam(path, {"role_no": role_no, "usernames": usernames})
         return self.send_post(request_param)

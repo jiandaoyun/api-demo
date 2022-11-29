@@ -1,17 +1,18 @@
 /**
-* Copyright (c) 2015-2022, FineX, All Rights Reserved.
-* @author Thomas.Zhuang
-* @date 2022/06/08
-*/
+ * Copyright (c) 2015-2022, FineX, All Rights Reserved.
+ * @author Thomas.Zhuang
+ * @date 2022/06/08
+ */
 
 import { ApiClient } from '../../base/api_client';
+import { CORP_COOP_BASE_PATH} from '../../constants/http_constant'
 
 export class CorpCoopApiClient extends ApiClient {
-    validVersions = ['v4'];
-    defaultVersion = 'v4';
+    validVersions = ['v5'];
+    defaultVersion = 'v5';
 
     /**
-    * check version
+     * check version
      */
     async doRequest(options) {
         if (!this.validVersions.includes(this.version)) {
@@ -21,12 +22,12 @@ export class CorpCoopApiClient extends ApiClient {
     }
 
     /**
-    * 列出我连接的企业
-    */
+     * 列出我连接的企业
+     */
     async corpCoopDepartList(options) {
         return await this.doRequest({
             method: 'POST',
-            path: `corp_coop/guest/department_list`,
+            path: CORP_COOP_BASE_PATH + 'department/list',
             payload: {
                 dept_no: options.deptNo
             }
@@ -34,12 +35,12 @@ export class CorpCoopApiClient extends ApiClient {
     }
 
     /**
-    * 列出我连接的企业对接人
-    */
+     * 列出我连接的企业对接人
+     */
     async corpCoopMemberList(options) {
         return await this.doRequest({
             method: 'POST',
-            path: `corp_coop/guest/member_list`,
+            path: CORP_COOP_BASE_PATH + 'user/list',
             payload: {
                 dept_no: options.deptNo
             }
@@ -47,12 +48,12 @@ export class CorpCoopApiClient extends ApiClient {
     }
 
     /**
-    * 列出我连接的企业对接人详细信息
-    */
+     * 列出我连接的企业对接人详细信息
+     */
     async corpCoopUserInfo(username) {
         return await this.doRequest({
             method: 'POST',
-            path: `corp_coop/guest/user_retrieve`,
+            path: CORP_COOP_BASE_PATH + 'user/get',
             payload: {
                 username
             }

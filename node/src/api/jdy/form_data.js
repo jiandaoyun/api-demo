@@ -5,10 +5,11 @@
  */
 
 import { ApiClient } from '../../base/api_client';
+import { FORM_DATA_BASE_PATH } from '../../constants/http_constant';
 
 export class FormDataApiClient extends ApiClient {
-    validVersions = ['v4', 'v3', 'v2', 'v1'];
-    defaultVersion = 'v4';
+    validVersions = ['v5'];
+    defaultVersion = 'v5';
 
     /**
      * check version
@@ -23,11 +24,13 @@ export class FormDataApiClient extends ApiClient {
     /**
      * 新建单条数据接口
      */
-    async singleDataCreate(appId, entryId, data, options) {
+    async singleDataCreate(app_id, entry_id, data, options) {
         return await this.doRequest({
             method: 'POST',
-            path: `app/${appId}/entry/${entryId}/data_create`,
+            path: FORM_DATA_BASE_PATH + 'create',
             payload: {
+                app_id,
+                entry_id,
                 data,
                 is_start_workflow: options.isStartWorkflow,
                 is_start_trigger: options.isStartTrigger,
@@ -39,12 +42,12 @@ export class FormDataApiClient extends ApiClient {
     /**
      * 查询单条数据接口
      */
-    async singleDataQuery(appId, entryId, dataId) {
+    async singleDataQuery(app_id, entry_id, data_id) {
         return await this.doRequest({
             method: 'POST',
-            path: `app/${appId}/entry/${entryId}/data_retrieve`,
+            path: FORM_DATA_BASE_PATH + 'get',
             payload: {
-                data_id: dataId
+                app_id, entry_id, data_id
             }
         });
     }
@@ -52,11 +55,13 @@ export class FormDataApiClient extends ApiClient {
     /**
      * 修改单条数据接口
      */
-    async singleDataUpdate(appId, entryId, data_id, data, options) {
+    async singleDataUpdate(app_id, entry_id, data_id, data, options) {
         return await this.doRequest({
             method: 'POST',
-            path: `app/${appId}/entry/${entryId}/data_update`,
+            path: FORM_DATA_BASE_PATH + 'update',
             payload: {
+                app_id,
+                entry_id,
                 data_id,
                 data,
                 is_start_trigger: options.isStartTrigger,
@@ -66,30 +71,32 @@ export class FormDataApiClient extends ApiClient {
     }
 
     /**
-    * 删除单条数据接口
-    */
-    async singleDataRemove(appId, entryId, dataId, options) {
+     * 删除单条数据接口
+     */
+    async singleDataRemove(app_id, entry_id, data_id, options) {
         return await this.doRequest({
-            version: 'v1',
             method: 'POST',
-            path: `app/${appId}/entry/${entryId}/data_delete`,
+            path: FORM_DATA_BASE_PATH + 'delete',
             payload: {
-                data_id: dataId,
+                app_id,
+                entry_id,
+                data_id,
                 is_start_trigger: options.isStartTrigger,
             }
         });
     }
 
     /**
-    * 新建多条数据接口
-    */
-    async batchDataCreate(appId, entryId, dataList, options) {
+     * 新建多条数据接口
+     */
+    async batchDataCreate(app_id, entry_id, data_list, options) {
         return await this.doRequest({
-            version: 'v1',
             method: 'POST',
-            path: `app/${appId}/entry/${entryId}/data_batch_create`,
+            path: FORM_DATA_BASE_PATH + 'batch_create',
             payload: {
-                data_list: dataList,
+                app_id,
+                entry_id,
+                data_list,
                 is_start_workflow: options.isStartWorkflow,
                 transaction_id: options.transactionId
             }
@@ -99,12 +106,13 @@ export class FormDataApiClient extends ApiClient {
     /**
      * 查询多条数据接口
      */
-    async batchDataQuery(appId, entryId, options) {
+    async batchDataQuery(app_id, entry_id, options) {
         return await this.doRequest({
-            version: 'v1',
             method: 'POST',
-            path: `app/${appId}/entry/${entryId}/data`,
+            path: FORM_DATA_BASE_PATH + 'list',
             payload: {
+                app_id,
+                entry_id,
                 data_id: options.nextId,
                 fields: options.fields,
                 filter: options.filter,
@@ -116,13 +124,14 @@ export class FormDataApiClient extends ApiClient {
     /**
      * 修改多条数据接口
      */
-    async batchDataUpdate(appId, entryId, dataIds, data, options) {
+    async batchDataUpdate(app_id, entry_id, data_ids, data, options) {
         return await this.doRequest({
-            version: 'v1',
             method: 'POST',
-            path: `app/${appId}/entry/${entryId}/data_batch_update`,
+            path: FORM_DATA_BASE_PATH + 'batch_update',
             payload: {
-                data_ids: dataIds,
+                app_id,
+                entry_id,
+                data_ids,
                 data,
                 transaction_id: options.transactionId
             }
@@ -130,15 +139,14 @@ export class FormDataApiClient extends ApiClient {
     }
 
     /**
-    * 删除多条数据接口
-    */
-    async batchDataRemove(appId, entryId, dataIds) {
+     * 删除多条数据接口
+     */
+    async batchDataRemove(app_id, entry_id, data_ids) {
         return await this.doRequest({
-            version: 'v1',
             method: 'POST',
-            path: `app/${appId}/entry/${entryId}/data_batch_delete`,
+            path: FORM_DATA_BASE_PATH + 'batch_delete',
             payload: {
-                data_ids: dataIds
+                app_id, entry_id, data_ids
             }
         });
     }

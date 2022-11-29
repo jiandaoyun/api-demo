@@ -5,10 +5,14 @@
 */
 
 import { ApiClient } from '../../base/api_client';
+import { ROLE_BASE_PATH } from '../../constants/http_constant';
 
 export class RoleApiClient extends ApiClient {
-    validVersions = ['v2'];
-    defaultVersion = 'v2';
+    validVersions = ['v5'];
+    defaultVersion = 'v5';
+
+
+
 
     /**
     * check version
@@ -26,7 +30,7 @@ export class RoleApiClient extends ApiClient {
     async roleList(options) {
         return await this.doRequest({
             method: 'POST',
-            path: `role/list`,
+            path: ROLE_BASE_PATH + 'list',
             payload: {
                 ...options
             }
@@ -39,7 +43,7 @@ export class RoleApiClient extends ApiClient {
     async roleCreate(name, groupNo) {
         return await this.doRequest({
             method: 'POST',
-            path: `role/create`,
+            path: ROLE_BASE_PATH + 'create',
             payload: {
                 name,
                 group_no: groupNo
@@ -53,7 +57,7 @@ export class RoleApiClient extends ApiClient {
     async roleUpdate(roleNo, groupNo, options) {
         return await this.doRequest({
             method: 'POST',
-            path: `role/update`,
+            path: ROLE_BASE_PATH + 'update',
             payload: {
                 role_no: roleNo,
                 group_no: groupNo,
@@ -68,7 +72,7 @@ export class RoleApiClient extends ApiClient {
     async roleDelete(roleNo) {
         return await this.doRequest({
             method: 'POST',
-            path: `role/delete`,
+            path: ROLE_BASE_PATH + 'delete',
             payload: {
                 role_no: roleNo
             }
@@ -81,7 +85,7 @@ export class RoleApiClient extends ApiClient {
     async roleMemberList(roleNo, options) {
         return await this.doRequest({
             method: 'POST',
-            path: `role/member_list`,
+            path: ROLE_BASE_PATH + 'user/list',
             payload: {
                 role_no: roleNo,
                 ...options
@@ -95,7 +99,7 @@ export class RoleApiClient extends ApiClient {
     async roleAddMembers(roleNo, usernames) {
         return await this.doRequest({
             method: 'POST',
-            path: `role/add_members`,
+            path: ROLE_BASE_PATH + 'add_members',
             payload: {
                 role_no: roleNo,
                 usernames
@@ -106,10 +110,10 @@ export class RoleApiClient extends ApiClient {
     /**
      * 为自建角色批量移除成员
      */
-    async roleRmoveMembers(roleNo, usernames) {
+    async roleRemoveMembers(roleNo, usernames) {
         return await this.doRequest({
             method: 'POST',
-            path: `role/remove_members`,
+            path: ROLE_BASE_PATH + 'remove_members',
             payload: {
                 role_no: roleNo,
                 usernames

@@ -5,10 +5,11 @@
  */
 
 import { ApiClient } from '../../base/api_client';
+import { DEPT_BASE_PATH, MEMBER_BASE_PATH } from '../../constants/http_constant';
 
 export class MemberApiClient extends ApiClient {
-    validVersions = ['v2', 'v1'];
-    defaultVersion = 'v2';
+    validVersions = ['v5'];
+    defaultVersion = 'v5';
 
     /**
      * check version
@@ -23,12 +24,13 @@ export class MemberApiClient extends ApiClient {
     /**
      * 获取部门成员（递归）
      */
-    async deptMemberList(deptNo, options) {
+    async deptMemberList(dept_no, options) {
         return await this.doRequest({
             method: 'POST',
-            path: `department/${deptNo}/member_list`,
+            path: DEPT_BASE_PATH + 'user/list',
             payload: {
-                has_child: options.hasChild
+                has_child: options.hasChild,
+                dept_no
             }
         });
     }
@@ -39,7 +41,10 @@ export class MemberApiClient extends ApiClient {
     async userInfo(username) {
         return await this.doRequest({
             method: 'POST',
-            path: `user/${username}/user_retrieve`
+            path: MEMBER_BASE_PATH + 'get',
+            payload: {
+                username
+            }
         });
     }
 
@@ -49,7 +54,7 @@ export class MemberApiClient extends ApiClient {
     async userCreate(name, options) {
         return await this.doRequest({
             method: 'POST',
-            path: `user/create`,
+            path: MEMBER_BASE_PATH + 'create',
             payload: {
                 name,
                 ...options
@@ -63,8 +68,9 @@ export class MemberApiClient extends ApiClient {
     async userUpdate(username, options) {
         return await this.doRequest({
             method: 'POST',
-            path: `user/${username}/update`,
+            path: MEMBER_BASE_PATH + 'update',
             payload: {
+                username,
                 ...options
             }
         });
@@ -76,7 +82,10 @@ export class MemberApiClient extends ApiClient {
     async userDelete(username) {
         return await this.doRequest({
             method: 'POST',
-            path: `user/${username}/delete`
+            path: MEMBER_BASE_PATH + 'delete',
+            payload: {
+                username
+            }
         });
     }
 
@@ -86,7 +95,7 @@ export class MemberApiClient extends ApiClient {
     async userBatchDelete(usernames) {
         return await this.doRequest({
             method: 'POST',
-            path: `user/batch_delete`,
+            path: MEMBER_BASE_PATH + 'batch_delete',
             payload: {
                 usernames
             }
@@ -94,12 +103,12 @@ export class MemberApiClient extends ApiClient {
     }
 
     /**
-    * 批量导入成员
-    */
+     * 批量导入成员
+     */
     async userImport(users) {
         return await this.doRequest({
             method: 'POST',
-            path: `user/import`,
+            path: MEMBER_BASE_PATH + 'import',
             payload: {
                 users
             }

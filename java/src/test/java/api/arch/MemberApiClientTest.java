@@ -39,10 +39,10 @@ public class MemberApiClientTest {
         // 批量的话 三个参数必传
         List<UserCreateParam> paramList = new ArrayList<>();
         UserCreateParam createParam = new UserCreateParam(NAME + "1", USER_NAME + "1");
-        createParam.setDepartments(Collections.singletonList(1));
+        createParam.setDepartments(Collections.singletonList(DEPT_NO));
         paramList.add(createParam);
         createParam = new UserCreateParam(NAME + "2", USER_NAME + "2");
-        createParam.setDepartments(Collections.singletonList(1));
+        createParam.setDepartments(Collections.singletonList(DEPT_NO));
         paramList.add(createParam);
 
         Map<String, Object> result = memberApiClient.userImport(paramList, null);
@@ -62,7 +62,7 @@ public class MemberApiClientTest {
 
     private static void userUpdate() throws Exception {
         UserUpdateParam param = new UserUpdateParam(NAME + "_update", USER_NAME);
-        param.setDepartmentList(Collections.singletonList(1));
+        param.setDepartmentList(Collections.singletonList(DEPT_NO));
         Map<String, Object> result = memberApiClient.userUpdate(param, null);
         System.out.println("userUpdate result \n" + result);
     }
