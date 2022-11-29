@@ -3,9 +3,9 @@ from src.model.http.api_client import ApiClient
 from ...constants.http_constant import HttpConstant
 
 # 合法的版本
-valid_versions = ('v1')
+valid_versions = ('v5')
 # 默认版本
-default_version = 'v1'
+default_version = 'v5'
 
 
 class AppApiClient(ApiClient):
@@ -22,7 +22,7 @@ class AppApiClient(ApiClient):
     """
 
     def appList(self, skip, limit, version=default_version):
-        path = HttpConstant.APP_PATH.format(suffix='retrieve_all', version=self.getValidVersion(version))
+        path = HttpConstant.APP_PATH.format(suffix='list', version=self.getValidVersion(version))
         request_param = HttpRequestParam(path, {'skip': skip, 'limit': limit})
         return self.send_post(request_param)
 
@@ -36,6 +36,6 @@ class AppApiClient(ApiClient):
     """
 
     def entryList(self, app_id, skip, limit, version=default_version):
-        path = HttpConstant.ENTRY_LIST_PATH.format(app_id=app_id, version=self.getValidVersion(version))
-        request_param = HttpRequestParam(path, {'skip': skip, 'limit': limit})
+        path = HttpConstant.FORM_PATH.format(suffix='list', version=self.getValidVersion(version))
+        request_param = HttpRequestParam(path, {'skip': skip, 'limit': limit, 'app_id': app_id})
         return self.send_post(request_param)

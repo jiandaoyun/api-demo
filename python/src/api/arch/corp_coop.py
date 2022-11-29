@@ -3,9 +3,9 @@ from ...constants.http_constant import HttpConstant
 from ...model.http.http_request_param import HttpRequestParam
 
 # 合法的版本
-valid_versions = ('v4')
+valid_versions = ('v5')
 # 默认版本
-default_version = 'v4'
+default_version = 'v5'
 
 
 class CorpCoopApiClient(ApiClient):
@@ -21,7 +21,7 @@ class CorpCoopApiClient(ApiClient):
     '''
 
     def corpCoopDepartList(self, dept_no, version=default_version):
-        path = HttpConstant.CORP_COOP_PATH.format(suffix='guest/department_list',
+        path = HttpConstant.CORP_COOP_PATH.format(suffix='department/list',
                                                   version=self.getValidVersion(version))
         request_param = HttpRequestParam(path, {"dept_no": dept_no})
         return self.send_post(request_param)
@@ -34,7 +34,7 @@ class CorpCoopApiClient(ApiClient):
     '''
 
     def corpCoopMemberList(self, dept_no, version=default_version):
-        path = HttpConstant.CORP_COOP_PATH.format(suffix='guest/member_list',
+        path = HttpConstant.CORP_COOP_PATH.format(suffix='user/list',
                                                   version=self.getValidVersion(version))
         request_param = HttpRequestParam(path, {"dept_no": dept_no})
         return self.send_post(request_param)
@@ -47,7 +47,7 @@ class CorpCoopApiClient(ApiClient):
     '''
 
     def corpCoopUserInfo(self, user_name, version=default_version):
-        path = HttpConstant.CORP_COOP_PATH.format(suffix='guest/user_retrieve',
+        path = HttpConstant.CORP_COOP_PATH.format(suffix='user/get',
                                                   version=self.getValidVersion(version))
         request_param = HttpRequestParam(path, {"username": user_name})
         return self.send_post(request_param)

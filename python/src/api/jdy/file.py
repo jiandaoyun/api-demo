@@ -4,9 +4,9 @@ from ...model.http.http_request_param import generateTransactionId
 from src.model.http.api_client import ApiClient
 
 # 合法的版本
-valid_versions = ('v1')
+valid_versions = ('v5')
 # 默认版本
-default_version = 'v1'
+default_version = 'v5'
 
 
 class FileApiClient(ApiClient):
@@ -16,14 +16,16 @@ class FileApiClient(ApiClient):
 
     """
     获取文件上传凭证和上传地址接口
-    Arguments:
+    Arguments:  
         work_flow_query_param: WorkFlowApprovalCommentQueryParam 实例
     """
 
     def uploadToken(self, app_id, entry_id, version=default_version):
-        path = HttpConstant.FILE_UPLOAD_PATH.format(app_id=app_id, entry_id=entry_id,
-                                                  version=self.getValidVersion(version))
-        request_param = HttpRequestParam(path, generateTransactionId())
+        path = HttpConstant.FORM_PATH.format(suffix='file/get_upload_token',
+                                             version=self.getValidVersion(version))
+        request_param = HttpRequestParam(path, {'transaction_id': generateTransactionId(),
+                                                'app_id': app_id,
+                                                'entry_id': entry_id})
         return self.send_post(request_param)
 
     """

@@ -3,9 +3,9 @@ from ...constants.http_constant import HttpConstant
 from ...model.http.http_request_param import HttpRequestParam
 
 # 合法的版本
-valid_versions = ('v2')
+valid_versions = ('v5')
 # 默认版本
-default_version = 'v2'
+default_version = 'v5'
 
 
 class RoleApiClient(ApiClient):
@@ -75,7 +75,7 @@ class RoleApiClient(ApiClient):
     '''
 
     def roleMemberList(self, role_no, skip, limit, version=default_version):
-        path = HttpConstant.ROLE_PATH.format(suffix='member_list', version=self.getValidVersion(version))
+        path = HttpConstant.ROLE_PATH.format(suffix='user/list', version=self.getValidVersion(version))
         request_param = HttpRequestParam(path, {"role_no": role_no, "skip": skip, "limit": limit})
         return self.send_post(request_param)
 

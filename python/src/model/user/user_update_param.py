@@ -16,3 +16,6 @@ class UserUpdateParam:
 
     def getDepartments(self):
         return self.departments if hasattr(self, 'departments') else None
+
+    def setName(self, name):
+        self.name = name

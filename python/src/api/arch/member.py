@@ -3,9 +3,9 @@ from ...constants.http_constant import HttpConstant
 from ...model.http.http_request_param import HttpRequestParam
 
 # 合法的版本
-valid_versions = ('v2', 'v1')
+valid_versions = ('v5')
 # 默认版本
-default_version = 'v2'
+default_version = 'v5'
 
 
 class MemberApiClient(ApiClient):
@@ -22,9 +22,9 @@ class MemberApiClient(ApiClient):
     """
 
     def deptMemberList(self, dept_no, has_child, version=default_version):
-        path = HttpConstant.DEPT_BASE_PATH.format(suffix='member_list', dept_no=dept_no,
-                                                  version=self.getValidVersion(version))
-        request_param = HttpRequestParam(path, {"has_child": has_child})
+        path = HttpConstant.DEPT_PATH.format(suffix='user/list',
+                                             version=self.getValidVersion(version))
+        request_param = HttpRequestParam(path, {"has_child": has_child, 'dept_no': dept_no})
         return self.send_post(request_param)
 
     """
@@ -47,9 +47,9 @@ class MemberApiClient(ApiClient):
     """
 
     def userInfo(self, user_name, version=default_version):
-        path = HttpConstant.MEMBER_BASE_PATH.format(user_name=user_name, version=self.getValidVersion(version),
-                                                    suffix='user_retrieve')
-        request_param = HttpRequestParam(path, None)
+        path = HttpConstant.MEMBER_PATH.format(version=self.getValidVersion(version),
+                                               suffix='get')
+        request_param = HttpRequestParam(path, {'username': user_name})
         return self.send_post(request_param)
 
     """
@@ -60,11 +60,11 @@ class MemberApiClient(ApiClient):
     """
 
     def userUpdate(self, user_update_param, version=default_version):
-        path = HttpConstant.MEMBER_BASE_PATH.format(user_name=user_update_param.getUserName(),
-                                                    version=self.getValidVersion(version), suffix='update')
+        path = HttpConstant.MEMBER_PATH.format(version=self.getValidVersion(version), suffix='update')
         request_param = HttpRequestParam(path,
                                          {'name': user_update_param.getName(),
-                                          'departments': user_update_param.getDepartments()})
+                                          'departments': user_update_param.getDepartments(),
+                                          'username': user_update_param.getUserName()})
         return self.send_post(request_param)
 
     """
@@ -75,9 +75,9 @@ class MemberApiClient(ApiClient):
     """
 
     def userDelete(self, user_name, version=default_version):
-        path = HttpConstant.MEMBER_BASE_PATH.format(user_name=user_name, version=self.getValidVersion(version),
+        path = HttpConstant.MEMBER_PATH.format(version=self.getValidVersion(version),
                                                     suffix='delete')
-        request_param = HttpRequestParam(path, None)
+        request_param = HttpRequestParam(path, {'username': user_name})
         return self.send_post(request_param)
 
     """

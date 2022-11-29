@@ -7,3 +7,9 @@ class UserCreateParam:
     def setDepartments(self, departments):
         # 列表 int 选填
         self.departments = departments
+
+    def setUsername(self, username):
+        self.username = username
+
+    def setName(self, name):
+        self.name = name

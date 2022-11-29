@@ -8,4 +8,4 @@ class HttpRequestParam:
 
 
 def generateTransactionId():
-    return {'transaction_id': str(uuid.uuid4())}
+    return str(uuid.uuid4())

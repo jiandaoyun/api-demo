@@ -39,7 +39,9 @@ def singleDataCreate():
 
 # 测试 查询单条数据接口
 def singleDataQuery():
-    result = formDataApiClient.singleDataQuery(HttpConstant.APP_ID, HttpConstant.ENTRY_ID, data_id)
+    form_data_query_param = FormDataQueryParam(HttpConstant.APP_ID, HttpConstant.ENTRY_ID)
+    form_data_query_param.setDataId(data_id)
+    result = formDataApiClient.singleDataQuery(form_data_query_param)
     print('singleDataQuery result:', result)
 
 

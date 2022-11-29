@@ -3,9 +3,9 @@ from ...constants.http_constant import HttpConstant
 from ...model.http.http_request_param import HttpRequestParam
 
 # 合法的版本
-valid_versions = ('v2')
+valid_versions = ('v5')
 # 默认版本
-default_version = 'v2'
+default_version = 'v5'
 
 
 class RoleGroupApiClient(ApiClient):

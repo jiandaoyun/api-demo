@@ -6,7 +6,7 @@ import random
 
 memberApiClient = MemberApiClient(HttpConstant.API_KEY, HttpConstant.HOST)
 
-random = str(random.randint(100 , 200) )
+random = str(random.randint(100, 200))
 name = 'name' + random
 user_name = 'user_name' + random
 
@@ -38,6 +38,7 @@ def userInfo():
 def userUpdate():
     user_update_param = UserUpdateParam(name, user_name)
     user_update_param.setDepartments([101, 201])
+    user_update_param.setName(name + '_update')
     result = memberApiClient.userUpdate(user_update_param)
     print('userUpdate result:', result)
 
@@ -48,6 +49,8 @@ def userDelete():
 
 
 def userImport():
+    user_create_param.setUsername(user_name + '_import')
+    user_create_param.setName(user_name + '_import')
     result = memberApiClient.userImport([user_create_param])
     print('userImport result:', result)
 

@@ -50,17 +50,10 @@ public class HttpConstant {
      */
     public static final String FORM_DATA_BASE_PATH = "/app/entry/data/";
 
-//    /**
-//     * 表单数据相关的接口前缀
-//     */
-//    public static final String FORM_DATA_BASE_PATH = "/app/";
-
 //    # 把 API_KEY 修改成自己的API_KEY  集成模式 6Q1X2kbk4quufIaFnNu5EdqxgLYOSyxT。公共模式：pVCkWk96tzghiDttdjXxcj3fTZpdQ5AV
     public static final String API_KEY = "pVCkWk96tzghiDttdjXxcj3fTZpdQ5AV";
 
     public static final String APP_ID = "63567f0eac9f4e0007c92645";
-
-    public static final String WORK_FLOW_ENTRY_ID = "637c83b646be44000747e3d4";
 
     public static final String ENTRY_ID = "637c8b9830ebbc0007bc496f";
 
