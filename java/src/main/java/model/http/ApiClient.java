@@ -111,7 +111,6 @@ public class ApiClient {
         HttpClient client = getSSLHttpClient();
         Header[] headers = getHttpHeaders(this.getApiKey());
         String url = this.host + param.getPath();
-        System.out.println("url===" + url);
         HttpRequestBase request = new HttpPost(url);
 
         // 请求参数

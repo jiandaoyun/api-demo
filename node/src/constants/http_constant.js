@@ -6,16 +6,16 @@
 
 
 /**
- * apiKey  集成模式 6Q1X2kbk4quufIaFnNu5EdqxgLYOSyxT。公共模式：pVCkWk96tzghiDttdjXxcj3fTZpdQ5AV
+ * API_KEY
  * @type {string}
  */
-export const API_KEY = 'pVCkWk96tzghiDttdjXxcj3fTZpdQ5AV';
+export const API_KEY = 'API_KEY';
 
 /**
  * 请求地址
  * @type {string}
  */
-export const HOST = 'http://localhost:3000/api';
+export const HOST = 'https://api.jiandaoyun.com/api';
 
 
 /**
@@ -66,6 +66,6 @@ export const FORM_BASE_PATH = "app/entry/";
  */
 export const FORM_DATA_BASE_PATH = "app/entry/data/";
 
-export const APP_ID = "63567f0eac9f4e0007c92645";
+export const APP_ID = "APP_ID";
 
-export const ENTRY_ID = "637c8b9830ebbc0007bc496f";
+export const ENTRY_ID = "ENTRY_ID";
