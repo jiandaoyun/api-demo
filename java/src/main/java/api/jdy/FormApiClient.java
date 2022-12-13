@@ -1,5 +1,8 @@
 package api.jdy;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import model.form.FormQueryParam;
 import model.http.ApiClient;
 import model.http.HttpRequestParam;
 import org.apache.commons.lang3.StringUtils;
@@ -24,6 +27,11 @@ public class FormApiClient extends ApiClient {
         this.setValidVersionList(VALID_VERSION_LIST);
     }
 
+    @Override
+    public String generatePath(String version, String path) {
+        return super.getValidVersion(version) + FORM_BASE_PATH + path;
+    }
+
     /**
      * 表单字段查询接口
      *
@@ -34,11 +42,30 @@ public class FormApiClient extends ApiClient {
         if (StringUtils.isBlank(appId) || StringUtils.isBlank(entryId)) {
             throw new RuntimeException("param lack!");
         }
-        String url = super.getValidVersion(version) + FORM_BASE_PATH  + "widget/list";
+        String path = this.generatePath(version, "widget/list");
         Map<String, Object> data = new HashMap<>();
         data.put("app_id", appId);
         data.put("entry_id", entryId);
-        HttpRequestParam param = new HttpRequestParam(url, data);
+        HttpRequestParam param = new HttpRequestParam(path, data);
+        return this.sendPostRequest(param);
+    }
+
+    /**
+     * 表单查询接口 分页
+     *
+     * @param queryParam - 查询参数
+     * @return 表单信息
+     */
+    public Map<String, Object> entryList(FormQueryParam queryParam, String version) throws Exception {
+        if (queryParam == null || !queryParam.isValid()) {
+            throw new RuntimeException("param lack!");
+        }
+        String path = this.generatePath(version, "list");
+        // 请求参数 将 queryParam 里面的属性转换成map
+        Map<String, Object> data =
+                new ObjectMapper().convertValue(queryParam, new TypeReference<Map<String, Object>>() {
+                });
+        HttpRequestParam param = new HttpRequestParam(path, data);
         return this.sendPostRequest(param);
     }
 }

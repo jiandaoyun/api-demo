@@ -21,8 +21,6 @@ public class MemberApiClientTest {
     public static void main(String[] args) throws Exception {
         // 用户创建
         userCreate();
-        // 部门用户列表
-        deptMemberList();
         // 根据userName查用户信息
         userInfo();
         // 用户更新
@@ -75,15 +73,9 @@ public class MemberApiClientTest {
         System.out.println("userCreate result \n" + result);
     }
 
-    private static void deptMemberList() throws Exception {
-        Map<String, Object> result = memberApiClient.deptMemberList(DEPT_NO, true, null);
-        System.out.println("deptMemberList result \n" + result);
-    }
-
 
     private static void userInfo() throws Exception {
         Map<String, Object> result = memberApiClient.userInfo(USER_NAME, null);
         System.out.println("userInfo result \n" + result);
     }
-
 }

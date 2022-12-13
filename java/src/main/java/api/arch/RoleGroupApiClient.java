@@ -29,6 +29,11 @@ public class RoleGroupApiClient extends ApiClient {
         this.setValidVersionList(VALID_VERSION_LIST);
     }
 
+    @Override
+    public String generatePath(String version, String path) {
+        return super.getValidVersion(version) + ROLE_GROUP_BASE_PATH + path;
+    }
+
     /**
      * 列出角色组
      *
@@ -39,7 +44,7 @@ public class RoleGroupApiClient extends ApiClient {
         if (queryParam == null || !queryParam.isValid()) {
             throw new RuntimeException("param lack!");
         }
-        String path = super.getValidVersion(version) + ROLE_GROUP_BASE_PATH + "list";
+        String path = this.generatePath(version,"list");
         // 请求参数 将 queryParam 里面的属性转换成map
         Map<String, Object> data =
                 new ObjectMapper().convertValue(queryParam, new TypeReference<Map<String, Object>>() {
@@ -58,7 +63,7 @@ public class RoleGroupApiClient extends ApiClient {
         if (StringUtils.isBlank(name)) {
             throw new RuntimeException("param lack!");
         }
-        String path = super.getValidVersion(version) + ROLE_GROUP_BASE_PATH + "create";
+        String path = this.generatePath(version,"create");
         Map<String, Object> data = new HashMap<>();
         data.put("name", name);
         HttpRequestParam param = new HttpRequestParam(path, data);
@@ -76,7 +81,7 @@ public class RoleGroupApiClient extends ApiClient {
         if (StringUtils.isBlank(name) || roleGroupNo == null) {
             throw new RuntimeException("param lack!");
         }
-        String path = super.getValidVersion(version) + ROLE_GROUP_BASE_PATH + "update";
+        String path = this.generatePath(version,"update");
         Map<String, Object> data = new HashMap<>();
         data.put("name", name);
         data.put("role_group_no", roleGroupNo);
@@ -94,7 +99,7 @@ public class RoleGroupApiClient extends ApiClient {
         if (roleGroupNo == null) {
             throw new RuntimeException("param lack!");
         }
-        String path = super.getValidVersion(version) + ROLE_GROUP_BASE_PATH + "delete";
+        String path = this.generatePath(version, "delete");
         Map<String, Object> data = new HashMap<>();
         data.put("role_group_no", roleGroupNo);
         HttpRequestParam param = new HttpRequestParam(path, data);

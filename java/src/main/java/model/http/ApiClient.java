@@ -26,7 +26,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class ApiClient {
+public abstract class ApiClient {
 
     /**
      * apiKey
@@ -84,6 +84,16 @@ public class ApiClient {
     public void setValidVersionList(List<String> validVersionList) {
         this.validVersionList = validVersionList;
     }
+
+
+    /**
+     * 生成 path
+     *
+     * @param version - 版本号
+     * @param path    - 路径
+     * @return 接口的路径
+     */
+    public abstract String generatePath(String version, String path);
 
     /**
      * 获得合法的版本号

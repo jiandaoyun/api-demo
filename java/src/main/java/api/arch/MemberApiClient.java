@@ -12,7 +12,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static constants.HttpConstant.DEPT_BASE_PATH;
 import static constants.HttpConstant.MEMBER_BASE_PATH;
 
 /**
@@ -28,24 +27,9 @@ public class MemberApiClient extends ApiClient {
         this.setValidVersionList(VALID_VERSION_LIST);
     }
 
-    /**
-     * 获取部门成员（递归）
-     *
-     * @param deptNo   - 部门编号
-     * @param hasChild - 是否查子部门
-     * @return 部门成员信息
-     */
-    public Map<String, Object> deptMemberList(Integer deptNo, Boolean hasChild, String version) throws Exception {
-        if (deptNo == null || hasChild == null) {
-            throw new RuntimeException("param lack!");
-        }
-        String path = super.getValidVersion(version) + DEPT_BASE_PATH + "user/list";
-        // 请求参数
-        Map<String, Object> data = new HashMap<>();
-        data.put("has_child", hasChild);
-        data.put("dept_no", deptNo);
-        HttpRequestParam param = new HttpRequestParam(path, data);
-        return this.sendPostRequest(param);
+    @Override
+    public String generatePath(String version, String path) {
+        return super.getValidVersion(version) + MEMBER_BASE_PATH + path;
     }
 
     /**
@@ -58,7 +42,7 @@ public class MemberApiClient extends ApiClient {
         if (param == null || !param.isValid()) {
             throw new RuntimeException("param lack!");
         }
-        String path = super.getValidVersion(version) + MEMBER_BASE_PATH + "create";
+        String path = this.generatePath(version, "create");
         // 请求参数
         Map<String, Object> data = new HashMap<>();
         data.put("name", param.getName());
@@ -78,7 +62,7 @@ public class MemberApiClient extends ApiClient {
         if (StringUtils.isBlank(userName)) {
             throw new RuntimeException("param lack!");
         }
-        String path = super.getValidVersion(version) + MEMBER_BASE_PATH + "get";
+        String path = this.generatePath(version, "get");
         // 请求参数
         Map<String, Object> data = new HashMap<>();
         data.put("username", userName);
@@ -96,7 +80,7 @@ public class MemberApiClient extends ApiClient {
         if (updateParam == null || !updateParam.isValid()) {
             throw new RuntimeException("param lack!");
         }
-        String path = super.getValidVersion(version) + MEMBER_BASE_PATH + "update";
+        String path = this.generatePath(version, "update");
         // 请求参数
         Map<String, Object> data = new HashMap<>();
         data.put("name", updateParam.getName());
@@ -116,7 +100,7 @@ public class MemberApiClient extends ApiClient {
         if (StringUtils.isBlank(userName)) {
             throw new RuntimeException("param lack!");
         }
-        String path = super.getValidVersion(version) + MEMBER_BASE_PATH +  "delete";
+        String path = this.generatePath(version, "delete");
         // 请求参数
         Map<String, Object> data = new HashMap<>();
         data.put("username", userName);
@@ -135,7 +119,7 @@ public class MemberApiClient extends ApiClient {
         if (CollectionUtils.isEmpty(userNameList)) {
             throw new RuntimeException("param lack!");
         }
-        String path = super.getValidVersion(version) + MEMBER_BASE_PATH + "batch_delete";
+        String path = this.generatePath(version, "batch_delete");
         // 请求参数
         Map<String, Object> data = new HashMap<>();
         data.put("usernames", userNameList);
@@ -153,7 +137,7 @@ public class MemberApiClient extends ApiClient {
         if (CollectionUtils.isEmpty(userNameList)) {
             throw new RuntimeException("param lack!");
         }
-        String path = super.getValidVersion(version) + MEMBER_BASE_PATH + "import";
+        String path = this.generatePath(version, "import");
         // 请求参数
         Map<String, Object> data = new HashMap<>();
         data.put("users", userNameList);

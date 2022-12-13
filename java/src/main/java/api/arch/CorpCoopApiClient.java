@@ -26,6 +26,11 @@ public class CorpCoopApiClient extends ApiClient {
         this.setValidVersionList(VALID_VERSION_LIST);
     }
 
+    @Override
+    public String generatePath(String version, String path) {
+        return super.getValidVersion(version) + CORP_COOP_BASE_PATH + path;
+    }
+
     /**
      * 列出我连接的企业
      *
@@ -33,7 +38,7 @@ public class CorpCoopApiClient extends ApiClient {
      * @return 我连接的企业
      */
     public Map<String, Object> corpCoopDepartList(Integer deptNo, String version) throws Exception {
-        String path = super.getValidVersion(version) + CORP_COOP_BASE_PATH + "department/list";
+        String path = this.generatePath(version, "department/list");
         // 请求参数
         Map<String, Object> data = new HashMap<>();
         data.put("dept_no", deptNo);
@@ -48,7 +53,7 @@ public class CorpCoopApiClient extends ApiClient {
      * @return 我连接的企业对接人
      */
     public Map<String, Object> corpCoopMemberList(Integer deptNo, String version) throws Exception {
-        String path = super.getValidVersion(version) + CORP_COOP_BASE_PATH + "user/list";
+        String path = this.generatePath(version,"user/list");
         // 请求参数
         Map<String, Object> data = new HashMap<>();
         data.put("dept_no", deptNo);
@@ -65,7 +70,7 @@ public class CorpCoopApiClient extends ApiClient {
         if (StringUtils.isBlank(userName)) {
             throw new RuntimeException("param lack!");
         }
-        String path = super.getValidVersion(version) + CORP_COOP_BASE_PATH + "user/get";
+        String path = this.generatePath(version,"user/get");
         // 请求参数
         Map<String, Object> data = new HashMap<>();
         data.put("username", userName);

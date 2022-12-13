@@ -6,7 +6,10 @@ import model.http.HttpRequestParam;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import static constants.HttpConstant.DEPT_BASE_PATH;
 
@@ -23,6 +26,11 @@ public class DeptApiClient extends ApiClient {
         this.setValidVersionList(VALID_VERSION_LIST);
     }
 
+    @Override
+    public String generatePath(String version, String path) {
+        return super.getValidVersion(version) + DEPT_BASE_PATH + path;
+    }
+
     /**
      * 获取部门编号对应部门列表 （递归）
      *
@@ -33,7 +41,7 @@ public class DeptApiClient extends ApiClient {
         if (deptNo == null) {
             throw new RuntimeException("param lack!");
         }
-        String path = super.getValidVersion(version) + DEPT_BASE_PATH + "list";
+        String path = this.generatePath(version, "list");
         // 请求参数
         Map<String, Object> data = new HashMap<>();
         data.put("has_child", hasChild);
@@ -52,7 +60,7 @@ public class DeptApiClient extends ApiClient {
         if (param == null || !param.isValid()) {
             throw new RuntimeException("param lack!");
         }
-        String path = super.getValidVersion(version) + DEPT_BASE_PATH + "create";
+        String path = this.generatePath(version,"create");
         // 请求参数
         Map<String, Object> data = new HashMap<>();
         data.put("name", param.getName());
@@ -74,7 +82,7 @@ public class DeptApiClient extends ApiClient {
         if (deptNo == null || StringUtils.isBlank(name)) {
             throw new RuntimeException("param lack!");
         }
-        String path = super.getValidVersion(version) + DEPT_BASE_PATH + "update";
+        String path = this.generatePath(version,"update");
         // 请求参数
         Map<String, Object> data = new HashMap<>();
         data.put("name", name);
@@ -93,7 +101,7 @@ public class DeptApiClient extends ApiClient {
         if (deptNo == null) {
             throw new RuntimeException("param lack!");
         }
-        String path = super.getValidVersion(version) + DEPT_BASE_PATH + "delete";
+        String path = this.generatePath(version,"delete");
         // 请求参数
         Map<String, Object> data = new HashMap<>();
         data.put("dept_no",deptNo);
@@ -111,7 +119,7 @@ public class DeptApiClient extends ApiClient {
         if (StringUtils.isBlank(integrateId)) {
             throw new RuntimeException("param lack!");
         }
-        String path = super.getValidVersion(version) + DEPT_BASE_PATH + "dept_no/get";
+        String path = this.generatePath(version,"dept_no/get");
         // 请求参数
         Map<String, Object> data = new HashMap<>();
         data.put("integrate_id", integrateId);
@@ -129,11 +137,32 @@ public class DeptApiClient extends ApiClient {
         if (CollectionUtils.isEmpty(paramList)) {
             throw new RuntimeException("param lack!");
         }
-        String path = super.getValidVersion(version) + DEPT_BASE_PATH + "import";
+        String path = this.generatePath(version,"import");
         // 请求参数
         Map<String, Object> data = new HashMap<>();
         data.put("departments", paramList);
         HttpRequestParam httpRequestParam = new HttpRequestParam(path, data);
         return this.sendPostRequest(httpRequestParam);
+    }
+
+
+    /**
+     * 获取部门成员（递归）
+     *
+     * @param deptNo   - 部门编号
+     * @param hasChild - 是否查子部门
+     * @return 部门成员信息
+     */
+    public Map<String, Object> deptMemberList(Integer deptNo, Boolean hasChild, String version) throws Exception {
+        if (deptNo == null || hasChild == null) {
+            throw new RuntimeException("param lack!");
+        }
+        String path = this.generatePath(version,"user/list");
+        // 请求参数
+        Map<String, Object> data = new HashMap<>();
+        data.put("has_child", hasChild);
+        data.put("dept_no", deptNo);
+        HttpRequestParam param = new HttpRequestParam(path, data);
+        return this.sendPostRequest(param);
     }
 }

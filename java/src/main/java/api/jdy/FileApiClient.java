@@ -27,6 +27,11 @@ public class FileApiClient extends ApiClient {
         this.setValidVersionList(VALID_VERSION_LIST);
     }
 
+    @Override
+    public String generatePath(String version, String path) {
+        return super.getValidVersion(version) + FORM_BASE_PATH + path;
+    }
+
     /**
      * 获取文件上传凭证和上传地址接口
      *
@@ -37,7 +42,7 @@ public class FileApiClient extends ApiClient {
         if (uploadTokenParam == null || !uploadTokenParam.isValid()) {
             throw new RuntimeException("param lack!");
         }
-        String path = super.getValidVersion(version) + FORM_BASE_PATH + "file/get_upload_token";
+        String path = this.generatePath(version, "file/get_upload_token");
         // 请求参数
         Map<String, Object> data = new HashMap<>();
         data.put("transaction_id", uploadTokenParam.getTransactionId());

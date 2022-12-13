@@ -6,7 +6,10 @@ import model.form.*;
 import model.http.ApiClient;
 import model.http.HttpRequestParam;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import static constants.HttpConstant.FORM_DATA_BASE_PATH;
 
@@ -24,6 +27,11 @@ public class FormDataApiClient extends ApiClient {
         this.setValidVersionList(VALID_VERSION_LIST);
     }
 
+    @Override
+    public String generatePath(String version, String path) {
+        return super.getValidVersion(version) + FORM_DATA_BASE_PATH + path;
+    }
+
 
     /**
      * 新建单条数据接口
@@ -35,7 +43,7 @@ public class FormDataApiClient extends ApiClient {
         if (createParam == null || !createParam.isValid()) {
             throw new RuntimeException("param lack!");
         }
-        String path = super.getValidVersion(version) + FORM_DATA_BASE_PATH + "create";
+        String path = this.generatePath(version, "create");
         // 请求参数 将 queryParam 里面的属性转换成map
         Map<String, Object> data =
                 new ObjectMapper().convertValue(createParam, new TypeReference<Map<String, Object>>() {
@@ -55,7 +63,7 @@ public class FormDataApiClient extends ApiClient {
         if (queryParam == null || !queryParam.isSingleQueryValid()) {
             throw new RuntimeException("param lack!");
         }
-        String path = super.getValidVersion(version) + FORM_DATA_BASE_PATH + "get";
+        String path = this.generatePath(version, "get");
         Map<String, Object> data = new HashMap<>();
         data.put("data_id", queryParam.getDataId());
         data.put("app_id", queryParam.getApp_id());
@@ -74,7 +82,7 @@ public class FormDataApiClient extends ApiClient {
         if (updateParam == null || !updateParam.isValid()) {
             throw new RuntimeException("param lack!");
         }
-        String path = super.getValidVersion(version) + FORM_DATA_BASE_PATH + "update";
+        String path = this.generatePath(version, "update");
         // 请求参数 将 queryParam 里面的属性转换成map
         Map<String, Object> data =
                 new ObjectMapper().convertValue(updateParam, new TypeReference<Map<String, Object>>() {
@@ -95,7 +103,7 @@ public class FormDataApiClient extends ApiClient {
         if (deleteParam == null || !deleteParam.isValid()) {
             throw new RuntimeException("param lack!");
         }
-        String path = super.getValidVersion(version) + FORM_DATA_BASE_PATH + "delete";
+        String path = this.generatePath(version, "delete");
         Map<String, Object> data =
                 new ObjectMapper().convertValue(deleteParam, new TypeReference<Map<String, Object>>() {
                 });
@@ -114,7 +122,7 @@ public class FormDataApiClient extends ApiClient {
         if (createParam == null || !createParam.isValid()) {
             throw new RuntimeException("param lack!");
         }
-        String path = super.getValidVersion(version) + FORM_DATA_BASE_PATH + "batch_create";
+        String path = this.generatePath(version, "batch_create");
         Map<String, Object> data =
                 new ObjectMapper().convertValue(createParam, new TypeReference<Map<String, Object>>() {
                 });
@@ -133,7 +141,7 @@ public class FormDataApiClient extends ApiClient {
         if (queryParam == null || !queryParam.isValid()) {
             throw new RuntimeException("param lack!");
         }
-        String path = super.getValidVersion(version) + FORM_DATA_BASE_PATH + "list";
+        String path = this.generatePath(version, "list");
         Map<String, Object> data =
                 new ObjectMapper().convertValue(queryParam, new TypeReference<Map<String, Object>>() {
                 });
@@ -152,7 +160,7 @@ public class FormDataApiClient extends ApiClient {
         if (removeParam == null || !removeParam.isValid()) {
             throw new RuntimeException("param lack!");
         }
-        String path = super.getValidVersion(version) + FORM_DATA_BASE_PATH + "batch_delete";
+        String path = this.generatePath(version, "batch_delete");
         Map<String, Object> data =
                 new ObjectMapper().convertValue(removeParam, new TypeReference<Map<String, Object>>() {
                 });
@@ -171,7 +179,7 @@ public class FormDataApiClient extends ApiClient {
         if (updateParam == null || !updateParam.isValid()) {
             throw new RuntimeException("param lack!");
         }
-        String path = super.getValidVersion(version) + FORM_DATA_BASE_PATH + "batch_update";
+        String path = this.generatePath(version, "batch_update");
         Map<String, Object> data =
                 new ObjectMapper().convertValue(updateParam, new TypeReference<Map<String, Object>>() {
                 });

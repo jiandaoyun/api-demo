@@ -30,6 +30,11 @@ public class RoleApiClient extends ApiClient {
         this.setValidVersionList(VALID_VERSION_LIST);
     }
 
+    @Override
+    public String generatePath(String version, String path) {
+        return super.getValidVersion(version) + ROLE_BASE_PATH + path;
+    }
+
     /**
      * 列出角色
      *
@@ -40,7 +45,7 @@ public class RoleApiClient extends ApiClient {
         if (queryParam == null || !queryParam.isValid()) {
             throw new RuntimeException("param lack!");
         }
-        String path = super.getValidVersion(version) + ROLE_BASE_PATH + "list";
+        String path = this.generatePath(version, "list");
         // 请求参数 将 queryParam 里面的属性转换成map
         Map<String, Object> data =
                 new ObjectMapper().convertValue(queryParam, new TypeReference<Map<String, Object>>() {
@@ -60,7 +65,7 @@ public class RoleApiClient extends ApiClient {
         if (StringUtils.isBlank(name) || groupNo == null) {
             throw new RuntimeException("param lack!");
         }
-        String path = super.getValidVersion(version) + ROLE_BASE_PATH + "create";
+        String path = this.generatePath(version,"create");
         Map<String, Object> data = new HashMap<>();
         data.put("group_no", groupNo);
         data.put("name", name);
@@ -78,7 +83,7 @@ public class RoleApiClient extends ApiClient {
         if (updateParam == null || !updateParam.isValid()) {
             throw new RuntimeException("param lack!");
         }
-        String path = super.getValidVersion(version) + ROLE_BASE_PATH + "update";
+        String path = this.generatePath(version,"update");
         // 请求参数 将 queryParam 里面的属性转换成map
         Map<String, Object> data =
                 new ObjectMapper().convertValue(updateParam, new TypeReference<Map<String, Object>>() {
@@ -97,10 +102,10 @@ public class RoleApiClient extends ApiClient {
         if (roleNo == null) {
             throw new RuntimeException("param lack!");
         }
-        String url = super.getValidVersion(version) + ROLE_BASE_PATH + "delete";
+        String path = this.generatePath(version,"delete");
         Map<String, Object> data = new HashMap<>();
         data.put("role_no", roleNo);
-        HttpRequestParam param = new HttpRequestParam(url, data);
+        HttpRequestParam param = new HttpRequestParam(path, data);
         return this.sendPostRequest(param);
     }
 
@@ -114,7 +119,7 @@ public class RoleApiClient extends ApiClient {
         if (queryParam == null || !queryParam.isValid()) {
             throw new RuntimeException("param lack!");
         }
-        String path = super.getValidVersion(version) + ROLE_BASE_PATH + "user/list";
+        String path = this.generatePath(version,"user/list");
         // 请求参数 将 queryParam 里面的属性转换成map
         Map<String, Object> data =
                 new ObjectMapper().convertValue(queryParam, new TypeReference<Map<String, Object>>() {
@@ -135,7 +140,7 @@ public class RoleApiClient extends ApiClient {
         if (roleNo == null || CollectionUtils.isEmpty(userNameList)) {
             throw new RuntimeException("param lack!");
         }
-        String path = super.getValidVersion(version) + ROLE_BASE_PATH + "add_members";
+        String path = this.generatePath(version,"add_members");
         Map<String, Object> data = new HashMap<>();
         data.put("role_no", roleNo);
         data.put("usernames", userNameList);
@@ -155,7 +160,7 @@ public class RoleApiClient extends ApiClient {
         if (roleNo == null || CollectionUtils.isEmpty(userNameList)) {
             throw new RuntimeException("param lack!");
         }
-        String path = super.getValidVersion(version) + ROLE_BASE_PATH + "remove_members";
+        String path = this.generatePath(version,"remove_members");
         Map<String, Object> data = new HashMap<>();
         data.put("role_no", roleNo);
         data.put("usernames", userNameList);

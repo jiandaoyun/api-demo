@@ -31,6 +31,8 @@ public class DeptApiClientTest {
         testDeptDelete();
         // 批量导入部门
         departmentImport();
+        // 部门用户列表
+        deptMemberList();
         // 根据集成模式通讯录的部门ID获取部门编号
         deptByIntegrateId();
     }
@@ -77,5 +79,10 @@ public class DeptApiClientTest {
         param.setParent_no(PARENT_NO);
         Map<String, Object> result = deptApiClient.deptCreate(param, null);
         System.out.println("testDeptCreate result \n" + result);
+    }
+
+    private static void deptMemberList() throws Exception {
+        Map<String, Object> result = deptApiClient.deptMemberList(DEPT_NO, true, null);
+        System.out.println("deptMemberList result \n" + result);
     }
 }
