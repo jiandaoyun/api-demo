@@ -15,13 +15,13 @@ const username = 'jianDaoYun';
 const name = '小云';
 
 describe('member api test', () => {
-    const api = new MemberApiClient(API_KEY, HOST,'v5');
+    const api = new MemberApiClient(API_KEY, HOST, 'v5');
 
     test('deptMemberList', async () => {
         const deptMemberList = await api.deptMemberList(RootDeptNo, {
             hasChild: true
         });
-        console.log('deptMemberList result:'+JSON.stringify(deptMemberList));
+        console.log('deptMemberList result:' + JSON.stringify(deptMemberList));
         expect(deptMemberList.users).toBeTruthy();
     });
 

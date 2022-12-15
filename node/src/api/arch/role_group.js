@@ -1,8 +1,8 @@
 /**
-* Copyright (c) 2015-2022, FineX, All Rights Reserved.
-* @author Thomas.Zhuang
-* @date 2022/06/08
-*/
+ * Copyright (c) 2015-2022, FineX, All Rights Reserved.
+ * @author Thomas.Zhuang
+ * @date 2022/06/08
+ */
 
 import { ApiClient } from '../../base/api_client';
 import { ROLE_GROUP_BASE_PATH } from '../../constants/http_constant';
@@ -12,7 +12,7 @@ export class RoleGroupApiClient extends ApiClient {
     defaultVersion = 'v5';
 
     /**
-    * check version
+     * check version
      */
     async doRequest(options) {
         if (!this.validVersions.includes(this.version)) {
@@ -48,8 +48,8 @@ export class RoleGroupApiClient extends ApiClient {
     }
 
     /**
-    * 更新角色组
-    */
+     * 更新角色组
+     */
     async roleGroupUpdate(roleGroupNo, name) {
         return await this.doRequest({
             method: 'POST',
@@ -62,8 +62,8 @@ export class RoleGroupApiClient extends ApiClient {
     }
 
     /**
-    * 删除角色组
-    */
+     * 删除角色组
+     */
     async roleGroupDelete(roleGroupNo) {
         return await this.doRequest({
             method: 'POST',

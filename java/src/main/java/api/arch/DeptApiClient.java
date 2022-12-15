@@ -60,7 +60,7 @@ public class DeptApiClient extends ApiClient {
         if (param == null || !param.isValid()) {
             throw new RuntimeException("param lack!");
         }
-        String path = this.generatePath(version,"create");
+        String path = this.generatePath(version, "create");
         // 请求参数
         Map<String, Object> data = new HashMap<>();
         data.put("name", param.getName());
@@ -82,11 +82,11 @@ public class DeptApiClient extends ApiClient {
         if (deptNo == null || StringUtils.isBlank(name)) {
             throw new RuntimeException("param lack!");
         }
-        String path = this.generatePath(version,"update");
+        String path = this.generatePath(version, "update");
         // 请求参数
         Map<String, Object> data = new HashMap<>();
         data.put("name", name);
-        data.put("dept_no",deptNo);
+        data.put("dept_no", deptNo);
         HttpRequestParam httpRequestParam = new HttpRequestParam(path, data);
         return this.sendPostRequest(httpRequestParam);
     }
@@ -101,10 +101,10 @@ public class DeptApiClient extends ApiClient {
         if (deptNo == null) {
             throw new RuntimeException("param lack!");
         }
-        String path = this.generatePath(version,"delete");
+        String path = this.generatePath(version, "delete");
         // 请求参数
         Map<String, Object> data = new HashMap<>();
-        data.put("dept_no",deptNo);
+        data.put("dept_no", deptNo);
         HttpRequestParam httpRequestParam = new HttpRequestParam(path, data);
         return this.sendPostRequest(httpRequestParam);
     }
@@ -119,7 +119,7 @@ public class DeptApiClient extends ApiClient {
         if (StringUtils.isBlank(integrateId)) {
             throw new RuntimeException("param lack!");
         }
-        String path = this.generatePath(version,"dept_no/get");
+        String path = this.generatePath(version, "dept_no/get");
         // 请求参数
         Map<String, Object> data = new HashMap<>();
         data.put("integrate_id", integrateId);
@@ -137,7 +137,7 @@ public class DeptApiClient extends ApiClient {
         if (CollectionUtils.isEmpty(paramList)) {
             throw new RuntimeException("param lack!");
         }
-        String path = this.generatePath(version,"import");
+        String path = this.generatePath(version, "import");
         // 请求参数
         Map<String, Object> data = new HashMap<>();
         data.put("departments", paramList);
@@ -157,7 +157,7 @@ public class DeptApiClient extends ApiClient {
         if (deptNo == null || hasChild == null) {
             throw new RuntimeException("param lack!");
         }
-        String path = this.generatePath(version,"user/list");
+        String path = this.generatePath(version, "user/list");
         // 请求参数
         Map<String, Object> data = new HashMap<>();
         data.put("has_child", hasChild);

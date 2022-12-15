@@ -5,7 +5,7 @@
  */
 
 import { ApiClient } from '../../base/api_client';
-import { CORP_COOP_BASE_PATH} from '../../constants/http_constant'
+import { CORP_COOP_BASE_PATH } from '../../constants/http_constant'
 
 export class CorpCoopApiClient extends ApiClient {
     validVersions = ['v5'];

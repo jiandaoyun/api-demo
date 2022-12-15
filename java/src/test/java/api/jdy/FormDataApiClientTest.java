@@ -233,7 +233,7 @@ public class FormDataApiClientTest {
     }
 
     private static void singleDataQuery() throws Exception {
-        FormDataQueryParam queryParam = new FormDataQueryParam(APP_ID,ENTRY_ID);
+        FormDataQueryParam queryParam = new FormDataQueryParam(APP_ID, ENTRY_ID);
         queryParam.setDataId(dataId);
         Map<String, Object> result = formDataApiClient.singleDataQuery(queryParam, null);
         System.out.println("singleDataQuery result \n" + result);

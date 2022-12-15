@@ -53,7 +53,7 @@ public class CorpCoopApiClient extends ApiClient {
      * @return 我连接的企业对接人
      */
     public Map<String, Object> corpCoopMemberList(Integer deptNo, String version) throws Exception {
-        String path = this.generatePath(version,"user/list");
+        String path = this.generatePath(version, "user/list");
         // 请求参数
         Map<String, Object> data = new HashMap<>();
         data.put("dept_no", deptNo);
@@ -70,7 +70,7 @@ public class CorpCoopApiClient extends ApiClient {
         if (StringUtils.isBlank(userName)) {
             throw new RuntimeException("param lack!");
         }
-        String path = this.generatePath(version,"user/get");
+        String path = this.generatePath(version, "user/get");
         // 请求参数
         Map<String, Object> data = new HashMap<>();
         data.put("username", userName);

@@ -1,8 +1,8 @@
 /**
-* Copyright (c) 2015-2022, FineX, All Rights Reserved.
-* @author Thomas.Zhuang
-* @date 2022/06/08
-*/
+ * Copyright (c) 2015-2022, FineX, All Rights Reserved.
+ * @author Thomas.Zhuang
+ * @date 2022/06/08
+ */
 
 import { ApiClient } from '../../base/api_client';
 import { ROLE_BASE_PATH } from '../../constants/http_constant';
@@ -12,10 +12,8 @@ export class RoleApiClient extends ApiClient {
     defaultVersion = 'v5';
 
 
-
-
     /**
-    * check version
+     * check version
      */
     async doRequest(options) {
         if (!this.validVersions.includes(this.version)) {
