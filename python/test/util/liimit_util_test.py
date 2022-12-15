@@ -2,7 +2,6 @@ from src.api.arch.dept import DeptApiClient
 from src.constants.http_constant import HttpConstant
 import threading
 
-
 lock = threading.Lock()
 
 deptApiClient = DeptApiClient(HttpConstant.API_KEY, HttpConstant.HOST)
@@ -17,7 +16,7 @@ class MyThread(threading.Thread):
     def run(self):
         for x in range(0, 20):
             result = deptApiClient.deptList(1, True)
-            print(self.name+' result:',result)
+            print(self.name + ' result:', result)
 
 
 if __name__ == '__main__':
@@ -27,4 +26,3 @@ if __name__ == '__main__':
     thread1.start()
     thread2.start()
     thread3.start()
-

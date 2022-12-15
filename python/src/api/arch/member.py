@@ -76,7 +76,7 @@ class MemberApiClient(ApiClient):
 
     def userDelete(self, user_name, version=default_version):
         path = HttpConstant.MEMBER_PATH.format(version=self.getValidVersion(version),
-                                                    suffix='delete')
+                                               suffix='delete')
         request_param = HttpRequestParam(path, {'username': user_name})
         return self.send_post(request_param)
 
