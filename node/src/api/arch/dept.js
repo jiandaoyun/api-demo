@@ -5,10 +5,12 @@
  */
 
 import { ApiClient } from '../../base/api_client';
+import { DEPT_BASE_PATH } from '../../constants/http_constant'
+
 
 export class DeptApiClient extends ApiClient {
-    validVersions = ['v2', 'v1'];
-    defaultVersion = 'v2';
+    validVersions = ['v5'];
+    defaultVersion = 'v5';
 
     /**
      * check version
@@ -26,7 +28,7 @@ export class DeptApiClient extends ApiClient {
     async deptList(deptNo, options) {
         return await this.doRequest({
             method: 'POST',
-            path: `department/${deptNo}/department_list`,
+            path: DEPT_BASE_PATH + 'list',
             payload: {
                 has_child: options.hasChild
             }
@@ -39,7 +41,7 @@ export class DeptApiClient extends ApiClient {
     async deptCreate(name, options) {
         return await this.doRequest({
             method: 'POST',
-            path: `department/create`,
+            path: DEPT_BASE_PATH + 'create',
             payload: {
                 name,
                 parent_no: options.parentNo,
@@ -51,11 +53,12 @@ export class DeptApiClient extends ApiClient {
     /**
      * 更新部门
      */
-    async deptUpdate(deptNo, name) {
+    async deptUpdate(dept_no, name) {
         return await this.doRequest({
             method: 'POST',
-            path: `department/${deptNo}/update`,
+            path: DEPT_BASE_PATH + 'update',
             payload: {
+                dept_no,
                 name
             }
         });
@@ -64,10 +67,13 @@ export class DeptApiClient extends ApiClient {
     /**
      * 删除部门
      */
-    async deptDelete(deptNo) {
+    async deptDelete(dept_no) {
         return await this.doRequest({
             method: 'POST',
-            path: `department/${deptNo}/delete`
+            path: DEPT_BASE_PATH + 'delete',
+            payload: {
+                dept_no
+            }
         });
     }
 
@@ -77,7 +83,7 @@ export class DeptApiClient extends ApiClient {
     async deptByIntegrateId(integrateId) {
         return await this.doRequest({
             method: 'POST',
-            path: `department/get_deptno_by_integrateid`,
+            path: DEPT_BASE_PATH + 'dept_no/get',
             payload: {
                 integrate_id: integrateId
             }
@@ -90,7 +96,7 @@ export class DeptApiClient extends ApiClient {
     async departmentImport(departments) {
         return await this.doRequest({
             method: 'POST',
-            path: `department/import`,
+            path: DEPT_BASE_PATH + 'import',
             payload: {
                 departments
             }

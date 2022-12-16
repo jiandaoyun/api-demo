@@ -1,13 +1,13 @@
 package util;
 
-import api.arch.DeptDemo;
-
-import java.util.Map;
+import api.arch.DeptApiClient;
+import constants.HttpConstant;
 
 public class LimitUtilThread implements Runnable {
 
+    private final String threadName;
 
-    private String threadName;
+    private static final DeptApiClient deptApiClient = new DeptApiClient(HttpConstant.API_KEY, HttpConstant.HOST);
 
     public LimitUtilThread(String threadName) {
         this.threadName = threadName;
@@ -15,20 +15,20 @@ public class LimitUtilThread implements Runnable {
 
     @Override
     public void run() {
-        Long start = System.currentTimeMillis();
-        DeptDemo deptDemo = new DeptDemo();
-        Long temp;
+        long start = System.currentTimeMillis();
+
+        long temp;
         for (int i = 0; i < 15; i++) {
             try {
                 temp = System.currentTimeMillis();
-                Map<String, Object> reultMap = deptDemo.deptList(1,true);
+                deptApiClient.deptList(1, true, null);
                 System.out.println(threadName + "第" + i + "次请求耗时 :" + (System.currentTimeMillis() - temp));
             } catch (Exception e) {
                 System.out.println(threadName + " error happens!" + e.getMessage());
             }
 
         }
-        Long end = System.currentTimeMillis();
+        long end = System.currentTimeMillis();
         System.out.println(threadName + " cost time:" + (end - start) + "ms");
     }
 }

@@ -9,8 +9,6 @@ import axios from 'axios';
 import qs from 'querystring';
 import { defaultLimiter } from './limiter';
 
-export const ApiKey = 'TDlysl39yzl65V0ZmVf6AcSJTL3VwGYp';
-export const Host = 'https://api.jiandaoyun.com/api';
 
 export class ApiClient {
     /**

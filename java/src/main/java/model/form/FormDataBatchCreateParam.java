@@ -1,5 +1,7 @@
 package model.form;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.util.List;
 import java.util.Map;
 
@@ -7,17 +9,17 @@ public class FormDataBatchCreateParam {
     /**
      * 应用id
      */
-    private String appId;
+    private String app_id;
 
     /**
      * 表单id
      */
-    private String entryId;
+    private String entry_id;
 
     /**
      * 数据
      */
-    private List<Map<String, Object>> dataList;
+    private List<Map<String, Object>> data_list;
 
     private Boolean is_start_workflow;
 
@@ -27,26 +29,34 @@ public class FormDataBatchCreateParam {
     public FormDataBatchCreateParam() {
     }
 
-    public FormDataBatchCreateParam(String appId, String entryId, List<Map<String, Object>> dataList) {
-        this.appId = appId;
-        this.entryId = entryId;
-        this.dataList = dataList;
+    public FormDataBatchCreateParam(String app_id, String entry_id, List<Map<String, Object>> data_list) {
+        this.app_id = app_id;
+        this.entry_id = entry_id;
+        this.data_list = data_list;
     }
 
-    public String getAppId() {
-        return appId;
+    public String getApp_id() {
+        return app_id;
     }
 
-    public void setAppId(String appId) {
-        this.appId = appId;
+    public void setApp_id(String app_id) {
+        this.app_id = app_id;
     }
 
-    public String getEntryId() {
-        return entryId;
+    public String getEntry_id() {
+        return entry_id;
     }
 
-    public void setEntryId(String entryId) {
-        this.entryId = entryId;
+    public void setEntry_id(String entry_id) {
+        this.entry_id = entry_id;
+    }
+
+    public List<Map<String, Object>> getData_list() {
+        return data_list;
+    }
+
+    public void setData_list(List<Map<String, Object>> data_list) {
+        this.data_list = data_list;
     }
 
     public Boolean getIs_start_workflow() {
@@ -65,20 +75,18 @@ public class FormDataBatchCreateParam {
         this.transaction_id = transaction_id;
     }
 
-    public List<Map<String, Object>> getDataList() {
-        return dataList;
-    }
 
-    public void setDataList(List<Map<String, Object>> dataList) {
-        this.dataList = dataList;
+
+    public boolean isValid() {
+        return StringUtils.isNotBlank(this.getApp_id()) && StringUtils.isNotBlank(this.getEntry_id());
     }
 
     @Override
     public String toString() {
         return "FormDataBatchCreateParam{" +
-                "appId='" + appId + '\'' +
-                ", entryId='" + entryId + '\'' +
-                ", dataList=" + dataList +
+                "appId='" + app_id + '\'' +
+                ", entry_id='" + entry_id + '\'' +
+                ", data_list=" + data_list +
                 ", is_start_workflow=" + is_start_workflow +
                 ", transaction_id='" + transaction_id + '\'' +
                 '}';

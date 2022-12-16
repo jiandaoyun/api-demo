@@ -1,5 +1,7 @@
 package model.user;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.util.List;
 
 public class UserCreateParam {
@@ -46,6 +48,10 @@ public class UserCreateParam {
 
     public void setDepartments(List<Integer> departments) {
         this.departments = departments;
+    }
+
+    public boolean isValid() {
+        return StringUtils.isNotBlank(this.getName()) && StringUtils.isNotBlank(this.getUsername());
     }
 
     @Override

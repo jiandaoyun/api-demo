@@ -5,10 +5,11 @@
  */
 
 import { ApiClient } from '../../base/api_client';
+import { FORM_BASE_PATH, APP_BASE_PATH } from '../../constants/http_constant';
 
 export class AppApiClient extends ApiClient {
-    validVersions = ['v1'];
-    defaultVersion = 'v1';
+    validVersions = ['v5'];
+    defaultVersion = 'v5';
 
     /**
      * check version
@@ -26,7 +27,7 @@ export class AppApiClient extends ApiClient {
     async appList(options) {
         return await this.doRequest({
             method: 'POST',
-            path: 'app/retrieve_all',
+            path: APP_BASE_PATH + 'list',
             payload: {
                 ...options
             }
@@ -36,11 +37,12 @@ export class AppApiClient extends ApiClient {
     /**
      * 用户表单查询接口
      */
-    async entryList(appId, options) {
+    async entryList(app_id, options) {
         return await this.doRequest({
             method: 'POST',
-            path: `app/${appId}/entry_retrieve`,
+            path: FORM_BASE_PATH + 'list',
             payload: {
+                app_id,
                 ...options
             }
         });

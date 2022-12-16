@@ -1,19 +1,14 @@
 package util;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class LimitUtil {
     private static volatile int seq = 0;
 
-    private static int bucket = 1000;
+    private static final int bucket = 1000;
 
-    private static volatile List<Long> requestTimeList = new ArrayList(5) {{
-        for (int i = 0; i < 5; i++) {
-            add(0L);
-        }
-    }};
-    ;
+    private static volatile List<Long> requestTimeList = Arrays.asList(0L, 0L, 0L, 0L, 0L);
 
     private LimitUtil() {
     }
@@ -24,9 +19,9 @@ public class LimitUtil {
      * @throws InterruptedException
      */
     public static synchronized void tryBeforeRun() throws InterruptedException {
-        Long now = System.currentTimeMillis();
+        long now = System.currentTimeMillis();
         // 当前时间 与 前limit个请求的时间 作比较
-        Long interval = now - requestTimeList.get(seq);
+        long interval = now - requestTimeList.get(seq);
         if (interval < 0) {
             // 执行时间: t[seq]+bucket=now-interval+bucket
             // 等待时间: bucket-interval

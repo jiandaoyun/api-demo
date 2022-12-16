@@ -1,5 +1,7 @@
 package model.user;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.util.List;
 
 public class UserUpdateParam {
@@ -43,6 +45,10 @@ public class UserUpdateParam {
 
     public void setDepartmentList(List<Integer> departmentList) {
         this.departmentList = departmentList;
+    }
+
+    public boolean isValid() {
+        return StringUtils.isNotBlank(this.getName()) && StringUtils.isNotBlank(this.getUserName());
     }
 
     @Override

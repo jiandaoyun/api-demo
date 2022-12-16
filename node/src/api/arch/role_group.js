@@ -1,17 +1,18 @@
 /**
-* Copyright (c) 2015-2022, FineX, All Rights Reserved.
-* @author Thomas.Zhuang
-* @date 2022/06/08
-*/
+ * Copyright (c) 2015-2022, FineX, All Rights Reserved.
+ * @author Thomas.Zhuang
+ * @date 2022/06/08
+ */
 
 import { ApiClient } from '../../base/api_client';
+import { ROLE_GROUP_BASE_PATH } from '../../constants/http_constant';
 
 export class RoleGroupApiClient extends ApiClient {
-    validVersions = ['v2'];
-    defaultVersion = 'v2';
+    validVersions = ['v5'];
+    defaultVersion = 'v5';
 
     /**
-    * check version
+     * check version
      */
     async doRequest(options) {
         if (!this.validVersions.includes(this.version)) {
@@ -26,7 +27,7 @@ export class RoleGroupApiClient extends ApiClient {
     async roleGroupList(options) {
         return await this.doRequest({
             method: 'POST',
-            path: `role_group/list`,
+            path: ROLE_GROUP_BASE_PATH + 'list',
             payload: {
                 ...options
             }
@@ -39,7 +40,7 @@ export class RoleGroupApiClient extends ApiClient {
     async roleGroupCreate(name) {
         return await this.doRequest({
             method: 'POST',
-            path: `role_group/create`,
+            path: ROLE_GROUP_BASE_PATH + 'create',
             payload: {
                 name
             }
@@ -47,12 +48,12 @@ export class RoleGroupApiClient extends ApiClient {
     }
 
     /**
-    * 更新角色组
-    */
+     * 更新角色组
+     */
     async roleGroupUpdate(roleGroupNo, name) {
         return await this.doRequest({
             method: 'POST',
-            path: `role_group/update`,
+            path: ROLE_GROUP_BASE_PATH + 'update',
             payload: {
                 role_group_no: roleGroupNo,
                 name
@@ -61,12 +62,12 @@ export class RoleGroupApiClient extends ApiClient {
     }
 
     /**
-    * 删除角色组
-    */
+     * 删除角色组
+     */
     async roleGroupDelete(roleGroupNo) {
         return await this.doRequest({
             method: 'POST',
-            path: `role_group/delete`,
+            path: ROLE_GROUP_BASE_PATH + 'delete',
             payload: {
                 role_group_no: roleGroupNo,
             }

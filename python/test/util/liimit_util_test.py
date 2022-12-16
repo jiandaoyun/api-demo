@@ -1,21 +1,22 @@
-import time
-
-from src.test.api.arch.dept_demo_test import deptList
-from src.util.http_util import limiter
+from src.api.arch.dept import DeptApiClient
+from src.constants.http_constant import HttpConstant
 import threading
 
 lock = threading.Lock()
 
+deptApiClient = DeptApiClient(HttpConstant.API_KEY, HttpConstant.HOST)
+
 
 class MyThread(threading.Thread):
-    def __init__(self, threadID, name):
+    def __init__(self, thread_id, name):
         threading.Thread.__init__(self)
-        self.threadID = threadID
+        self.thread_id = thread_id
         self.name = name
 
     def run(self):
         for x in range(0, 20):
-            deptList()
+            result = deptApiClient.deptList(1, True)
+            print(self.name + ' result:', result)
 
 
 if __name__ == '__main__':
@@ -25,4 +26,3 @@ if __name__ == '__main__':
     thread1.start()
     thread2.start()
     thread3.start()
-

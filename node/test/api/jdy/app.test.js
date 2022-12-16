@@ -5,27 +5,24 @@
  */
 
 import { AppApiClient } from '../../../src/api/jdy/app';
-import { ApiKey, Host } from '../../../src/base/api_client';
+import { API_KEY, HOST } from '../../../src/constants/http_constant';
 
 export const appTest = 'appTest';
 
-export let appId = '';
-export let entryId = '';
-
+let appId;
 describe('app api test', () => {
-    const api = new AppApiClient(ApiKey, Host);
+    const api = new AppApiClient(API_KEY, HOST, 'v5');
 
     test('appList', async () => {
         const appList = await api.appList({});
-        expect(appList.apps).toBeTruthy();
-        console.log(appList);
-        appId = appList.apps[0].app_id;
+        console.log('appList result:' + JSON.stringify(appList));
+        expect(appList['apps']).toBeTruthy();
+        appId = appList['apps'][0].app_id;
     });
 
     test('entryList', async () => {
         const entryList = await api.entryList(appId, {});
+        console.log('entryList result:' + JSON.stringify(entryList));
         expect(entryList.forms).toBeTruthy();
-        console.log(entryList);
-        entryId = entryList.forms[0].entry_id;
     });
 });

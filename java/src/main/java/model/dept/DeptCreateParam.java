@@ -1,5 +1,7 @@
 package model.dept;
 
+import org.apache.commons.lang3.StringUtils;
+
 /**
  * 创建部门的参数
  */
@@ -49,6 +51,10 @@ public class DeptCreateParam {
 
     public void setDept_no(Integer dept_no) {
         this.dept_no = dept_no;
+    }
+
+    public boolean isValid() {
+        return StringUtils.isNotBlank(this.getName());
     }
 
     @Override

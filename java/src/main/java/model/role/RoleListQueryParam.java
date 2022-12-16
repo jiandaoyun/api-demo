@@ -1,28 +1,12 @@
 package model.role;
 
 
-public class RoleListQueryParam {
-    private Integer skip;
-    private Integer limit;
+import model.base.PageBaseParam;
+
+public class RoleListQueryParam extends PageBaseParam {
 
     private boolean has_internal;
     private boolean has_sync;
-
-    public Integer getSkip() {
-        return skip;
-    }
-
-    public void setSkip(Integer skip) {
-        this.skip = skip;
-    }
-
-    public Integer getLimit() {
-        return limit;
-    }
-
-    public void setLimit(Integer limit) {
-        this.limit = limit;
-    }
 
     public boolean isHas_internal() {
         return has_internal;
@@ -40,11 +24,15 @@ public class RoleListQueryParam {
         this.has_sync = has_sync;
     }
 
+    public boolean isValid() {
+        return super.isValid();
+    }
+
     @Override
     public String toString() {
         return "RoleListQueryParam{" +
-                "skip=" + skip +
-                ", limit=" + limit +
+                "skip=" + super.getSkip() +
+                ", limit=" + super.getLimit() +
                 ", has_internal=" + has_internal +
                 ", has_sync=" + has_sync +
                 '}';

@@ -2,11 +2,10 @@ import uuid
 
 
 class HttpRequestParam:
-    def __init__(self, api_key, url, data):
-        self.apiKey = api_key
-        self.url = url
+    def __init__(self, path, data):
+        self.path = path
         self.data = data
 
 
 def generateTransactionId():
-    return {'transaction_id': str(uuid.uuid4())}
+    return str(uuid.uuid4())

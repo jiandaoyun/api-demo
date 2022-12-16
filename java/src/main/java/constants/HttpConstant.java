@@ -4,61 +4,55 @@ package constants;
  * http 相关的常量
  */
 public class HttpConstant {
-    public static final String HOST = "https://api.jiandaoyun.com/api";
-
-    public static final String HOST_V2 = HOST + "/v2";
-
-    public static final String HOST_V1 = HOST + "/v1";
-
-    public static final String HOST_V4 = HOST + "/v4";
+    public static final String HOST = "https://api.jiandaoyun.com/api/";
 
     /**
      * 部门相关的接口前缀
      */
-    public static final String DEPT_BASE_URL = HOST_V2 + "/department/";
+    public static final String DEPT_BASE_PATH = "/corp/department/";
 
     /**
      * 成员相关的接口前缀
      */
-    public static final String MEMBER_BASE_URL = HOST_V2 + "/user/";
+    public static final String MEMBER_BASE_PATH = "/corp/user/";
 
     /**
      * 应用相关的接口前缀
      */
-    public static final String APP_BASE_URL = HOST_V1 + "/app/";
+    public static final String APP_BASE_PATH = "/app/";
 
 
     /**
      * 企业互联的接口前缀
      */
-    public static final String CORP_COOP_BASE_URL = HOST_V4 + "/corp_coop/";
+    public static final String CORP_COOP_BASE_PATH = "/corp/guest/";
 
     /**
      * 角色相关的接口前缀
      */
-    public static final String ROLE_BASE_URL = HOST_V2 + "/role/";
+    public static final String ROLE_BASE_PATH = "/corp/role/";
 
     /**
      * 角色组相关的接口前缀
      */
-    public static final String ROLE_GROUP_BASE_URL = HOST_V2 + "/role_group/";
+    public static final String ROLE_GROUP_BASE_PATH = "/corp/role_group/";
 
     /**
      * 表单相关的接口前缀
      */
-    public static final String FORM_BASE_URL = HOST_V2 + "/app/";
+    public static final String FORM_BASE_PATH = "/app/entry/";
 
     /**
-     * 表单数据相关的接口前缀
+     * 表单相关的接口前缀
      */
-    public static final String FORM_DATA_BASE_URL = HOST_V4 + "/app/";
+    public static final String FORM_DATA_BASE_PATH = "/app/entry/data/";
 
+    /**
+     * API_KEY
+     */
     public static final String API_KEY = "API_KEY";
 
     public static final String APP_ID = "APP_ID";
 
-    public static final String WORK_FLOW_ENTRY_ID = "WORK_FLOW_ENTRY_ID";
-
     public static final String ENTRY_ID = "ENTRY_ID";
-
 }

@@ -1,15 +1,16 @@
 /**
-* Copyright (c) 2015-2022, FineX, All Rights Reserved.
-* @author Thomas.Zhuang
-* @date 2022/06/02
-*/
+ * Copyright (c) 2015-2022, FineX, All Rights Reserved.
+ * @author Thomas.Zhuang
+ * @date 2022/06/02
+ */
 
 
 import { ApiClient } from '../../base/api_client';
+import { FORM_BASE_PATH } from '../../constants/http_constant';
 
 export class FormApiClient extends ApiClient {
-    validVersions = ['v2', 'v1'];
-    defaultVersion = 'v2';
+    validVersions = ['v5'];
+    defaultVersion = 'v5';
 
     /**
      * check version
@@ -24,10 +25,14 @@ export class FormApiClient extends ApiClient {
     /**
      * 表单字段查询接口
      */
-    async formWidgets(appId, entryId) {
+    async formWidgets(app_id, entry_id) {
         return await this.doRequest({
             method: 'POST',
-            path: `app/${appId}/entry/${entryId}/widgets`
+            path: FORM_BASE_PATH + 'widget/list',
+            payload: {
+                app_id,
+                entry_id
+            }
         });
     }
 }
