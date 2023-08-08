@@ -168,6 +168,7 @@ public abstract class ApiClient {
         List<Header> headerList = new ArrayList<>();
         headerList.add(new BasicHeader("Authorization", "Bearer " + apiKey));
         headerList.add(new BasicHeader("Content-Type", "application/json;charset=utf-8"));
+        headerList.add(new BasicHeader("Accept-Encoding", "identity"));
         return headerList.toArray(new Header[headerList.size()]);
     }
 

@@ -1,4 +1,4 @@
-# fxpub-api-demo/java
+# fxpub-api-demo/python
 
 简道云 openApi 调用示例 python 版本。
 
