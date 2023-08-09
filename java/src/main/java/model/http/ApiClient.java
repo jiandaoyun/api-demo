@@ -15,6 +15,7 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.entity.mime.MultipartEntityBuilder;
 import org.apache.http.entity.mime.content.StringBody;
 import org.apache.http.impl.client.HttpClients;
+import org.apache.http.impl.io.EmptyInputStream;
 import org.apache.http.message.BasicHeader;
 import org.apache.http.ssl.SSLContextBuilder;
 import util.LimitUtil;
@@ -139,8 +140,8 @@ public abstract class ApiClient {
         int statusCode = response.getStatusLine().getStatusCode();
         ObjectMapper mapper = new ObjectMapper();
         Map<String, Object> result = new HashMap<>();
-        // 有部分接口直接返回 没有数据
-        if (response.getEntity().getContentLength() > 0) {
+        // 有部分接口直接返回 没有数据 fix：不能用content-length大于0判断，response header为gzip编码方式的情况下为-1
+        if (!(response.getEntity().getContent() instanceof EmptyInputStream)) {
             result = (Map<String, Object>) mapper.readValue(response.getEntity().getContent(), Object.class);
         }
         if (statusCode >= 400) {
@@ -168,7 +169,6 @@ public abstract class ApiClient {
         List<Header> headerList = new ArrayList<>();
         headerList.add(new BasicHeader("Authorization", "Bearer " + apiKey));
         headerList.add(new BasicHeader("Content-Type", "application/json;charset=utf-8"));
-        headerList.add(new BasicHeader("Accept-Encoding", "identity"));
         return headerList.toArray(new Header[headerList.size()]);
     }
 
@@ -193,7 +193,8 @@ public abstract class ApiClient {
         ObjectMapper mapper = new ObjectMapper();
         Map<String, Object> result = new HashMap<>();
         // 有部分接口直接返回 没有数据
-        if (response.getEntity().getContentLength() > 0) {
+        // fix：不能用content-length大于0判断，response header为gzip编码方式的情况下为-1
+        if (!(response.getEntity().getContent() instanceof EmptyInputStream)) {
             result = (Map<String, Object>) mapper.readValue(response.getEntity().getContent(), Object.class);
         }
         if (statusCode >= 400) {
