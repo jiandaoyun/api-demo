@@ -22,7 +22,7 @@ class ApiClient:
     """
 
     def getValidVersion(self, version):
-        if version is str and version in self.valid_versions:
+        if isinstance(version, str) and version in self.valid_versions:
             return version
         return self.default_version
 
