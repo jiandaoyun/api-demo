@@ -2,42 +2,32 @@ package api.arch;
 
 import constants.HttpConstant;
 import model.dept.DeptCreateParam;
+import model.http.HttpRequestParam;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import org.mockito.ArgumentCaptor;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.spy;
 
 /**
  * 部门相关接口测试
  */
 public class DeptApiClientTest {
-
     private static final Integer DEPT_NO = 10015;
-
     private static final Integer PARENT_NO = 1;
-
     private static final String DEPT_NAME = "Java_v5_";
-
     private static final DeptApiClient deptApiClient = new DeptApiClient(HttpConstant.API_KEY, HttpConstant.HOST);
 
-    public static void main(String[] args) throws Exception {
-        // 创建部门
-        testDeptCreate();
-        // 根据deptNo查询部门信息
-        testDeptList();
-        // 更新部门
-        testDeptUpdate();
-        // 删除部门
-        testDeptDelete();
-        // 批量导入部门
-        departmentImport();
-        // 部门用户列表
-        deptMemberList();
-        // 根据集成模式通讯录的部门ID获取部门编号
-        deptByIntegrateId();
-    }
 
-    private static void departmentImport() throws Exception {
+    @Test
+    @DisplayName("test departmentImport")
+    public void departmentImport() throws Exception {
         // name 和 dept_no 必传
         List<DeptCreateParam> paramList = new ArrayList<>();
         DeptCreateParam deptOne = new DeptCreateParam(DEPT_NAME + "one");
@@ -49,40 +39,101 @@ public class DeptApiClientTest {
         deptTwo.setParent_no(PARENT_NO);
         deptOne.setParent_no(PARENT_NO);
         paramList.add(deptTwo);
-        Map<String, Object> result = deptApiClient.departmentImport(paramList, null);
-        System.out.println("departmentImport result \n" + result);
+
+        DeptApiClient spyClient = spy(deptApiClient);
+        ArgumentCaptor<HttpRequestParam> argumentCaptor = ArgumentCaptor.forClass(HttpRequestParam.class);
+        doReturn(null).when(spyClient).sendPostRequest(argumentCaptor.capture());
+        spyClient.departmentImport(paramList, null);
+        HttpRequestParam httpRequestParam = argumentCaptor.getValue();
+
+        assertEquals("v5/corp/department/import", httpRequestParam.getPath());
+        assertEquals(Arrays.asList(deptOne, deptTwo), httpRequestParam.getData().get("departments"));
     }
 
-    private static void deptByIntegrateId() throws Exception {
-        Map<String, Object> result = deptApiClient.deptByIntegrateId("58335612", null);
-        System.out.println("deptByIntegrateId result \n" + result);
+    @Test
+    @DisplayName("test deptByIntegrateId")
+    public void deptByIntegrateId() throws Exception {
+        DeptApiClient spyClient = spy(deptApiClient);
+        ArgumentCaptor<HttpRequestParam> argumentCaptor = ArgumentCaptor.forClass(HttpRequestParam.class);
+        doReturn(null).when(spyClient).sendPostRequest(argumentCaptor.capture());
+        spyClient.deptByIntegrateId("58335612", null);
+        HttpRequestParam httpRequestParam = argumentCaptor.getValue();
+
+        assertEquals("v5/corp/department/dept_no/get", httpRequestParam.getPath());
+        assertEquals("58335612", httpRequestParam.getData().get("integrate_id"));
     }
 
-    private static void testDeptDelete() throws Exception {
-        Map<String, Object> result = deptApiClient.deptDelete(DEPT_NO, null);
-        System.out.println("testDeptDelete result \n" + result);
+    @Test
+    @DisplayName("test deptDelete")
+    public void deptDelete() throws Exception {
+        DeptApiClient spyClient = spy(deptApiClient);
+        ArgumentCaptor<HttpRequestParam> argumentCaptor = ArgumentCaptor.forClass(HttpRequestParam.class);
+        doReturn(null).when(spyClient).sendPostRequest(argumentCaptor.capture());
+        spyClient.deptDelete(DEPT_NO, null);
+        HttpRequestParam httpRequestParam = argumentCaptor.getValue();
+
+        assertEquals("v5/corp/department/delete", httpRequestParam.getPath());
+        assertEquals(DEPT_NO, httpRequestParam.getData().get("dept_no"));
     }
 
-    private static void testDeptUpdate() throws Exception {
-        Map<String, Object> result = deptApiClient.deptUpdate(DEPT_NO, DEPT_NAME + DEPT_NO + "_update", null);
-        System.out.println("testDeptUpdate result \n" + result);
+    @Test
+    @DisplayName("test deptUpdate")
+    public void deptUpdate() throws Exception {
+        DeptApiClient spyClient = spy(deptApiClient);
+        ArgumentCaptor<HttpRequestParam> argumentCaptor = ArgumentCaptor.forClass(HttpRequestParam.class);
+        doReturn(null).when(spyClient).sendPostRequest(argumentCaptor.capture());
+        spyClient.deptUpdate(DEPT_NO, DEPT_NAME + DEPT_NO + "_update", null);
+        HttpRequestParam httpRequestParam = argumentCaptor.getValue();
+
+        assertEquals("v5/corp/department/update", httpRequestParam.getPath());
+        assertEquals(DEPT_NO, httpRequestParam.getData().get("dept_no"));
+        assertEquals(DEPT_NAME + DEPT_NO + "_update", httpRequestParam.getData().get("name"));
     }
 
-    private static void testDeptList() throws Exception {
-        Map<String, Object> result = deptApiClient.deptList(PARENT_NO, false, null);
-        System.out.println("testDeptList result \n" + result);
+    @Test
+    @DisplayName("test deptList")
+    public void deptList() throws Exception {
+        DeptApiClient spyClient = spy(deptApiClient);
+        ArgumentCaptor<HttpRequestParam> argumentCaptor = ArgumentCaptor.forClass(HttpRequestParam.class);
+        doReturn(null).when(spyClient).sendPostRequest(argumentCaptor.capture());
+        spyClient.deptList(PARENT_NO, false, null);
+        HttpRequestParam httpRequestParam = argumentCaptor.getValue();
+
+        assertEquals("v5/corp/department/list", httpRequestParam.getPath());
+        assertEquals(PARENT_NO, httpRequestParam.getData().get("dept_no"));
+        assertEquals(false, httpRequestParam.getData().get("has_child"));
     }
 
-    private static void testDeptCreate() throws Exception {
+    @Test
+    @DisplayName("test deptCreate")
+    public void deptCreate() throws Exception {
         DeptCreateParam param = new DeptCreateParam(DEPT_NAME + DEPT_NO);
         param.setDept_no(DEPT_NO);
         param.setParent_no(PARENT_NO);
-        Map<String, Object> result = deptApiClient.deptCreate(param, null);
-        System.out.println("testDeptCreate result \n" + result);
+
+        DeptApiClient spyClient = spy(deptApiClient);
+        ArgumentCaptor<HttpRequestParam> argumentCaptor = ArgumentCaptor.forClass(HttpRequestParam.class);
+        doReturn(null).when(spyClient).sendPostRequest(argumentCaptor.capture());
+        spyClient.deptCreate(param, null);
+        HttpRequestParam httpRequestParam = argumentCaptor.getValue();
+
+        assertEquals("v5/corp/department/create", httpRequestParam.getPath());
+        assertEquals(PARENT_NO, httpRequestParam.getData().get("parent_no"));
+        assertEquals(DEPT_NO, httpRequestParam.getData().get("dept_no"));
+        assertEquals(DEPT_NAME + DEPT_NO, httpRequestParam.getData().get("name"));
     }
 
-    private static void deptMemberList() throws Exception {
-        Map<String, Object> result = deptApiClient.deptMemberList(DEPT_NO, true, null);
-        System.out.println("deptMemberList result \n" + result);
+    @Test
+    @DisplayName("test deptMemberList")
+    public void deptMemberList() throws Exception {
+        DeptApiClient spyClient = spy(deptApiClient);
+        ArgumentCaptor<HttpRequestParam> argumentCaptor = ArgumentCaptor.forClass(HttpRequestParam.class);
+        doReturn(null).when(spyClient).sendPostRequest(argumentCaptor.capture());
+        spyClient.deptMemberList(DEPT_NO, true, null);
+        HttpRequestParam httpRequestParam = argumentCaptor.getValue();
+
+        assertEquals("v5/corp/department/user/list", httpRequestParam.getPath());
+        assertEquals(DEPT_NO, httpRequestParam.getData().get("dept_no"));
+        assertEquals(true, httpRequestParam.getData().get("has_child"));
     }
 }

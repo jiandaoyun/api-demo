@@ -1,9 +1,15 @@
 package api.arch;
 
 import constants.HttpConstant;
+import model.http.HttpRequestParam;
 import model.role.RoleGroupListQueryParam;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import org.mockito.ArgumentCaptor;
 
-import java.util.Map;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.spy;
 
 /**
  * 角色组相关接口测试
@@ -11,48 +17,69 @@ import java.util.Map;
 public class RoleGroupApiClientTest {
 
     private static final RoleGroupApiClient roleGroupApiClient = new RoleGroupApiClient(HttpConstant.API_KEY, HttpConstant.HOST);
-
     private static final String GROUP_NAME = "group_name";
+    private static final Integer groupNo = 6;
 
-    private static Integer groupNo = null;
+    @Test
+    @DisplayName("test roleGroupDelete")
+    public void roleGroupDelete() throws Exception {
+        RoleGroupApiClient spyClient = spy(roleGroupApiClient);
+        ArgumentCaptor<HttpRequestParam> argumentCaptor = ArgumentCaptor.forClass(HttpRequestParam.class);
+        doReturn(null).when(spyClient).sendPostRequest(argumentCaptor.capture());
+        spyClient.roleGroupDelete(groupNo, null);
+        HttpRequestParam httpRequestParam = argumentCaptor.getValue();
 
-    public static void main(String[] args) throws Exception {
-        // 创建角色组
-        roleGroupCreate();
-        // 列出角色组
-        roleGroupList();
-        // 更新角色组
-        roleGroupUpdate();
-        // 删除角色组
-        roleGroupDelete();
+        assertEquals("v5/corp/role_group/delete", httpRequestParam.getPath());
+        assertEquals(groupNo, httpRequestParam.getData().get("role_group_no"));
     }
 
-    private static void roleGroupDelete() throws Exception {
-        Map<String, Object> result = roleGroupApiClient.roleGroupDelete(groupNo, null);
-        System.out.println("roleGroupDelete result\n" + result);
+    @Test
+    @DisplayName("test roleGroupUpdate")
+    public void roleGroupUpdate() throws Exception {
+        String name = GROUP_NAME + "_update";
+        RoleGroupApiClient spyClient = spy(roleGroupApiClient);
+        ArgumentCaptor<HttpRequestParam> argumentCaptor = ArgumentCaptor.forClass(HttpRequestParam.class);
+        doReturn(null).when(spyClient).sendPostRequest(argumentCaptor.capture());
+        spyClient.roleGroupUpdate(name, groupNo, null);
+        HttpRequestParam httpRequestParam = argumentCaptor.getValue();
+
+        assertEquals("v5/corp/role_group/update", httpRequestParam.getPath());
+        assertEquals(groupNo, httpRequestParam.getData().get("role_group_no"));
+        assertEquals(name, httpRequestParam.getData().get("name"));
     }
 
-    private static void roleGroupUpdate() throws Exception {
-        Map<String, Object> result = roleGroupApiClient.roleGroupUpdate(GROUP_NAME + "_update", groupNo, null);
-        System.out.println("roleGroupUpdate result\n" + result);
+    @Test
+    @DisplayName("test roleGroupCreate")
+    public void roleGroupCreate() throws Exception {
+        RoleGroupApiClient spyClient = spy(roleGroupApiClient);
+        ArgumentCaptor<HttpRequestParam> argumentCaptor = ArgumentCaptor.forClass(HttpRequestParam.class);
+        doReturn(null).when(spyClient).sendPostRequest(argumentCaptor.capture());
+        spyClient.roleGroupCreate(GROUP_NAME, null);
+        HttpRequestParam httpRequestParam = argumentCaptor.getValue();
+
+        assertEquals("v5/corp/role_group/create", httpRequestParam.getPath());
+        assertEquals(GROUP_NAME, httpRequestParam.getData().get("name"));
     }
 
-    private static void roleGroupCreate() throws Exception {
-        Map<String, Object> result = roleGroupApiClient.roleGroupCreate(GROUP_NAME, null);
-        System.out.println("roleGroupCreate result\n" + result);
-        if (result.get("role_group") != null) {
-            Map<String, Object> roleGroup = (Map<String, Object>) result.get("role_group");
-            groupNo = Integer.parseInt(roleGroup.get("group_no").toString());
-        }
-    }
-
-    private static void roleGroupList() throws Exception {
+    @Test
+    @DisplayName("test roleGroupList")
+    public void roleGroupList() throws Exception {
         RoleGroupListQueryParam queryParam = new RoleGroupListQueryParam();
         queryParam.setSkip(0);
         queryParam.setLimit(10);
         queryParam.setHas_internal(true);
         queryParam.setHas_sync(true);
-        Map<String, Object> result = roleGroupApiClient.roleGroupList(queryParam, null);
-        System.out.println("roleGroupList result\n" + result);
+
+        RoleGroupApiClient spyClient = spy(roleGroupApiClient);
+        ArgumentCaptor<HttpRequestParam> argumentCaptor = ArgumentCaptor.forClass(HttpRequestParam.class);
+        doReturn(null).when(spyClient).sendPostRequest(argumentCaptor.capture());
+        spyClient.roleGroupList(queryParam, null);
+        HttpRequestParam httpRequestParam = argumentCaptor.getValue();
+
+        assertEquals("v5/corp/role_group/list", httpRequestParam.getPath());
+        assertEquals(0, httpRequestParam.getData().get("skip"));
+        assertEquals(10, httpRequestParam.getData().get("limit"));
+        assertEquals(true, httpRequestParam.getData().get("has_internal"));
+        assertEquals(true, httpRequestParam.getData().get("has_sync"));
     }
 }

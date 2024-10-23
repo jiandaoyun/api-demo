@@ -1,13 +1,20 @@
 package api.arch;
 
 import constants.HttpConstant;
+import model.http.HttpRequestParam;
 import model.role.RoleListQueryParam;
 import model.role.RoleMemberQueryParam;
 import model.role.RoleUpdateParam;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import org.mockito.ArgumentCaptor;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.Map;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.spy;
 
 /**
  * 角色相关接口测试
@@ -15,82 +22,125 @@ import java.util.Map;
 public class RoleApiClientTest {
 
     private static final RoleApiClient roleApiClient = new RoleApiClient(HttpConstant.API_KEY, HttpConstant.HOST);
-
     private static final int GROUP_NO = 120;
-
     private static final String ROLE_NAME = "role_name";
-
-    private static Integer roleNo = null;
-
+    private static final Integer roleNo = 6;
     private static final List<String> userNameList = Collections.singletonList("R-gDIIDws8");
 
-    public static void main(String[] args) throws Exception {
-        // 创建角色
-        roleCreate();
-        // 列出角色
-        roleList();
-        // 更新角色
-        roleUpdate();
-        // 批量给已有的成员设置角色
-        roleAddMembers();
-        // 列出角色下的所有成员
-        roleMemberList();
-        // 为自建角色批量移除成员
-        roleRemoveMembers();
-        // 删除角色
-        roleDelete();
+    @Test
+    @DisplayName("test roleRemoveMembers")
+    public void roleRemoveMembers() throws Exception {
+        RoleApiClient spyClient = spy(roleApiClient);
+        ArgumentCaptor<HttpRequestParam> argumentCaptor = ArgumentCaptor.forClass(HttpRequestParam.class);
+        doReturn(null).when(spyClient).sendPostRequest(argumentCaptor.capture());
+        spyClient.roleRemoveMembers(roleNo, userNameList, null);
+        HttpRequestParam httpRequestParam = argumentCaptor.getValue();
+
+        assertEquals("v5/corp/role/remove_members", httpRequestParam.getPath());
+        assertEquals(userNameList, httpRequestParam.getData().get("usernames"));
+        assertEquals(roleNo, httpRequestParam.getData().get("role_no"));
     }
 
-    private static void roleRemoveMembers() throws Exception {
-        Map<String, Object> result = roleApiClient.roleRemoveMembers(roleNo, userNameList, null);
-        System.out.println("roleRemoveMembers result\n" + result);
+    @Test
+    @DisplayName("test roleAddMembers")
+    public void roleAddMembers() throws Exception {
+        RoleApiClient spyClient = spy(roleApiClient);
+        ArgumentCaptor<HttpRequestParam> argumentCaptor = ArgumentCaptor.forClass(HttpRequestParam.class);
+        doReturn(null).when(spyClient).sendPostRequest(argumentCaptor.capture());
+        spyClient.roleAddMembers(roleNo, userNameList, null);
+        HttpRequestParam httpRequestParam = argumentCaptor.getValue();
+
+        assertEquals("v5/corp/role/add_members", httpRequestParam.getPath());
+        assertEquals(userNameList, httpRequestParam.getData().get("usernames"));
+        assertEquals(roleNo, httpRequestParam.getData().get("role_no"));
     }
 
-    private static void roleAddMembers() throws Exception {
-        Map<String, Object> result =
-                roleApiClient.roleAddMembers(roleNo, userNameList, null);
-        System.out.println("roleAddMembers result\n" + result);
-    }
-
-    private static void roleMemberList() throws Exception {
+    @Test
+    @DisplayName("test roleMemberList")
+    public void roleMemberList() throws Exception {
         RoleMemberQueryParam queryParam = new RoleMemberQueryParam();
         queryParam.setRole_no(roleNo);
         queryParam.setSkip(0);
         queryParam.setLimit(100);
-        Map<String, Object> result = roleApiClient.roleMemberList(queryParam, null);
-        System.out.println("roleMemberList result\n" + result);
+
+        RoleApiClient spyClient = spy(roleApiClient);
+        ArgumentCaptor<HttpRequestParam> argumentCaptor = ArgumentCaptor.forClass(HttpRequestParam.class);
+        doReturn(null).when(spyClient).sendPostRequest(argumentCaptor.capture());
+        spyClient.roleMemberList(queryParam, null);
+        HttpRequestParam httpRequestParam = argumentCaptor.getValue();
+
+        assertEquals("v5/corp/role/user/list", httpRequestParam.getPath());
+        assertEquals(0, httpRequestParam.getData().get("skip"));
+        assertEquals(100, httpRequestParam.getData().get("limit"));
+        assertEquals(roleNo, httpRequestParam.getData().get("role_no"));
     }
 
-    private static void roleDelete() throws Exception {
-        Map<String, Object> result = roleApiClient.roleDelete(roleNo, null);
-        System.out.println("roleDelete result\n" + result);
+    @Test
+    @DisplayName("test roleDelete")
+    public void roleDelete() throws Exception {
+        RoleApiClient spyClient = spy(roleApiClient);
+        ArgumentCaptor<HttpRequestParam> argumentCaptor = ArgumentCaptor.forClass(HttpRequestParam.class);
+        doReturn(null).when(spyClient).sendPostRequest(argumentCaptor.capture());
+        spyClient.roleDelete(roleNo, null);
+        HttpRequestParam httpRequestParam = argumentCaptor.getValue();
+
+        assertEquals("v5/corp/role/delete", httpRequestParam.getPath());
+        assertEquals(roleNo, httpRequestParam.getData().get("role_no"));
     }
 
-    private static void roleUpdate() throws Exception {
+    @Test
+    @DisplayName("test roleUpdate")
+    public void roleUpdate() throws Exception {
         RoleUpdateParam updateParam = new RoleUpdateParam();
         updateParam.setRole_no(roleNo);
         updateParam.setGroup_no(GROUP_NO);
         updateParam.setName(ROLE_NAME + "_update");
-        Map<String, Object> result = roleApiClient.roleUpdate(updateParam, null);
-        System.out.println("roleUpdate result\n" + result);
+
+        RoleApiClient spyClient = spy(roleApiClient);
+        ArgumentCaptor<HttpRequestParam> argumentCaptor = ArgumentCaptor.forClass(HttpRequestParam.class);
+        doReturn(null).when(spyClient).sendPostRequest(argumentCaptor.capture());
+        spyClient.roleUpdate(updateParam, null);
+        HttpRequestParam httpRequestParam = argumentCaptor.getValue();
+
+        assertEquals("v5/corp/role/update", httpRequestParam.getPath());
+        assertEquals(roleNo, httpRequestParam.getData().get("role_no"));
+        assertEquals(ROLE_NAME + "_update", httpRequestParam.getData().get("name"));
+        assertEquals(GROUP_NO, httpRequestParam.getData().get("group_no"));
     }
 
-    private static void roleCreate() throws Exception {
-        Map<String, Object> result = roleApiClient.roleCreate(ROLE_NAME, GROUP_NO, null);
-        System.out.println("roleCreate result\n" + result);
-        if (result.get("role") != null) {
-            Map<String, Object> role = (Map<String, Object>) result.get("role");
-            roleNo = Integer.parseInt(role.get("role_no").toString());
-        }
+    @Test
+    @DisplayName("test roleCreate")
+    public void roleCreate() throws Exception {
+        RoleApiClient spyClient = spy(roleApiClient);
+        ArgumentCaptor<HttpRequestParam> argumentCaptor = ArgumentCaptor.forClass(HttpRequestParam.class);
+        doReturn(null).when(spyClient).sendPostRequest(argumentCaptor.capture());
+        spyClient.roleCreate(ROLE_NAME, GROUP_NO, null);
+        HttpRequestParam httpRequestParam = argumentCaptor.getValue();
+
+        assertEquals("v5/corp/role/create", httpRequestParam.getPath());
+        assertEquals(ROLE_NAME, httpRequestParam.getData().get("name"));
+        assertEquals(GROUP_NO, httpRequestParam.getData().get("group_no"));
     }
 
-    private static void roleList() throws Exception {
+    @Test
+    @DisplayName("test roleList")
+    public void roleList() throws Exception {
         RoleListQueryParam queryParam = new RoleListQueryParam();
         queryParam.setSkip(0);
         queryParam.setLimit(10);
         queryParam.setHas_internal(true);
         queryParam.setHas_sync(true);
-        Map<String, Object> result = roleApiClient.roleList(queryParam, null);
-        System.out.println("roleList result\n" + result);
+
+        RoleApiClient spyClient = spy(roleApiClient);
+        ArgumentCaptor<HttpRequestParam> argumentCaptor = ArgumentCaptor.forClass(HttpRequestParam.class);
+        doReturn(null).when(spyClient).sendPostRequest(argumentCaptor.capture());
+        spyClient.roleList(queryParam, null);
+        HttpRequestParam httpRequestParam = argumentCaptor.getValue();
+
+        assertEquals("v5/corp/role/list", httpRequestParam.getPath());
+        assertEquals(0, httpRequestParam.getData().get("skip"));
+        assertEquals(10, httpRequestParam.getData().get("limit"));
+        assertEquals(true, httpRequestParam.getData().get("has_internal"));
+        assertEquals(true, httpRequestParam.getData().get("has_sync"));
     }
 }

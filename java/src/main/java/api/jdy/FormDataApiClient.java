@@ -2,7 +2,13 @@ package api.jdy;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import model.form.*;
+import model.form.FormDataBatchCreateParam;
+import model.form.FormDataBatchRemoveParam;
+import model.form.FormDataBatchUpdateParam;
+import model.form.FormDataCreateParam;
+import model.form.FormDataDeleteParam;
+import model.form.FormDataQueryParam;
+import model.form.FormDataUpdateParam;
 import model.http.ApiClient;
 import model.http.HttpRequestParam;
 
