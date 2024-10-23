@@ -94,9 +94,9 @@ public class FormDataUpdateParam {
     @Override
     public String toString() {
         return "FormDataUpdateParam{" +
-                "appId='" + app_id + '\'' +
-                ", entryId='" + entry_id + '\'' +
-                ", dataId='" + data_id + '\'' +
+                "app_id='" + app_id + '\'' +
+                ", entry_id='" + entry_id + '\'' +
+                ", data_id='" + data_id + '\'' +
                 ", data=" + data +
                 ", is_start_trigger=" + is_start_trigger +
                 ", transaction_id='" + transaction_id + '\'' +

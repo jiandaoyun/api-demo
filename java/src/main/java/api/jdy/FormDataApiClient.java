@@ -65,7 +65,7 @@ public class FormDataApiClient extends ApiClient {
         }
         String path = this.generatePath(version, "get");
         Map<String, Object> data = new HashMap<>();
-        data.put("data_id", queryParam.getDataId());
+        data.put("data_id", queryParam.getData_id());
         data.put("app_id", queryParam.getApp_id());
         data.put("entry_id", queryParam.getEntry_id());
         HttpRequestParam param = new HttpRequestParam(path, data);

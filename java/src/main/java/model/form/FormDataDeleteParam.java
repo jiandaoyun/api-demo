@@ -66,10 +66,10 @@ public class FormDataDeleteParam {
 
     @Override
     public String toString() {
-        return "FormDataUpdateParam{" +
-                "appId='" + app_id + '\'' +
-                ", entryId='" + entry_id + '\'' +
-                ", dataId='" + data_id + '\'' +
+        return "FormDataDeleteParam{" +
+                "app_id='" + app_id + '\'' +
+                ", entry_id='" + entry_id + '\'' +
+                ", data_id='" + data_id + '\'' +
                 ", is_start_trigger=" + is_start_trigger +
                 '}';
     }

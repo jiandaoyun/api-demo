@@ -19,7 +19,7 @@ public class FormDataQueryParam {
     /**
      * 数据ID
      */
-    private String dataId;
+    private String data_id;
 
     /**
      * 从 数据ID 开始返回 limit 条数据
@@ -41,7 +41,7 @@ public class FormDataQueryParam {
     }
 
     public boolean isSingleQueryValid() {
-        return this.isValid() && StringUtils.isNotBlank(this.getDataId());
+        return this.isValid() && StringUtils.isNotBlank(this.getData_id());
     }
 
     public FormDataQueryParam() {
@@ -68,12 +68,12 @@ public class FormDataQueryParam {
         this.entry_id = entry_id;
     }
 
-    public String getDataId() {
-        return dataId;
+    public String getData_id() {
+        return data_id;
     }
 
-    public void setDataId(String dataId) {
-        this.dataId = dataId;
+    public void setData_id(String data_id) {
+        this.data_id = data_id;
     }
 
     public Integer getLimit() {
@@ -105,7 +105,7 @@ public class FormDataQueryParam {
         return "FormDataQueryParam{" +
                 "app_id='" + app_id + '\'' +
                 ", entry_id='" + entry_id + '\'' +
-                ", dataId='" + dataId + '\'' +
+                ", data_id='" + data_id + '\'' +
                 ", limit=" + limit +
                 ", fieldList=" + fieldList +
                 ", filter=" + filter +
