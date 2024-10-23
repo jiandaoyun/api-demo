@@ -25,7 +25,7 @@ public class RoleGroupListQueryParam extends PageBaseParam {
 
     @Override
     public String toString() {
-        return "RoleListQueryParam{" +
+        return "RoleGroupListQueryParam{" +
                 "skip=" + super.getSkip() +
                 ", limit=" + super.getLimit() +
                 ", has_internal=" + has_internal +

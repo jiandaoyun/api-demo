@@ -49,7 +49,7 @@ public class FormDataBatchRemoveParam {
 
     @Override
     public String toString() {
-        return "FormDataBatchRemove{" +
+        return "FormDataBatchRemoveParam{" +
                 "data_ids=" + data_ids +
                 ", app_id='" + app_id + '\'' +
                 ", entry_id='" + entry_id + '\'' +

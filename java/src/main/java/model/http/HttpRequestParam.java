@@ -41,7 +41,7 @@ public class HttpRequestParam {
     @Override
     public String toString() {
         return "HttpRequestParam{" +
-                ", path='" + path + '\'' +
+                "path='" + path + '\'' +
                 ", data=" + data +
                 '}';
     }

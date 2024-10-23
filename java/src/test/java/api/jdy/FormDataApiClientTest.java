@@ -2,11 +2,17 @@ package api.jdy;
 
 import constants.HttpConstant;
 import model.form.*;
+import model.http.HttpRequestParam;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import org.mockito.ArgumentCaptor;
 
 import java.util.*;
 
 import static constants.HttpConstant.APP_ID;
 import static constants.HttpConstant.ENTRY_ID;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.*;
 
 /**
  * 表单数据相关接口测试
@@ -20,31 +26,12 @@ public class FormDataApiClientTest {
     private static final String ADDRESS_WIDGET = "_widget_1669106585320";
     private static final String DATA_WIDGET = "_widget_1669106585319";
 
-    private static String dataId = null;
-    private static List<String> dataIdList = null;
+    private static final String dataId = "671619c7cda20728e6d89c51";
+    private static final List<String> dataIdList = Arrays.asList("671619c7cda20728e6d89c52", "671619c7cda20728e6d89c53");
 
-
-    public static void main(String[] args) throws Exception {
-        // 新建单条数据接口
-        singleDataCreate();
-        // 查询单条数据接口
-        singleDataQuery();
-        // 更新单条数据接口
-        singleDataUpdate();
-        // 删除单条数据
-        singleDataRemove();
-
-        // 新建多条数据接口
-        batchDataCreate();
-        // 查询多条数据
-        batchDataQuery();
-        //  修改多条数据接口
-        batchDataUpdate();
-        // 删除多条数据接口
-        batchDataRemove();
-    }
-
-    private static void batchDataUpdate() throws Exception {
+    @Test
+    @DisplayName("test batchDataUpdate")
+    public void batchDataUpdate() throws Exception {
         FormDataBatchUpdateParam param =
                 new FormDataBatchUpdateParam(APP_ID, ENTRY_ID);
         Map<String, Object> data = new HashMap<>();
@@ -55,20 +42,43 @@ public class FormDataApiClientTest {
         });
         param.setData(data);
         param.setData_ids(dataIdList);
-        Map<String, Object> result = formDataApiClient.batchDataUpdate(param, null);
-        System.out.println("batchDataUpdate result \n" + result);
+
+        FormDataApiClient spyClient = spy(formDataApiClient);
+        ArgumentCaptor<HttpRequestParam> argumentCaptor = ArgumentCaptor.forClass(HttpRequestParam.class);
+        doReturn(null).when(spyClient).sendPostRequest(argumentCaptor.capture());
+        spyClient.batchDataUpdate(param, null);
+        HttpRequestParam httpRequestParam = argumentCaptor.getValue();
+
+        assertEquals("v5/app/entry/data/batch_update", httpRequestParam.getPath());
+        assertEquals(APP_ID, httpRequestParam.getData().get("app_id"));
+        assertEquals(ENTRY_ID, httpRequestParam.getData().get("entry_id"));
+        assertEquals(dataIdList, httpRequestParam.getData().get("data_ids"));
+        assertEquals(data, httpRequestParam.getData().get("data"));
     }
 
-    private static void batchDataRemove() throws Exception {
-        FormDataBatchRemoveParam param = new FormDataBatchRemoveParam(APP_ID, ENTRY_ID,
-                dataIdList);
-        Map<String, Object> result = formDataApiClient.batchDataRemove(param, null);
-        System.out.println("batchDataRemove result \n" + result);
+    @Test
+    @DisplayName("test batchDataRemove")
+    public void batchDataRemove() throws Exception {
+        FormDataBatchRemoveParam param = new FormDataBatchRemoveParam(APP_ID, ENTRY_ID, dataIdList);
+
+        FormDataApiClient spyClient = spy(formDataApiClient);
+        ArgumentCaptor<HttpRequestParam> argumentCaptor = ArgumentCaptor.forClass(HttpRequestParam.class);
+        doReturn(null).when(spyClient).sendPostRequest(argumentCaptor.capture());
+        spyClient.batchDataRemove(param, null);
+        HttpRequestParam httpRequestParam = argumentCaptor.getValue();
+
+        assertEquals("v5/app/entry/data/batch_delete", httpRequestParam.getPath());
+        assertEquals(APP_ID, httpRequestParam.getData().get("app_id"));
+        assertEquals(ENTRY_ID, httpRequestParam.getData().get("entry_id"));
+        assertEquals(dataIdList, httpRequestParam.getData().get("data_ids"));
     }
 
-    private static void batchDataQuery() throws Exception {
+    @Test
+    @DisplayName("test batchDataQuery")
+    public void batchDataQuery() throws Exception {
         FormDataQueryParam param = new FormDataQueryParam(APP_ID, ENTRY_ID);
         param.setLimit(10);
+        param.setData_id(dataId);
         // 只查这两个字段，不传为查全部字段
         param.setFieldList(Arrays.asList(NUM_WIDGET, TEXT_WIDGET));
         // 按条件查询表单数据
@@ -90,12 +100,25 @@ public class FormDataApiClientTest {
             }
         };
         param.setFilter(filter);
-        Map<String, Object> result = formDataApiClient.batchDataQuery(param, null);
-        System.out.println("batchDataQuery result \n" + result);
+
+        FormDataApiClient spyClient = spy(formDataApiClient);
+        ArgumentCaptor<HttpRequestParam> argumentCaptor = ArgumentCaptor.forClass(HttpRequestParam.class);
+        doReturn(null).when(spyClient).sendPostRequest(argumentCaptor.capture());
+        spyClient.batchDataQuery(param, null);
+        HttpRequestParam httpRequestParam = argumentCaptor.getValue();
+
+        assertEquals("v5/app/entry/data/list", httpRequestParam.getPath());
+        assertEquals(APP_ID, httpRequestParam.getData().get("app_id"));
+        assertEquals(ENTRY_ID, httpRequestParam.getData().get("entry_id"));
+        assertEquals(dataId, httpRequestParam.getData().get("data_id"));
+        assertEquals(10, httpRequestParam.getData().get("limit"));
+        assertEquals(Arrays.asList(NUM_WIDGET, TEXT_WIDGET), httpRequestParam.getData().get("fieldList"));
+        assertEquals(filter, httpRequestParam.getData().get("filter"));
     }
 
-
-    private static void batchDataCreate() throws Exception {
+    @Test
+    @DisplayName("test batchDataCreate")
+    public void batchDataCreate() throws Exception {
         Map<String, Object> data = new HashMap<>();
         // 数字
         data.put(NUM_WIDGET, new HashMap<String, Object>() {
@@ -131,23 +154,43 @@ public class FormDataApiClientTest {
         List<Map<String, Object>> dataList = new ArrayList<>();
         dataList.add(data);
         dataList.add(data);
-
         FormDataBatchCreateParam createParam =
                 new FormDataBatchCreateParam(APP_ID, ENTRY_ID, dataList);
-        Map<String, Object> result = formDataApiClient.batchDataCreate(createParam, null);
-        System.out.println("batchDataCreate result \n" + result);
-        if (result.get("success_ids") != null) {
-            dataIdList = (List<String>) result.get("success_ids");
-        }
+        createParam.setIs_start_workflow(false);
+
+        FormDataApiClient spyClient = spy(formDataApiClient);
+        ArgumentCaptor<HttpRequestParam> argumentCaptor = ArgumentCaptor.forClass(HttpRequestParam.class);
+        doReturn(null).when(spyClient).sendPostRequest(argumentCaptor.capture());
+        spyClient.batchDataCreate(createParam, null);
+        HttpRequestParam httpRequestParam = argumentCaptor.getValue();
+
+        assertEquals("v5/app/entry/data/batch_create", httpRequestParam.getPath());
+        assertEquals(APP_ID, httpRequestParam.getData().get("app_id"));
+        assertEquals(ENTRY_ID, httpRequestParam.getData().get("entry_id"));
+        assertEquals(dataList, httpRequestParam.getData().get("data_list"));
+        assertEquals(false, httpRequestParam.getData().get("is_start_workflow"));
     }
 
-    private static void singleDataRemove() throws Exception {
+    @Test
+    @DisplayName("test singleDataRemove")
+    public void singleDataRemove() throws Exception {
         FormDataDeleteParam deleteParam = new FormDataDeleteParam(APP_ID, ENTRY_ID, dataId);
-        Map<String, Object> result = formDataApiClient.singleDataRemove(deleteParam, null);
-        System.out.println("singleDataRemove result \n" + result);
+
+        FormDataApiClient spyClient = spy(formDataApiClient);
+        ArgumentCaptor<HttpRequestParam> argumentCaptor = ArgumentCaptor.forClass(HttpRequestParam.class);
+        doReturn(null).when(spyClient).sendPostRequest(argumentCaptor.capture());
+        spyClient.singleDataRemove(deleteParam, null);
+        HttpRequestParam httpRequestParam = argumentCaptor.getValue();
+
+        assertEquals("v5/app/entry/data/delete", httpRequestParam.getPath());
+        assertEquals(APP_ID, httpRequestParam.getData().get("app_id"));
+        assertEquals(ENTRY_ID, httpRequestParam.getData().get("entry_id"));
+        assertEquals(dataId, httpRequestParam.getData().get("data_id"));
     }
 
-    private static void singleDataUpdate() throws Exception {
+    @Test
+    @DisplayName("test singleDataUpdate")
+    public void singleDataUpdate() throws Exception {
         Map<String, Object> data = new HashMap<>();
         // 数字
         data.put(NUM_WIDGET, new HashMap<String, Object>() {
@@ -180,15 +223,28 @@ public class FormDataApiClientTest {
                 put("value", 1654976900000L);
             }
         });
-
         FormDataUpdateParam updateParam =
                 new FormDataUpdateParam(APP_ID, ENTRY_ID, data);
         updateParam.setData_id(dataId);
-        Map<String, Object> result = formDataApiClient.singleDataUpdate(updateParam, null);
-        System.out.println("singleDataUpdate result \n" + result);
+        updateParam.setIs_start_trigger(false);
+
+        FormDataApiClient spyClient = spy(formDataApiClient);
+        ArgumentCaptor<HttpRequestParam> argumentCaptor = ArgumentCaptor.forClass(HttpRequestParam.class);
+        doReturn(null).when(spyClient).sendPostRequest(argumentCaptor.capture());
+        spyClient.singleDataUpdate(updateParam, null);
+        HttpRequestParam httpRequestParam = argumentCaptor.getValue();
+
+        assertEquals("v5/app/entry/data/update", httpRequestParam.getPath());
+        assertEquals(APP_ID, httpRequestParam.getData().get("app_id"));
+        assertEquals(ENTRY_ID, httpRequestParam.getData().get("entry_id"));
+        assertEquals(dataId, httpRequestParam.getData().get("data_id"));
+        assertEquals(data, httpRequestParam.getData().get("data"));
+        assertEquals(false, httpRequestParam.getData().get("is_start_trigger"));
     }
 
-    private static void singleDataCreate() throws Exception {
+    @Test
+    @DisplayName("test singleDataCreate")
+    public void singleDataCreate() throws Exception {
         Map<String, Object> data = new HashMap<>();
         // 数字
         data.put(NUM_WIDGET, new HashMap<String, Object>() {
@@ -221,21 +277,40 @@ public class FormDataApiClientTest {
                 put("value", 1654176800000L);
             }
         });
-
         FormDataCreateParam createParam =
                 new FormDataCreateParam(APP_ID, ENTRY_ID, data);
-        Map<String, Object> result = formDataApiClient.singleDataCreate(createParam, null);
-        System.out.println("singleDataCreate result \n" + result);
-        if (result.get("data") != null) {
-            Map<String, Object> dataResult = (Map<String, Object>) result.get("data");
-            dataId = dataResult.get("_id").toString();
-        }
+        createParam.setIs_start_trigger(false);
+        createParam.setIs_start_workflow(false);
+
+        FormDataApiClient spyClient = spy(formDataApiClient);
+        ArgumentCaptor<HttpRequestParam> argumentCaptor = ArgumentCaptor.forClass(HttpRequestParam.class);
+        doReturn(null).when(spyClient).sendPostRequest(argumentCaptor.capture());
+        spyClient.singleDataCreate(createParam, null);
+        HttpRequestParam httpRequestParam = argumentCaptor.getValue();
+
+        assertEquals("v5/app/entry/data/create", httpRequestParam.getPath());
+        assertEquals(APP_ID, httpRequestParam.getData().get("app_id"));
+        assertEquals(ENTRY_ID, httpRequestParam.getData().get("entry_id"));
+        assertEquals(data, httpRequestParam.getData().get("data"));
+        assertEquals(false, httpRequestParam.getData().get("is_start_trigger"));
+        assertEquals(false, httpRequestParam.getData().get("is_start_workflow"));
     }
 
-    private static void singleDataQuery() throws Exception {
+    @Test
+    @DisplayName("test singleDataQuery")
+    public void singleDataQuery() throws Exception {
         FormDataQueryParam queryParam = new FormDataQueryParam(APP_ID, ENTRY_ID);
-        queryParam.setDataId(dataId);
-        Map<String, Object> result = formDataApiClient.singleDataQuery(queryParam, null);
-        System.out.println("singleDataQuery result \n" + result);
+        queryParam.setData_id(dataId);
+
+        FormDataApiClient spyClient = spy(formDataApiClient);
+        ArgumentCaptor<HttpRequestParam> argumentCaptor = ArgumentCaptor.forClass(HttpRequestParam.class);
+        doReturn(null).when(spyClient).sendPostRequest(argumentCaptor.capture());
+        spyClient.singleDataQuery(queryParam, null);
+        HttpRequestParam httpRequestParam = argumentCaptor.getValue();
+
+        assertEquals("v5/app/entry/data/get", httpRequestParam.getPath());
+        assertEquals(APP_ID, httpRequestParam.getData().get("app_id"));
+        assertEquals(ENTRY_ID, httpRequestParam.getData().get("entry_id"));
+        assertEquals(dataId, httpRequestParam.getData().get("data_id"));
     }
 }

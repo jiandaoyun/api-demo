@@ -84,7 +84,7 @@ public class FormDataBatchCreateParam {
     @Override
     public String toString() {
         return "FormDataBatchCreateParam{" +
-                "appId='" + app_id + '\'' +
+                "app_id='" + app_id + '\'' +
                 ", entry_id='" + entry_id + '\'' +
                 ", data_list=" + data_list +
                 ", is_start_workflow=" + is_start_workflow +
