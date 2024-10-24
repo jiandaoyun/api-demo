@@ -29,7 +29,7 @@ public class FormDataQueryParam {
     /**
      * 查询的字段
      */
-    private List<String> fieldList;
+    private List<String> fields;
 
     /**
      * 过滤条件
@@ -84,12 +84,12 @@ public class FormDataQueryParam {
         this.limit = limit;
     }
 
-    public List<String> getFieldList() {
-        return fieldList;
+    public List<String> getFields() {
+        return fields;
     }
 
-    public void setFieldList(List<String> fieldList) {
-        this.fieldList = fieldList;
+    public void setFields(List<String> fields) {
+        this.fields = fields;
     }
 
     public Map<String, Object> getFilter() {
@@ -107,7 +107,7 @@ public class FormDataQueryParam {
                 ", entry_id='" + entry_id + '\'' +
                 ", data_id='" + data_id + '\'' +
                 ", limit=" + limit +
-                ", fieldList=" + fieldList +
+                ", fields=" + fields +
                 ", filter=" + filter +
                 '}';
     }
