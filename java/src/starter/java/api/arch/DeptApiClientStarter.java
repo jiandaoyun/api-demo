@@ -22,13 +22,13 @@ public class DeptApiClientStarter {
 
     public static void main(String[] args) throws Exception {
         // 创建部门
-        testDeptCreate();
+        deptCreate();
         // 根据deptNo查询部门信息
-        testDeptList();
+        deptList();
         // 更新部门
-        testDeptUpdate();
+        deptUpdate();
         // 删除部门
-        testDeptDelete();
+        deptDelete();
         // 批量导入部门
         departmentImport();
         // 部门用户列表
@@ -58,22 +58,22 @@ public class DeptApiClientStarter {
         System.out.println("deptByIntegrateId result \n" + result);
     }
 
-    private static void testDeptDelete() throws Exception {
+    private static void deptDelete() throws Exception {
         Map<String, Object> result = deptApiClient.deptDelete(DEPT_NO, null);
         System.out.println("testDeptDelete result \n" + result);
     }
 
-    private static void testDeptUpdate() throws Exception {
+    private static void deptUpdate() throws Exception {
         Map<String, Object> result = deptApiClient.deptUpdate(DEPT_NO, DEPT_NAME + DEPT_NO + "_update", null);
         System.out.println("testDeptUpdate result \n" + result);
     }
 
-    private static void testDeptList() throws Exception {
+    private static void deptList() throws Exception {
         Map<String, Object> result = deptApiClient.deptList(PARENT_NO, false, null);
         System.out.println("testDeptList result \n" + result);
     }
 
-    private static void testDeptCreate() throws Exception {
+    private static void deptCreate() throws Exception {
         DeptCreateParam param = new DeptCreateParam(DEPT_NAME + DEPT_NO);
         param.setDept_no(DEPT_NO);
         param.setParent_no(PARENT_NO);

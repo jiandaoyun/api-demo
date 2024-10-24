@@ -4,7 +4,11 @@ import constants.HttpConstant;
 import model.user.UserCreateParam;
 import model.user.UserUpdateParam;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
 
 /**
  * 成员相关接口测试

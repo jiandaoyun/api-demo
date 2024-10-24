@@ -1,8 +1,14 @@
 package api.arch;
 
 import constants.HttpConstant;
+import model.http.HttpRequestParam;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import org.mockito.ArgumentCaptor;
 
-import java.util.Map;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.spy;
 
 /**
  * 企业互联相关接口测试
@@ -11,28 +17,44 @@ public class CorpCoopApiClientTest {
 
     private static final CorpCoopApiClient corpCoopApiClient = new CorpCoopApiClient(HttpConstant.API_KEY, HttpConstant.HOST);
 
-    public static void main(String[] args) throws Exception {
-        // 列出我连接的企业
-        corpCoopDepartList();
-        // 列出我连接的企业对接人
-        corpCoopMemberList();
-        // 列出我连接的企业对接人详细信息
-        corpCoopUserInfo();
+    @Test
+    @DisplayName("test corpCoopDepartList")
+    public void corpCoopDepartList() throws Exception {
+        CorpCoopApiClient spyClient = spy(corpCoopApiClient);
+        ArgumentCaptor<HttpRequestParam> argumentCaptor = ArgumentCaptor.forClass(HttpRequestParam.class);
+        doReturn(null).when(spyClient).sendPostRequest(argumentCaptor.capture());
+        spyClient.corpCoopDepartList(6, null);
+        HttpRequestParam httpRequestParam = argumentCaptor.getValue();
+
+        assertEquals("v5/corp/guest/department/list", httpRequestParam.getPath());
+        assertEquals(6, httpRequestParam.getData().get("dept_no"));
     }
 
-    private static void corpCoopDepartList() throws Exception {
-        Map<String, Object> result = corpCoopApiClient.corpCoopDepartList(null, null);
-        System.out.println("deptList result\n" + result);
+    @Test
+    @DisplayName("test corpCoopMemberList")
+    public void corpCoopMemberList() throws Exception {
+        CorpCoopApiClient spyClient = spy(corpCoopApiClient);
+        ArgumentCaptor<HttpRequestParam> argumentCaptor = ArgumentCaptor.forClass(HttpRequestParam.class);
+        doReturn(null).when(spyClient).sendPostRequest(argumentCaptor.capture());
+        spyClient.corpCoopMemberList(6, null);
+        HttpRequestParam httpRequestParam = argumentCaptor.getValue();
+
+        assertEquals("v5/corp/guest/user/list", httpRequestParam.getPath());
+        assertEquals(6, httpRequestParam.getData().get("dept_no"));
     }
 
-    private static void corpCoopMemberList() throws Exception {
-        Map<String, Object> result = corpCoopApiClient.corpCoopMemberList(null, null);
-        System.out.println("corpCoopMemberList result\n" + result);
-    }
-
-    private static void corpCoopUserInfo() throws Exception {
+    @Test
+    @DisplayName("test corpCoopUserInfo")
+    public void corpCoopUserInfo() throws Exception {
         String userName = "R-60e2767055c8760006ac79bc-jdy-y4r83c4jpqzg";
-        Map<String, Object> result = corpCoopApiClient.corpCoopUserInfo(userName, null);
-        System.out.println("corpCoopUserInfo result\n" + result);
+
+        CorpCoopApiClient spyClient = spy(corpCoopApiClient);
+        ArgumentCaptor<HttpRequestParam> argumentCaptor = ArgumentCaptor.forClass(HttpRequestParam.class);
+        doReturn(null).when(spyClient).sendPostRequest(argumentCaptor.capture());
+        spyClient.corpCoopUserInfo(userName, null);
+        HttpRequestParam httpRequestParam = argumentCaptor.getValue();
+
+        assertEquals("v5/corp/guest/user/get", httpRequestParam.getPath());
+        assertEquals(userName, httpRequestParam.getData().get("username"));
     }
 }
