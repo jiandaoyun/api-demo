@@ -26,7 +26,7 @@ public class FormApiClient : ApiClient
     }
 
     /**
-    * 新建单条数据接口
+    * 表单字段查询接口
     */
     public async Task<JsonElement?> formWidgets(string appId, string entryId)
     {

@@ -93,7 +93,7 @@ public class FormDataApiClientTest {
         param.setLimit(10);
         param.setData_id(dataId);
         // 只查这两个字段，不传为查全部字段
-        param.setFieldList(Arrays.asList(NUM_WIDGET, TEXT_WIDGET));
+        param.setFields(Arrays.asList(NUM_WIDGET, TEXT_WIDGET));
         // 按条件查询表单数据
         List<Map<String, Object>> condList = new ArrayList<>();
         // 字段 _widget_1654848548482 的值 等于  单行文本 字符串
@@ -125,7 +125,7 @@ public class FormDataApiClientTest {
         assertEquals(ENTRY_ID, httpRequestParam.getData().get("entry_id"));
         assertEquals(dataId, httpRequestParam.getData().get("data_id"));
         assertEquals(10, httpRequestParam.getData().get("limit"));
-        assertEquals(Arrays.asList(NUM_WIDGET, TEXT_WIDGET), httpRequestParam.getData().get("fieldList"));
+        assertEquals(Arrays.asList(NUM_WIDGET, TEXT_WIDGET), httpRequestParam.getData().get("fields"));
         assertEquals(filter, httpRequestParam.getData().get("filter"));
     }
 

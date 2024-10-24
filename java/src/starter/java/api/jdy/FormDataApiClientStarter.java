@@ -81,7 +81,7 @@ public class FormDataApiClientStarter {
         FormDataQueryParam param = new FormDataQueryParam(APP_ID, ENTRY_ID);
         param.setLimit(10);
         // 只查这两个字段，不传为查全部字段
-        param.setFieldList(Arrays.asList(NUM_WIDGET, TEXT_WIDGET));
+        param.setFields(Arrays.asList(NUM_WIDGET, TEXT_WIDGET));
         // 按条件查询表单数据
         List<Map<String, Object>> condList = new ArrayList<>();
         // 字段 _widget_1654848548482 的值 等于  单行文本 字符串
