@@ -1,21 +1,27 @@
+import unittest
+from unittest.mock import patch
 from src.constants.http_constant import HttpConstant
 from src.api.jdy.app import AppApiClient
 
-appApiCilent = AppApiClient(HttpConstant.API_KEY, HttpConstant.HOST)
+appApiClient = AppApiClient(HttpConstant.API_KEY, HttpConstant.HOST)
 
+class TestSendEmail(unittest.TestCase):
+    # 测试 应用分页列表
+    @patch.object(appApiClient, 'send_post')
+    def test_app_list(self, mock_send_post):
+        appApiClient.appList(0, 10)
+        request_param = mock_send_post.call_args[0][0]
+        self.assertEqual(request_param.data, {
+            'skip': 0, 'limit': 10
+        })
+        self.assertEqual(request_param.path, "/v5/app/list")
 
-# 测试 应用分页列表
-def appList():
-    result = appApiCilent.appList(0, 10)
-    print('appList result:', result)
-
-
-# 表单查询接口 分页
-def entryList():
-    result = appApiCilent.entryList(HttpConstant.APP_ID, 0, 10)
-    print('entryList result:', result)
-
-
-if __name__ == '__main__':
-    appList()
-    entryList()
+    # 表单查询接口 分页
+    @patch.object(appApiClient, 'send_post')
+    def test_entry_list(self, mock_send_post):
+        appApiClient.entryList(HttpConstant.APP_ID, 0, 10)
+        request_param = mock_send_post.call_args[0][0]
+        self.assertEqual(request_param.data, {
+            'skip': 0, 'limit': 10, 'app_id': HttpConstant.APP_ID
+        })
+        self.assertEqual(request_param.path, "/v5/app/entry/list")
