@@ -1,25 +1,16 @@
-import src.api.jdy.file as file_demo
+import unittest
+from unittest.mock import patch
 from src.constants.http_constant import HttpConstant
 from src.api.jdy.file import FileApiClient
 
-fileApiDemo = FileApiClient(HttpConstant.API_KEY, HttpConstant.HOST)
+fileApiClient = FileApiClient(HttpConstant.API_KEY, HttpConstant.HOST)
 
-
-# 测试 获取文件上传凭证和上传地址接口
-def uploadToken():
-    result = fileApiDemo.uploadToken(HttpConstant.APP_ID, HttpConstant.ENTRY_ID)
-    print('uploadToken result:', result)
-    return result
-
-
-def uploadFile(url, token):
-    file = {'file': ('file_upload.txt', open('./file_upload.txt', 'rb'), 'application/txt')}
-    result = fileApiDemo.uploadFile(url, token, file)
-    print('uploadFile result:', result)
-
-
-if __name__ == '__main__':
-    token_result = uploadToken()
-    url = token_result['token_and_url_list'][0]['url']
-    token = token_result['token_and_url_list'][0]['token']
-    uploadFile(url, token)
+class TestSendEmail(unittest.TestCase):
+    # 测试 获取文件上传凭证和上传地址接口
+    @patch.object(fileApiClient, 'send_post')
+    def test_upload_token(self, mock_send_post):
+        fileApiClient.uploadToken(HttpConstant.APP_ID, HttpConstant.ENTRY_ID)
+        request_param = mock_send_post.call_args[0][0]
+        self.assertEqual(request_param.data["app_id"], HttpConstant.APP_ID)
+        self.assertEqual(request_param.data["entry_id"], HttpConstant.ENTRY_ID)
+        self.assertEqual(request_param.path, "/v5/app/entry/file/get_upload_token")
